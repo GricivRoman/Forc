@@ -1,1 +1,31 @@
-<router-outlet></router-outlet>
+<body>
+    <header class="container">
+        <nav class="navbar navbar-dark bg-dark navbar-expand-md">
+            <div class="mx-2">
+                <a class="navbar-nav navbar-brand nav-link" routerLink=""><fa-icon [icon]="carrotIcon"></fa-icon> Food diary </a>
+            </div>
+            <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#theMenu">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div id="theMenu" class="navbar-collapse collapse">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" routerLink="personal-account">Личный кабинет</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" routerLink="diary-menu">Меню</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <router-outlet></router-outlet>
+    </div>
+    <footer class="container">
+        <hr>
+        <div id="mainFooter" class="text-center">
+            <p>Copyright 2023 Griciv.R.</p>
+        </div>
+    </footer>
+</body>
