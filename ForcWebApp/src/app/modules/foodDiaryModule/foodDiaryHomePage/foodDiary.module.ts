@@ -1,10 +1,10 @@
 import { NgModule } from "@angular/core";
-import { FoodDiaryRoutingModule } from "../foodDiary-routing.module";
+import { FoodDiaryRoutingModule } from "./foodDiary-routing.module";
 import { FoodDiaryComponent } from "./foodDiary.component";
 
 @NgModule({
     imports: [
-        FoodDiaryRoutingModule,
+        FoodDiaryRoutingModule
     ],
     declarations:[
         FoodDiaryComponent
