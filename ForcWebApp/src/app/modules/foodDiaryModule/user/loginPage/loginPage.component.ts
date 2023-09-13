@@ -2,14 +2,13 @@ import { Component, OnInit } from '@angular/core'
 import { FormGroup, FormControl, Validators } from '@angular/forms'
 import { Router } from '@angular/router';
 
-
 @Component({
     selector: 'app-login-page',
     templateUrl: 'loginPage.component.html'
 })
 export class LoginPageComponent implements OnInit{
 
-    loginButtonDisabled: boolean = true;
+    loginButtonDisabled = true;
 
     form = new FormGroup({
         name: new FormControl('', [Validators.required]),

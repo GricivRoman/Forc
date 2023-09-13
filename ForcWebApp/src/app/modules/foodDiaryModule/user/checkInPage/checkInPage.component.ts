@@ -1,13 +1,13 @@
-import { Component } from '@angular/core'
+import { Component, OnInit } from '@angular/core'
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Route, Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
     selector: 'app-check-in-page',
     templateUrl: 'checkInPage.component.html'
 })
-export class CheckInPageComponent {
-    checkInButtonDisabled: boolean = true;
+export class CheckInPageComponent implements OnInit {
+    checkInButtonDisabled = true;
 
     form = new FormGroup({
         name: new FormControl('', [Validators.required]),
@@ -28,7 +28,7 @@ export class CheckInPageComponent {
     }
 
     backToLogin(){
-        this.router.navigateByUrl('user/login');
+        this.router.navigate(['user/login']);
     }
 
     checkIn(){
