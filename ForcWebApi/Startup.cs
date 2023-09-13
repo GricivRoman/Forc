@@ -1,10 +1,13 @@
 ﻿
+using ForcWebApi.Infrastructure;
+
 namespace ForcWebApi
 {
     public class Startup
     {
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<DataContext>();
             services.AddControllers(options => options.SuppressImplicitRequiredAttributeForNonNullableReferenceTypes = true);
             services.AddControllersWithViews();
         }
