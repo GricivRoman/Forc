@@ -5,4 +5,7 @@ import { Component } from '@angular/core';
     templateUrl: 'foodDiary.component.html'
 })
 export class FoodDiaryComponent {
+    click(){
+        alert('click')
+    }
 }
