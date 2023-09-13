@@ -5,10 +5,10 @@
                 <div class="form-group mx-xl-0 mx-sm-2">
                     <div class="col-xl-8 col-sm-10">
                         <label for="name">User name</label>
-                        <input id="name" class="form-control" formControlName="name" type="text">
+                        <input id="name" class="form-control" formControlName="userName" type="text">
                         <div class="text-danger"
-                            *ngIf="form.controls.name.invalid && form.controls.name.touched">
-                            <p *ngIf="form.controls.name.hasError('required')">Name is required</p>
+                            *ngIf="form.controls.userName.invalid && form.controls.userName.touched">
+                            <p *ngIf="form.controls.userName.hasError('required')">Name is required</p>
                         </div>
                     </div>
                     <div class="col-xl-8 col-sm-10">

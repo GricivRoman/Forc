@@ -1,22 +1,24 @@
 import { Component, OnInit } from '@angular/core'
 import { FormGroup, FormControl, Validators } from '@angular/forms'
 import { Router } from '@angular/router';
+import { AccountService } from '../account.service';
+import { LoginModel } from '../loginModel';
 
 @Component({
     selector: 'app-login-page',
     templateUrl: 'loginPage.component.html'
 })
 export class LoginPageComponent implements OnInit{
-
+    model: LoginModel;
     loginButtonDisabled = true;
 
     form = new FormGroup({
-        name: new FormControl('', [Validators.required]),
+        userName: new FormControl('', [Validators.required]),
         password: new FormControl('', [Validators.required, Validators.minLength(7)])
     });
 
-    constructor(protected router: Router){
-
+    constructor(protected router: Router,
+        private service: AccountService){
     }
 
     ngOnInit(): void {
@@ -27,7 +29,10 @@ export class LoginPageComponent implements OnInit{
     }
 
     login(){
-        //send request to API
+        if(this.form.valid){
+            this.model = this.form.value as LoginModel;
+            this.service.login(this.model);
+        }
     }
 
     checkIn(){
