@@ -8,7 +8,7 @@ namespace ForcWebApi.Infrastructure.Entities
     /// <summary>
     /// Пользователь
     /// </summary>
-    public class User : IdentityUser<Guid>
+    public class User : IdentityUser
     {
         /// <summary>
         /// Имя пользователя

@@ -1,20 +1,21 @@
 ﻿using ForcWebApi.Infrastructure.Entities;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace ForcWebApi.Infrastructure
 {
-    public class DataContext : DbContext
+    public class DataContext : IdentityDbContext<User>
     {
-        protected readonly IConfiguration Configuration;
+        protected readonly IConfiguration _config;
 
-        public DataContext(IConfiguration configuration)
+        public DataContext(IConfiguration config)
         {
-            Configuration = configuration;
+            _config = config;
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder options)
         {
-            options.UseNpgsql(Configuration.GetConnectionString("ForcDB"));
+            options.UseNpgsql(_config.GetConnectionString("ForcDB"));
         }
 
         public DbSet<User> User { get; set; }
