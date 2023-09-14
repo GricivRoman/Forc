@@ -21,6 +21,7 @@ export class AppComponent {
 
   logout(){
     this.localStorageService.clearAuthInfo();
+    this.router.navigate(['']);
   }
 
   login(){
