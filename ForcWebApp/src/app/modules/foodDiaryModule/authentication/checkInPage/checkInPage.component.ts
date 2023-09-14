@@ -13,7 +13,7 @@ export class CheckInPageComponent implements OnInit {
     checkInButtonDisabled = true;
 
     form = new FormGroup({
-        userName: new FormControl('', [Validators.required]),
+        userName: new FormControl('', [Validators.required, Validators.minLength(3)]),
         email: new FormControl('', [Validators.required, Validators.email]),
         password: new FormControl('', [Validators.required, Validators.minLength(7)])
     });
