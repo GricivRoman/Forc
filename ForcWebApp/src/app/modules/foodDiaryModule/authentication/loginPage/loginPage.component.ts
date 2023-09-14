@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core'
 import { FormGroup, FormControl, Validators } from '@angular/forms'
 import { ActivatedRoute, Router } from '@angular/router';
-import { AccountService } from '../account.service';
+import { AuthenticationService } from '../authentication.service';
 import { LoginModel } from '../loginModel';
 
 @Component({
@@ -19,7 +19,7 @@ export class LoginPageComponent implements OnInit{
 
     constructor(protected router: Router,
         private route: ActivatedRoute,
-        private service: AccountService){
+        private service: AuthenticationService){
     }
 
     ngOnInit(): void {

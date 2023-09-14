@@ -2,16 +2,16 @@ import { NgModule } from '@angular/core'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { LoginPageComponent } from './loginPage/loginPage.component'
 import { CheckInPageComponent } from './checkInPage/checkInPage.component'
-import { AccountRoutingModule } from './account-routing.module'
+import { AuthenticationRoutingModule } from './authentication-routing.module'
 import { CommonModule } from '@angular/common';
-import { AccountService } from './account.service'
+import { AuthenticationService } from './authentication.service'
 import { HttpClientModule } from '@angular/common/http'
 
 @NgModule({
     imports: [
         FormsModule,
         ReactiveFormsModule,
-        AccountRoutingModule,
+        AuthenticationRoutingModule,
         CommonModule,
         HttpClientModule
     ],
@@ -20,9 +20,9 @@ import { HttpClientModule } from '@angular/common/http'
         CheckInPageComponent
     ],
     providers: [
-        AccountService
+        AuthenticationService
     ]
 })
-export class AccountModule {
+export class AuthenticationModule {
 
 }

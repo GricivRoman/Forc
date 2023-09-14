@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AutGuard } from './modules/foodDiaryModule/account/authGuard';
+import { AutGuard } from './modules/foodDiaryModule/authentication/authGuard';
 
 const routes: Routes = [
   {
@@ -18,7 +18,7 @@ const routes: Routes = [
   },
   {
     path: 'user',
-    loadChildren: () => import ('./modules/foodDiaryModule/account/account.module').then(x => x.AccountModule)
+    loadChildren: () => import ('./modules/foodDiaryModule/authentication/authentication.module').then(x => x.AuthenticationModule)
   }
 ];
 

@@ -6,7 +6,7 @@ import { LocalStorageService } from "../../shared/localStorage.service";
 import { ActivatedRoute, Router } from "@angular/router";
 
 @Injectable()
-export class AccountService {
+export class AuthenticationService {
     constructor(private http: HttpClient,
         private localStorageService: LocalStorageService,
         private router: Router,

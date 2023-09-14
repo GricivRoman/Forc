@@ -1,5 +1,4 @@
 ﻿using ForcWebApi.Dto;
-using ForcWebApi.Infrastructure;
 using ForcWebApi.Infrastructure.Entities;
 using ForcWebApi.Interfaces;
 using Microsoft.AspNetCore.Identity;
@@ -8,12 +7,10 @@ namespace ForcWebApi.Services
 {
     public class AuthService : IAccountService
     {
-        private readonly DataContext _context;
         private readonly UserManager<User> _userManager;
 
-        public AuthService(DataContext context, UserManager<User> userManager)
+        public AuthService(UserManager<User> userManager)
         {
-            _context = context;
             _userManager = userManager;
         }
         public async Task CreateUserAsync(UserViewModel userModel)

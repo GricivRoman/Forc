@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core'
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AccountService } from '../account.service';
+import { AuthenticationService } from '../authentication.service';
 import { CheckInModel } from '../checkInModel';
 
 @Component({
@@ -20,7 +20,7 @@ export class CheckInPageComponent implements OnInit {
 
     constructor(protected router: Router,
         private route: ActivatedRoute,
-        private service: AccountService){
+        private service: AuthenticationService){
     }
 
     ngOnInit(): void {

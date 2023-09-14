@@ -7,8 +7,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { ApiInterceptor } from './modules/shared/routing/api-interceptor';
-import { AuthActivatorService } from './modules/foodDiaryModule/account/authGuard';
-import { AccountService } from './modules/foodDiaryModule/account/account.service';
+import { AuthActivatorService } from './modules/foodDiaryModule/authentication/authGuard';
+import { AuthenticationService } from './modules/foodDiaryModule/authentication/authentication.service';
 
 @NgModule({
   declarations: [
@@ -30,7 +30,7 @@ import { AccountService } from './modules/foodDiaryModule/account/account.servic
       multi: true,
     },
     AuthActivatorService,
-    AccountService
+    AuthenticationService
   ],
   bootstrap: [AppComponent]
 })
