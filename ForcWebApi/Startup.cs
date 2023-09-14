@@ -1,6 +1,7 @@
 ﻿using ForcWebApi.Infrastructure;
 using ForcWebApi.Infrastructure.Entities;
 using ForcWebApi.Interfaces;
+using ForcWebApi.Middlewares;
 using ForcWebApi.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
@@ -70,6 +71,7 @@ namespace ForcWebApi
             }
             
             app.UseStaticFiles();
+            app.UseMiddleware<ExceptionHandlingMiddleware>();
             app.UseRouting();
 
             app.UseCors("allowedOrigins");
