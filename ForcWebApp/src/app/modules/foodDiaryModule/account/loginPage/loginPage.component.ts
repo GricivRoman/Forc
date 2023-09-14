@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core'
 import { FormGroup, FormControl, Validators } from '@angular/forms'
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AccountService } from '../account.service';
 import { LoginModel } from '../loginModel';
 
@@ -18,6 +18,7 @@ export class LoginPageComponent implements OnInit{
     });
 
     constructor(protected router: Router,
+        private route: ActivatedRoute,
         private service: AccountService){
     }
 
@@ -36,6 +37,8 @@ export class LoginPageComponent implements OnInit{
     }
 
     checkIn(){
-        this.router.navigate(['user/checkin']);
+        this.router.navigate(['user/checkin'], { queryParams : {
+            returnUrl: this.route.snapshot.queryParams['returnUrl']
+        }});
     }
 }

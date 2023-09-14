@@ -1,5 +1,4 @@
-﻿
-using ForcWebApi.Infrastructure;
+﻿using ForcWebApi.Infrastructure;
 using ForcWebApi.Infrastructure.Entities;
 using ForcWebApi.Interfaces;
 using ForcWebApi.Services;
@@ -49,9 +48,18 @@ namespace ForcWebApi
                 };
             });
             services.AddAuthorization();
+
+            services.AddCors(options =>
+            {
+                options.AddPolicy("allowedOrigins", policy =>
+                {
+                    policy.WithOrigins(_config["WebApplicationURL"]).AllowAnyMethod().AllowAnyHeader();
+                });
+            });
+
             services.AddControllers();
 
-            services.AddScoped<IAccountService, AccountService>();
+            services.AddScoped<IAccountService, AuthService>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -64,9 +72,11 @@ namespace ForcWebApi
             app.UseStaticFiles();
             app.UseRouting();
 
+            app.UseCors("allowedOrigins");
+
             app.UseAuthentication();
             app.UseAuthorization();
-
+            
             app.UseEndpoints(cfg =>
             {
                 cfg.MapControllerRoute("Default",

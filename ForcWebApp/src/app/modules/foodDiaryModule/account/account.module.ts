@@ -6,7 +6,6 @@ import { AccountRoutingModule } from './account-routing.module'
 import { CommonModule } from '@angular/common';
 import { AccountService } from './account.service'
 import { HttpClientModule } from '@angular/common/http'
-import { ApiRoutingService } from '../../shared/routing/api-routing-service'
 
 @NgModule({
     imports: [
@@ -21,8 +20,7 @@ import { ApiRoutingService } from '../../shared/routing/api-routing-service'
         CheckInPageComponent
     ],
     providers: [
-        AccountService,
-        ApiRoutingService
+        AccountService
     ]
 })
 export class AccountModule {

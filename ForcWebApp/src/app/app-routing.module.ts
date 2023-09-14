@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AutGuard } from './modules/foodDiaryModule/account/authGuard';
 
 const routes: Routes = [
   {
@@ -8,7 +9,8 @@ const routes: Routes = [
   },
   {
     path: 'personal-account',
-    loadChildren: () => import ('./modules/foodDiaryModule/userProfile/userProfile.module').then(m => m.UserProfileModule)
+    loadChildren: () => import ('./modules/foodDiaryModule/userProfile/userProfile.module').then(m => m.UserProfileModule),
+    canActivate: [AutGuard]
   },
   {
     path: 'diary-menu',

@@ -6,12 +6,12 @@ using Microsoft.AspNetCore.Identity;
 
 namespace ForcWebApi.Services
 {
-    public class AccountService : IAccountService
+    public class AuthService : IAccountService
     {
         private readonly DataContext _context;
         private readonly UserManager<User> _userManager;
 
-        public AccountService(DataContext context, UserManager<User> userManager)
+        public AuthService(DataContext context, UserManager<User> userManager)
         {
             _context = context;
             _userManager = userManager;
@@ -42,9 +42,6 @@ namespace ForcWebApi.Services
                     {
                         throw new InvalidOperationException("Invalid password");
                     }
-
-                    _context.Set<User>().Add(user);
-                    await _context.SaveChangesAsync();
                 }
             }
         }
