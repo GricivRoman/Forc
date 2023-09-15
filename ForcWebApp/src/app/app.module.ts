@@ -6,7 +6,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
-import { ApiInterceptor } from './modules/shared/routing/api-interceptor';
+import { ApiInterceptor } from './modules/shared/api-interceptor';
 import { AuthActivatorService } from './modules/foodDiaryModule/authentication/authGuard';
 import { AuthenticationService } from './modules/foodDiaryModule/authentication/authentication.service';
 

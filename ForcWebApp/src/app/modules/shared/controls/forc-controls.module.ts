@@ -2,9 +2,10 @@ import { NgModule } from "@angular/core";
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { TextControlComponent } from "./forc-text/textControl.component";
 import { CommonModule } from "@angular/common";
-import { PasswordControlComponent } from "./forc-password/PasswordControlComponent";
 import { EmailControlComponent } from "./forc-email/emailControlComponent";
 import { NumberControlComponent } from "./forc-number/numberControlComponent";
+import { CheckBoxControlComponent } from "./forc-checkbox/checkBoxControlComponent";
+import { PasswordControlComponent } from "./forc-password/passwordControlComponent";
 
 @NgModule({
     imports: [
@@ -16,13 +17,15 @@ import { NumberControlComponent } from "./forc-number/numberControlComponent";
         TextControlComponent,
         PasswordControlComponent,
         EmailControlComponent,
-        NumberControlComponent
+        NumberControlComponent,
+        CheckBoxControlComponent
     ],
     exports: [
         TextControlComponent,
         PasswordControlComponent,
         EmailControlComponent,
-        NumberControlComponent
+        NumberControlComponent,
+        CheckBoxControlComponent
     ],
     providers: [
 

@@ -1,8 +1,9 @@
-import { Directive, Input, OnInit } from "@angular/core";
+import { Component, Input, OnInit } from "@angular/core";
 import { FormControl, ValidationErrors } from "@angular/forms";
 
-@Directive({
-    selector: 'app-forc-text',
+@Component({
+    selector: 'app-base-control',
+    template: ''
 })
 export class BaseControlComponent implements OnInit {
     public err: string;
@@ -15,7 +16,7 @@ export class BaseControlComponent implements OnInit {
     @Input()
     control: FormControl;
 
-    mapErrorMessage(key: string): string{
+    mapErrorMessage(key: string): string {
         switch(key){
             case 'required':
                 return `${this.label} field is required`
@@ -25,7 +26,7 @@ export class BaseControlComponent implements OnInit {
                 return `Field must contains an e-male type string`
             default:
                 return ''
-        };
+        }
     }
 
     ngOnInit(): void {
