@@ -4,23 +4,16 @@
             <div class="row">
                 <div class="form-group mx-xl-0 mx-sm-2">
                     <div class="col-xl-8 col-sm-10">
-                        <label for="name">User name</label>
-                        <input id="name" class="form-control" formControlName="userName" type="text">
-                        <div class="text-danger"
-                            *ngIf="form.controls.userName.invalid && form.controls.userName.touched">
-                            <p *ngIf="form.controls.userName.hasError('required')">Name is required</p>
-                        </div>
+                        <app-forc-text
+                            [label]="'User name'"
+                            [control]='form.controls.userName'
+                        ></app-forc-text>
                     </div>
                     <div class="col-xl-8 col-sm-10">
-                        <label for="password">Password</label>
-                        <input id="password" class="form-control" formControlName="password" type="password">
-                        <div class="text-danger"
-                            *ngIf="form.controls.password.invalid && form.controls.password.touched">
-                            <p *ngIf="form.controls.password.hasError('required')">Password is required</p>
-                            <p *ngIf="form.controls.password.hasError('minlength')">
-                                Required min length is {{form.controls.password.getError('minlength').requiredLength}} but you entered {{form.controls.password.getError('minlength').actualLength}}
-                            </p>
-                        </div>
+                        <app-forc-password
+                            [label]="'Password'"
+                            [control]='form.controls.password'
+                        ></app-forc-password>
                     </div>
                 </div>
             </div>
