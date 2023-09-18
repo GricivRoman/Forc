@@ -1,0 +1,27 @@
+import { NgModule } from "@angular/core";
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { AddButtonComponent } from "./buttons/add-button.component";
+import { EditButtonComponent } from "./buttons/edit-button.component";
+import { DeleteButtonComponent } from "./buttons/delete-button.component";
+
+@NgModule({
+    imports: [
+        FontAwesomeModule
+    ],
+    declarations: [
+        AddButtonComponent,
+        EditButtonComponent,
+        DeleteButtonComponent
+    ],
+    exports: [
+        AddButtonComponent,
+        EditButtonComponent,
+        DeleteButtonComponent
+    ],
+    providers: [
+
+    ]
+})
+export class ForcButtonsModule {
+
+}

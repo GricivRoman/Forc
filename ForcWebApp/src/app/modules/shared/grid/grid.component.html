@@ -1,0 +1,25 @@
+<div class="mt-2">
+    <dx-data-grid
+        [dataSource]="dataSource"        
+        [showBorders]="true"
+        [showRowLines]="true"
+        [focusedRowEnabled]="true"
+        [rowAlternationEnabled]="true"
+        [allowColumnResizing]="allowColumnResizing"
+        columnResizingMode="nextColumn"
+        [columnMinWidth]="columnMinWidth"
+        [columnAutoWidth]="columnAutoWidth"
+        [columns]="columns"
+        [width]="gridWidth"
+        keyExpr="id"
+
+        [(autoNavigateToFocusedRow)]="autoNavigateToFocusedRow"
+        [(focusedRowKey)]="focusedRowKey"
+    >
+        <dxo-selection [mode] = "selectionMode"></dxo-selection>
+        <dxo-header-filter [visible]="true"></dxo-header-filter>
+        <dxo-paging [pageSize]="pageSize"></dxo-paging>
+        <dxo-grouping [autoExpandAll]="expandAll"></dxo-grouping>
+        <dxo-group-panel [visible]="allowGrouping"></dxo-group-panel>
+  </dx-data-grid>
+</div>
