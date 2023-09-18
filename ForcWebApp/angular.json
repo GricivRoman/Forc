@@ -19,7 +19,8 @@
               "jszip",
               "devexpress-diagram",
               "devexpress-gantt",
-              "devextreme-quill"
+              "devextreme-quill",
+              "guid-typescript"
             ],
             "outputPath": "dist/forc-web-app",
             "index": "src/index.html",
