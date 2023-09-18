@@ -1,10 +1,13 @@
 import { Component, Injectable, ViewChild } from '@angular/core'
 import { GridComponent } from '../../shared/grid/grid.component';
-import { GridOptions, GridOptionsService } from '../../shared/grid/grid-options.service';
+import { GridOptionsInterface } from '../../shared/grid/grid-options.interface';
 import { Column } from 'devextreme/ui/data_grid'
 import { gridSelectionModeStates } from '../../shared/grid/gridElementsModeStates';
 import { GridDataService } from '../../shared/grid/grid-data.service';
 import { Observable, of } from 'rxjs';
+import { GridOptions } from '../../shared/grid/grid-options.component';
+import { Guid } from 'guid-typescript';
+import { HumanModel } from './human.model';
 
 @Component({
     selector: 'app-diary-menu',
@@ -14,25 +17,34 @@ export class DiaryMenuComponent {
     constructor(public gridOptionService: DiaryMenuGridOptionService){
     }
 
-    @ViewChild(GridComponent, {static: false}) grid: GridComponent;
+    @ViewChild(GridComponent, {static: false}) grid: GridComponent<HumanModel>;
 
     rowDoubleClick = () => {
         const data = this.grid.getSelectedRowsData();
+        console.log(data);
     }
 
-    buttonClicked() {
-        console.log(this.grid.getSelectedRowsData());
+    add() {
         this.grid.dataSource.push({
-            id: null,
+            id: Guid.createEmpty(),
             name: 'Vanua',
             age: 33,
             sex: 'male'
         });
     }
+
+    edit() {
+        const data = this.grid.getSelectedRowsData();
+        data[0].name="UUUUU";
+    }
+
+    delete() {
+        console.log(this.grid.getSelectedRowsKeys());
+    }
 }
 
 @Injectable()
-export class DiaryMenuGridOptionService implements GridOptionsService, GridDataService {
+export class DiaryMenuGridOptionService implements GridOptionsInterface, GridDataService<HumanModel> {
     getColumns(): Column[]{
         return [
             {
@@ -60,28 +72,27 @@ export class DiaryMenuGridOptionService implements GridOptionsService, GridDataS
         return options;
     }
 
-    getGridData(): Observable<any[]> {
-        const data = [
+    getGridData(): Observable<HumanModel[]> {
+        const data: HumanModel[] = [
             {
-                id: 1,
+                id: Guid.create(),
                 name: 'Piter',
                 age: 27,
                 sex: 'male'
             },
             {
-                id: 2,
+                id: Guid.create(),
                 name: 'Fiasta',
-                age: 10,
+                age: 33,
                 sex: 'female'
             },
             {
-                id: 3,
+                id: Guid.create(),
                 name: 'Ploshka',
                 age: 44,
                 sex: 'female'
             }
         ];
-        
         return of(data);
     }
 }

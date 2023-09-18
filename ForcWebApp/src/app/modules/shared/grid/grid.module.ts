@@ -1,10 +1,11 @@
 import { NgModule } from '@angular/core'
 import { GridComponent } from './grid.component';
-import { DxDataGridModule } from 'devextreme-angular';
+import { DxDataGridModule, DxButtonModule } from 'devextreme-angular';
 
 @NgModule({
     imports:[
-        DxDataGridModule
+        DxDataGridModule,
+        DxButtonModule
     ],
     declarations:[
         GridComponent

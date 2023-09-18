@@ -1,31 +1,28 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { DxDataGridComponent } from 'devextreme-angular';
 import { gridSelectionModeStates } from './gridElementsModeStates';
-import { GridOptionsService } from './grid-options.service';
+import { GridOptionsInterface } from './grid-options.interface';
 import { Column } from 'devextreme/ui/data_grid'
 import { GridDataService } from './grid-data.service';
-
+import { BaseEntity } from '../baseEntity';
 
 @Component({
     selector: 'app-grid',
     templateUrl: 'grid.component.html',
     styleUrls: ['grid.component.css']
 })
-export class GridComponent implements OnInit{
+export class GridComponent<TClass extends BaseEntity> implements OnInit {
     @ViewChild(DxDataGridComponent, {static: false} ) grid: DxDataGridComponent;
 
     @Input()
-    public optionsService: GridOptionsService;
+    public optionsService: GridOptionsInterface;
     @Input()
-    public dataService: GridDataService;
+    public dataService: GridDataService<TClass>;
 
-    @Input()
-    public onRowDoubleCkick: Function;
-
-    public dataSource: any[];
+    public dataSource: TClass[];
     protected gridWidth: string;
     protected selectionMode: string;
-    protected columns: Column[];    
+    protected columns: Column[];
 
     protected allowColumnResizing: boolean;
     protected columnMinWidth: number;
@@ -33,7 +30,10 @@ export class GridComponent implements OnInit{
     protected pageSize: number;
 
     protected allowGrouping: boolean;
-    protected expandAll: boolean = true;
+    protected expandAll = true;
+
+    protected focusedRowKey: number;
+    protected autoNavigateToFocusedRow: boolean;
 
     ngOnInit() {
         const options = this.optionsService.getGridOptions();
@@ -46,21 +46,22 @@ export class GridComponent implements OnInit{
 
         this.allowColumnResizing = options.allowColumnResizing ?? true;
         this.columnMinWidth = options.columnMinWidth ?? 50;
-        this.columnAutoWidth = options.columnAutoWidth ?? true;       
+        this.columnAutoWidth = options.columnAutoWidth ?? true;
 
         this.allowGrouping = options.allowGrouping ?? false;
+        this.autoNavigateToFocusedRow = options.autoNavigateToFocusedRow ?? false;
     }
     
-    public getSelectedRowsData() : any[]{
+    public getSelectedRowsData() : TClass[] {
         return this.grid.instance.getSelectedRowsData();
     }
 
-    public getSelectedRowsKeys(): any[] {
+    public getSelectedRowsKeys(): TClass[] {
         return this.grid.instance.getSelectedRowKeys();
     }
 
-    public toggleGrouping(){
-        if(this.allowGrouping = true){
+    public toggleGrouping() {
+        if(this.allowGrouping) {
             this.expandAll = !this.expandAll;
         }
     }
@@ -70,7 +71,7 @@ export class GridComponent implements OnInit{
         this.grid.filterValue = null;
     }
 
-    private async loadData(){
+    private async loadData() {
         await this.dataService.getGridData().subscribe((data) => {
             this.dataSource = data;
         });

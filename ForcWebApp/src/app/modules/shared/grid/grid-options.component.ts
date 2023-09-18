@@ -9,9 +9,5 @@ export class GridOptions {
     columnAutoWidth?: boolean;
     pageSize?: number;
     allowGrouping?: boolean;
-}
-
-export interface GridOptionsService {
-    getColumns(): Column[];
-    getGridOptions(): GridOptions;
+    autoNavigateToFocusedRow?: boolean;
 }
