@@ -1,16 +1,20 @@
 <dx-data-grid
-    id="gridContainer"
-    [dataSource]="data"
-    (onRowDblClick)="clickRow()"
+    [dataSource]="dataSource"
+    (onRowDblClick)="onRowDoubleCkick()"
     [showBorders]="true"
     [showRowLines]="true"
->
-    <dxi-column dataField="name" dataType="string"></dxi-column>
-    <dxi-column dataField="sex" dataType="string"></dxi-column>
-    <dxi-column dataField="age" dataType="number"></dxi-column>
-    <dxo-paging [pageSize]="2"></dxo-paging>
-    <dxo-pager
-    [showPageSizeSelector]="true"
-    [allowedPageSizes]="[1, 2, 20]"
-  ></dxo-pager>
+    [allowColumnResizing]="allowColumnResizing"
+    columnResizingMode="nextColumn"
+    [columnMinWidth]="columnMinWidth"
+    [columnAutoWidth]="columnAutoWidth"
+    [columns]="columns"
+    [width]="gridWidth"
+>   
+    <dxo-selection
+      [mode] = "selectionMode"
+    ></dxo-selection>
+    <dxo-header-filter [visible]="true"></dxo-header-filter>
+    <dxo-paging [pageSize]="pageSize"></dxo-paging>
+    <dxo-grouping [autoExpandAll]="expandAll"></dxo-grouping>
+    <dxo-group-panel [visible]="allowGrouping"></dxo-group-panel>
 </dx-data-grid>

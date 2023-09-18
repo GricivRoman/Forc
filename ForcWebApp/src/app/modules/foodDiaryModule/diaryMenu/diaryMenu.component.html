@@ -1,2 +1,3 @@
 <h1>Менюшка навигации про приложению</h1>
-<app-grid></app-grid>
+<app-grid [optionsService]="gridOptionService" [dataService]="gridOptionService" [onRowDoubleCkick]="rowDoubleClick"></app-grid>
+<button (click)="buttonClicked()">кнопочка</button>

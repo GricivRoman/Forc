@@ -13,6 +13,14 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "allowedCommonJsDependencies": [
+              "devextreme",
+              "devextreme-angular",
+              "jszip",
+              "devexpress-diagram",
+              "devexpress-gantt",
+              "devextreme-quill"
+            ],
             "outputPath": "dist/forc-web-app",
             "index": "src/index.html",
             "main": "src/main.ts",

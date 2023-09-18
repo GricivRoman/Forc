@@ -1,5 +1,5 @@
 import { NgModule } from "@angular/core";
-import { DiaryMenuComponent } from "./diaryMenu.component";
+import { DiaryMenuComponent, DiaryMenuGridOptionService } from "./diaryMenu.component";
 import { DiaryMenuRoutingModule } from "./diaryMenu-routing.module";
 import { GridModule } from "../../shared/grid/grid.module";
 
@@ -10,6 +10,9 @@ import { GridModule } from "../../shared/grid/grid.module";
     ],
     declarations:[
         DiaryMenuComponent
+    ],
+    providers: [
+        DiaryMenuGridOptionService
     ]
 })
 export class DiaryMenuModule {
