@@ -4,7 +4,7 @@ import { gridSelectionModeStates } from './gridElementsModeStates';
 import { GridOptionsInterface } from './grid-options.interface';
 import { Column } from 'devextreme/ui/data_grid'
 import { GridDataService } from './grid-data.service';
-import { BaseEntity } from '../baseEntity';
+import { BaseEntity } from '../../baseEntity';
 
 @Component({
     selector: 'app-grid',
