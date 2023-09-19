@@ -1,9 +1,9 @@
 <h1>Менюшка навигации про приложению</h1>
 <div>
     <div>
-        <app-add-btn (click)="add()"></app-add-btn>
-        <app-edit-btn class="mx-1" (click)="edit()"></app-edit-btn>
-        <app-delete-btn (click)="delete()"></app-delete-btn>
+        <app-add-btn (click)="add()" [disabled]="true"></app-add-btn>
+        <app-edit-btn class="mx-1" (click)="edit()" [disabled]="true"></app-edit-btn>
+        <app-delete-btn (click)="delete()" [disabled]="true"></app-delete-btn>
     </div>
     <app-grid [optionsService]="gridOptionService" [dataService]="gridOptionService"></app-grid>
 </div>

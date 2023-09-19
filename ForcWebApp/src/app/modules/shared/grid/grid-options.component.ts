@@ -10,4 +10,5 @@ export class GridOptions {
     pageSize?: number;
     allowGrouping?: boolean;
     autoNavigateToFocusedRow?: boolean;
+    showSearchPanel?: boolean;
 }
