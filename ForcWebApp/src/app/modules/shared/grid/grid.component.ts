@@ -20,10 +20,9 @@ export class GridComponent<TClass extends BaseEntity> implements OnInit {
     public dataService: GridDataService<TClass>;
 
     public dataSource: TClass[];
+    protected columns: Column[];
     protected gridWidth: string;
     protected selectionMode: string;
-    protected columns: Column[];
-
     protected allowColumnResizing: boolean;
     protected columnMinWidth: number;
     protected columnAutoWidth: boolean;
@@ -34,6 +33,13 @@ export class GridComponent<TClass extends BaseEntity> implements OnInit {
 
     protected focusedRowKey: number;
     protected autoNavigateToFocusedRow: boolean;
+    
+    protected searchPanel = {
+        highlightCaseSensitive: false,
+        highlightSearchText: true,
+        searchVisibleColumnsOnly: true,
+        visible: false
+    }
 
     ngOnInit() {
         const options = this.optionsService.getGridOptions();
@@ -43,6 +49,7 @@ export class GridComponent<TClass extends BaseEntity> implements OnInit {
         this.selectionMode = options.selectionMode ?? gridSelectionModeStates.multiple;
         this.gridWidth = options.gridWidth ?? '100%';
         this.pageSize = options.pageSize ?? 10;
+        this.searchPanel.visible = options.showSearchPanel ?? false;
 
         this.allowColumnResizing = options.allowColumnResizing ?? true;
         this.columnMinWidth = options.columnMinWidth ?? 50;

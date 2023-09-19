@@ -3,10 +3,12 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { AddButtonComponent } from "./buttons/add-button.component";
 import { EditButtonComponent } from "./buttons/edit-button.component";
 import { DeleteButtonComponent } from "./buttons/delete-button.component";
+import { CommonModule } from "@angular/common";
 
 @NgModule({
     imports: [
-        FontAwesomeModule
+        FontAwesomeModule,
+        CommonModule
     ],
     declarations: [
         AddButtonComponent,
