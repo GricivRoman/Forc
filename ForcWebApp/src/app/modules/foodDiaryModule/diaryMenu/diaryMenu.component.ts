@@ -1,11 +1,11 @@
 import { Component, Injectable, ViewChild } from '@angular/core'
-import { GridComponent } from '../../shared/grid/grid.component';
-import { GridOptionsInterface } from '../../shared/grid/grid-options.interface';
+import { GridComponent } from '../../shared/module-frontend/forc-grid/grid.component';
+import { GridOptionsInterface } from '../../shared/module-frontend/forc-grid/grid-options.interface';
 import { Column } from 'devextreme/ui/data_grid'
-import { gridSelectionModeStates } from '../../shared/grid/gridElementsModeStates';
-import { GridDataService } from '../../shared/grid/grid-data.service';
+import { gridSelectionModeStates } from '../../shared/module-frontend/forc-grid/gridElementsModeStates';
+import { GridDataService } from '../../shared/module-frontend/forc-grid/grid-data.service';
 import { Observable, of } from 'rxjs';
-import { GridOptions } from '../../shared/grid/grid-options.component';
+import { GridOptions } from '../../shared/module-frontend/forc-grid/grid-options.component';
 import { Guid } from 'guid-typescript';
 import { HumanModel } from './human.model';
 

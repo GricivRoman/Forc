@@ -21,7 +21,7 @@ import { AuthenticationService } from './modules/foodDiaryModule/authentication/
     FormsModule,
     ReactiveFormsModule,
     CommonModule,
-    HttpClientModule
+    HttpClientModule,
   ],
   providers: [
     {

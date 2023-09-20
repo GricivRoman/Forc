@@ -6,7 +6,7 @@ import { AuthenticationRoutingModule } from './authentication-routing.module'
 import { CommonModule } from '@angular/common';
 import { AuthenticationService } from './authentication.service'
 import { HttpClientModule } from '@angular/common/http'
-import { ForcControlsModule } from '../../shared/controls/forc-controls.module'
+import { ForcControlsModule } from '../../shared/module-frontend/controls/forc-controls.module'
 
 @NgModule({
     imports: [
