@@ -1,16 +1,31 @@
 import { Component } from '@angular/core';
-import { LocalStorageService } from '../../shared/localStorage.service';
+import { PopupService } from '../../shared/module-frontend/forc-popup/popup.service';
+import { UserProfileComponent } from '../userProfile/userProfilecomponent';
 
 @Component({
     selector: 'app-food-diary',
     templateUrl: 'foodDiary.component.html'
 })
 export class FoodDiaryComponent {
-    constructor(private localStorageService: LocalStorageService){
-
+    constructor(private popupService: PopupService){
     }
     
     click(){
-        console.log(this.localStorageService.authInfo.token);
+        this.popupService.openWithTwoButtons(
+            UserProfileComponent,
+            'CustomTitle',
+            undefined,
+            true,
+            (ref, popupRef) => {
+            },
+            (ref, popupRef) => {
+                console.log('save');
+                console.log(ref);
+            },
+            (ref, popupRef) => {
+                console.log('close');
+                popupRef.close();
+            }
+        );
     }
 }
