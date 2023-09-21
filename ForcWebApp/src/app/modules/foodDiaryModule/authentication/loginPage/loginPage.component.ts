@@ -13,7 +13,7 @@ export class LoginPageComponent implements OnInit{
 	loginButtonDisabled = true;
 
 	form = new FormGroup({
-		userName: new FormControl('', [Validators.required, Validators.minLength(3)]),
+		userNameOrEmail: new FormControl('', [Validators.required, Validators.minLength(3)]),
 		password: new FormControl('', [Validators.required, Validators.minLength(7)])
 	});
 
