@@ -1,9 +1,9 @@
-import { Component } from "@angular/core";
-import { BaseControlComponent } from "../baseControl.component";
+import { Component } from '@angular/core';
+import { BaseControlComponent } from '../baseControl.component';
 
 @Component({
-    selector: 'app-forc-text',
-    templateUrl: 'textControlComponent.html'
+	selector: 'app-forc-text',
+	templateUrl: 'textControlComponent.html'
 })
 export class TextControlComponent extends BaseControlComponent {
 }

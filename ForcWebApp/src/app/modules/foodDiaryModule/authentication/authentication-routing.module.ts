@@ -4,18 +4,18 @@ import { LoginPageComponent } from './loginPage/loginPage.component';
 import { CheckInPageComponent } from './checkInPage/checkInPage.component';
 
 const routes: Routes = [
-  {
-    path: 'login',
-    component: LoginPageComponent
-  },
-  {
-    path: 'checkin',
-    component: CheckInPageComponent
-  }
+	{
+		path: 'login',
+		component: LoginPageComponent
+	},
+	{
+		path: 'checkin',
+		component: CheckInPageComponent
+	}
 ];
 
 @NgModule({
-  imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+	imports: [RouterModule.forChild(routes)],
+	exports: [RouterModule]
 })
 export class AuthenticationRoutingModule { }

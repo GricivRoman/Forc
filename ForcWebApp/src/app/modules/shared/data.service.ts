@@ -1,33 +1,33 @@
-import { HttpClient } from "@angular/common/http";
-import { Injectable } from "@angular/core";
-import { Guid } from "guid-typescript";
-import { Observable } from "rxjs";
-import { BaseEntity } from "./baseEntity";
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { Guid } from 'guid-typescript';
+import { Observable } from 'rxjs';
+import { BaseEntity } from './baseEntity';
 
 @Injectable()
 export class DataService<T extends BaseEntity> {
-    public url: string;
-    
-    constructor(private http: HttpClient){
-    }
-    
-    public get(id: Guid): Observable<T>{
-        return this.http.get<T>(`${this.url}/${id}`);
-    }
+	public url: string;
 
-    public getList(): Observable<T[]>{
-        return this.http.get<T[]>(`${this.url}/list`);
-    }
+	constructor(private http: HttpClient){
+	}
 
-    public save(model: T){
-        return this.http.post(`${this.url}`, model);
-    }
+	public get(id: Guid): Observable<T>{
+		return this.http.get<T>(`${this.url}/${id}`);
+	}
 
-    public update(model: T){
-        return this.http.put(`${this.url}`, model);
-    }
+	public getList(): Observable<T[]>{
+		return this.http.get<T[]>(`${this.url}/list`);
+	}
 
-    public delete(id: Guid): Observable<any>{
-        return this.http.delete(`${this.url}/${id}`);
-    }
+	public save(model: T){
+		return this.http.post(`${this.url}`, model);
+	}
+
+	public update(model: T){
+		return this.http.put(`${this.url}`, model);
+	}
+
+	public delete(id: Guid): Observable<any>{
+		return this.http.delete(`${this.url}/${id}`);
+	}
 }
