@@ -26,6 +26,6 @@ namespace ForcWebApi.Infrastructure.Entities
         /// <summary>
         /// В каких наборах блюд присутствует это блюдо
         /// </summary>
-        public ICollection<UserDishCollection>? UserDishCollections { get; set; }
+        public ICollection<UserDishCollection> UserDishCollections { get; set; }
     }
 }

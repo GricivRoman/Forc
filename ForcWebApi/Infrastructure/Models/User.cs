@@ -13,7 +13,7 @@ namespace ForcWebApi.Infrastructure.Entities
         /// <summary>
         /// Имя пользователя
         /// </summary>
-        public string? Name { get; set; }
+        public string Name { get; set; }
 
         /// <summary>
         /// Дата рождения
@@ -23,7 +23,7 @@ namespace ForcWebApi.Infrastructure.Entities
         /// <summary>
         /// Гендер
         /// </summary>
-        public string? Gender { get; set; }
+        public string Gender { get; set; }
 
         /// <summary>
         /// Пол
@@ -39,22 +39,22 @@ namespace ForcWebApi.Infrastructure.Entities
         /// <summary>
         /// Категория физической активности
         /// </summary>
-        public PhysicalActivityCatalog? PhysicalActivity { get; set; }
+        public PhysicalActivityCatalog PhysicalActivity { get; set; }
 
         /// <summary>
         /// Взвешивания
         /// </summary>
-        public ICollection<WeightCondition>? WeightConditions { get; set; }
+        public ICollection<WeightCondition> WeightConditions { get; set; }
 
         /// <summary>
         /// Цели
         /// </summary>
-        public ICollection<Target>? Targets { get; set; }
+        public ICollection<Target> Targets { get; set; }
 
         /// <summary>
         /// Приемы пищи
         /// </summary>
-        public ICollection<Meal>? Meals { get; set; }
+        public ICollection<Meal> Meals { get; set; }
 
         /// <summary>
         /// Id каталога блюд пользователя

@@ -16,6 +16,6 @@ namespace ForcWebApi.Infrastructure.Entities
         /// <summary>
         /// Набор блюд
         /// </summary>
-        public ICollection<Dish>? Dishes { get; set; }
+        public ICollection<Dish> Dishes { get; set; }
     }
 }
