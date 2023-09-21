@@ -11,27 +11,27 @@ import { AuthActivatorService } from './modules/foodDiaryModule/authentication/a
 import { AuthenticationService } from './modules/foodDiaryModule/authentication/authentication.service';
 
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    FontAwesomeModule,
-    FormsModule,
-    ReactiveFormsModule,
-    CommonModule,
-    HttpClientModule,
-  ],
-  providers: [
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: ApiInterceptor,
-      multi: true,
-    },
-    AuthActivatorService,
-    AuthenticationService
-  ],
-  bootstrap: [AppComponent]
+	declarations: [
+		AppComponent
+	],
+	imports: [
+		BrowserModule,
+		AppRoutingModule,
+		FontAwesomeModule,
+		FormsModule,
+		ReactiveFormsModule,
+		CommonModule,
+		HttpClientModule,
+	],
+	providers: [
+		{
+			provide: HTTP_INTERCEPTORS,
+			useClass: ApiInterceptor,
+			multi: true,
+		},
+		AuthActivatorService,
+		AuthenticationService
+	],
+	bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,46 +1,67 @@
-{
-  "root": true,
-  "ignorePatterns": [
-    "projects/**/*"
-  ],
-  "overrides": [
-    {
-      "files": [
-        "*.ts"
-      ],
-      "extends": [
-        "eslint:recommended",
-        "plugin:@typescript-eslint/recommended",
-        "plugin:@angular-eslint/recommended",
-        "plugin:@angular-eslint/template/process-inline-templates"
-      ],
-      "rules": {
-        "@angular-eslint/directive-selector": [
-          "error",
-          {
-            "type": "attribute",
-            "prefix": "app",
-            "style": "camelCase"
-          }
-        ],
-        "@angular-eslint/component-selector": [
-          "error",
-          {
-            "type": "element",
-            "prefix": "app",
-            "style": "kebab-case"
-          }
-        ]
-      }
-    },
-    {
-      "files": [
-        "*.html"
-      ],
-      "extends": [
-        "plugin:@angular-eslint/template/recommended"
-      ],
-      "rules": {}
-    }
-  ]
+{   
+    "root": true,
+    "ignorePatterns": [
+        "projects/**/*"
+    ],
+    "overrides": [
+        {
+            "env": {
+                "browser": true,
+                "es2021": true
+            },
+            "files": [
+                "*.ts"
+            ],
+            "extends": [
+                "eslint:recommended",
+                "plugin:@typescript-eslint/recommended"
+            ],
+            "parser": "@typescript-eslint/parser",
+            "parserOptions": {
+                "ecmaVersion": "latest"
+            },
+            "plugins": [
+                "@typescript-eslint"
+            ],
+            "rules": {
+                "indent": [
+                    "error",
+                    "tab"
+                ],
+                "@typescript-eslint/no-explicit-any": "off",
+                "linebreak-style": [
+                    "error",
+                    "windows"
+                ],
+                "quotes": [
+                    "error",
+                    "single"
+                ],
+                "semi": [
+                    "error",
+                    "always"
+                ],
+                "no-multi-spaces": [
+                    "error"
+                ],
+                "no-trailing-spaces": [
+                    "error"
+                ],
+                "eqeqeq": [
+                    "error",
+                    "always",
+                    {"null": "ignore"}
+                ]
+            }
+        },
+        {
+            "files": [
+              "*.html"
+            ],
+            "extends": [
+              "plugin:@angular-eslint/template/recommended"
+            ],
+            "rules": {}
+        }
+    ]    
 }
