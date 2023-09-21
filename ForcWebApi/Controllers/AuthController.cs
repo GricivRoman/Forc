@@ -42,7 +42,10 @@ namespace ForcWebApi.Controllers
         [Route("/account/login")]
         public async Task<IActionResult> CreateTokenAsync([FromBody] LoginViewModel model)
         {
-            var user = await _userManager.FindByNameAsync(model.UserName);
+            var userByUserName = await _userManager.FindByNameAsync(model.UserNameOrEmail);
+            var userByEmail = await _userManager.FindByEmailAsync(model.UserNameOrEmail);
+            var user = userByUserName ?? userByEmail;
+
             if (user != null)
             {
                 var result = await _signInManager.CheckPasswordSignInAsync(user, model.Password, false);
