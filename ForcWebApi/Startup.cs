@@ -1,11 +1,14 @@
-﻿using ForcWebApi.Infrastructure;
+﻿using FluentValidation.AspNetCore;
+using ForcWebApi.Infrastructure;
 using ForcWebApi.Infrastructure.Entities;
 using ForcWebApi.Interfaces;
 using ForcWebApi.Middlewares;
 using ForcWebApi.Services;
+using ForcWebApi.Validation;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
+using System.Reflection;
 using System.Text;
 
 namespace ForcWebApi
@@ -58,9 +61,15 @@ namespace ForcWebApi
                 });
             });
 
-            services.AddControllers();
+            services.AddControllers().AddFluentValidation(fv =>
+            {
+                fv.ImplicitlyValidateChildProperties = true;
+                fv.ImplicitlyValidateRootCollectionElements = true;
+                fv.RegisterValidatorsFromAssembly(Assembly.GetExecutingAssembly());
+            });
 
             services.AddScoped<IAccountService, AuthService>();
+            services.AddScoped<ValidationFilterAttribute>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

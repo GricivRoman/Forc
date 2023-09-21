@@ -10,7 +10,7 @@ using System.Text;
 
 namespace ForcWebApi.Controllers
 {
-    public class AuthController : Controller
+    public class AuthController : BaseController
     {
         private readonly SignInManager<User> _signInManager;
         private readonly UserManager<User> _userManager;
@@ -32,7 +32,7 @@ namespace ForcWebApi.Controllers
 
         [HttpPost]
         [Route("/account/checkin")]
-        public async Task<IActionResult> CheckInAsync([FromBody] UserViewModel userModel)
+        public async Task<IActionResult> CheckInAsync([FromBody]CheckInViewModel userModel)
         {
             await _accountService.CreateUserAsync(userModel);
             return Ok();

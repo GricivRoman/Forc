@@ -13,7 +13,7 @@ namespace ForcWebApi.Services
         {
             _userManager = userManager;
         }
-        public async Task CreateUserAsync(UserViewModel userModel)
+        public async Task CreateUserAsync(CheckInViewModel userModel)
         {
             var user = await _userManager.FindByEmailAsync(userModel.Email);
             if (user != null)
