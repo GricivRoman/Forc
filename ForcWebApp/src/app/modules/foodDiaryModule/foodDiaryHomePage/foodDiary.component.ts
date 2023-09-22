@@ -2,13 +2,14 @@ import { Component } from '@angular/core';
 import { PopupService } from '../../shared/module-frontend/forc-popup/popup.service';
 import { UserProfileComponent } from '../userProfile/userProfilecomponent';
 import { DialogService } from '../../shared/module-frontend/forc-dialog/dialog.service';
+import { AlertService } from '../../shared/module-frontend/forc-alert/alert.service';
 
 @Component({
 	selector: 'app-food-diary',
 	templateUrl: 'foodDiary.component.html'
 })
 export class FoodDiaryComponent {
-	constructor(private popupService: PopupService, private dialogService: DialogService){
+	constructor(private popupService: PopupService, private dialogService: DialogService, private alertService: AlertService){
 	}
 
 	click(){
@@ -29,8 +30,10 @@ export class FoodDiaryComponent {
 		// 	}
 		// );
 
-		this.dialogService.openYesNoDialog('Вы хорошо себя чувствуете?').subscribe((answer)=>{
-			console.log(answer);
-		});
+		// this.dialogService.openYesNoDialog('Вы хорошо себя чувствуете?').subscribe((answer)=>{
+		// 	console.log(answer);
+		// });
+
+		this.alertService.showMessage('Saved succesful');
 	}
 }

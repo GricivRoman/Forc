@@ -5,6 +5,7 @@ import { PopupService } from '../../shared/module-frontend/forc-popup/popup.serv
 import { UserProfileModule } from '../userProfile/userProfile.module';
 import { DiaryMenuModule } from '../diaryMenu/diaryMenu.module';
 import { DialogService } from '../../shared/module-frontend/forc-dialog/dialog.service';
+import { AlertService } from '../../shared/module-frontend/forc-alert/alert.service';
 
 @NgModule({
 	imports: [
@@ -17,7 +18,8 @@ import { DialogService } from '../../shared/module-frontend/forc-dialog/dialog.s
 	],
 	providers: [
 		PopupService,
-		DialogService
+		DialogService,
+		AlertService
 	]
 })
 export class FoodDiaryModule {
