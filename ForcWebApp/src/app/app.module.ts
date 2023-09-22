@@ -9,6 +9,7 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { ApiInterceptor } from './modules/shared/api-interceptor';
 import { AuthActivatorService } from './modules/foodDiaryModule/authentication/authGuard';
 import { AuthenticationService } from './modules/foodDiaryModule/authentication/authentication.service';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
 	declarations: [
@@ -22,6 +23,7 @@ import { AuthenticationService } from './modules/foodDiaryModule/authentication/
 		ReactiveFormsModule,
 		CommonModule,
 		HttpClientModule,
+		MatDialogModule
 	],
 	providers: [
 		{
