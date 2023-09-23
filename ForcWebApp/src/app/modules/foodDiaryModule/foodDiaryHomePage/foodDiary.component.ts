@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { PopupService } from '../../shared/module-frontend/forc-popup/popup.service';
-import { UserProfileComponent } from '../userProfile/userProfilecomponent';
 import { DialogService } from '../../shared/module-frontend/forc-dialog/dialog.service';
 import { AlertService } from '../../shared/module-frontend/forc-alert/alert.service';
+import { AlertDialogStates } from '../../shared/module-frontend/forc-alert/alertDialogStates';
 
 @Component({
 	selector: 'app-food-diary',
@@ -34,6 +34,6 @@ export class FoodDiaryComponent {
 		// 	console.log(answer);
 		// });
 
-		this.alertService.showMessage('Saved succesful');
+		this.alertService.showMessage('Saved succesful', AlertDialogStates.error);
 	}
 }
