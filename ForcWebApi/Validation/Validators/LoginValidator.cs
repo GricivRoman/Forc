@@ -9,7 +9,7 @@ namespace ForcWebApi.Validation.Validators
         {
             RuleFor(x => x.UserNameOrEmail)
                 .NotEmpty()
-                .WithName("UserNameOrEmail")
+                .WithName("User name or E-mail")
                 .WithMessage("{PropertyName} is required");
 
             RuleFor(x => x.Password)

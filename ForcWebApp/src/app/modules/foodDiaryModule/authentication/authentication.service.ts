@@ -4,6 +4,7 @@ import { LoginModel } from './loginModel';
 import { CheckInModel } from './checkInModel';
 import { LocalStorageService } from '../../shared/localStorage.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Observable } from 'rxjs';
 
 @Injectable()
 export class AuthenticationService {
@@ -29,18 +30,22 @@ export class AuthenticationService {
 		});
 	}
 
-	checkIn(model: CheckInModel){
-		this.http.post('account/checkin', model).subscribe({
-			next : () => {
-				const loginModel: LoginModel = {
-					userName: model.userName,
-					password: model.password
-				};
-				this.login(loginModel);
-			},
-			error: (err) => {
-				console.log(err);
-			}
+	checkIn(model: CheckInModel): Observable<any>{
+		return this.http.post('account/checkin', model).pipe((task) => {
+			task.subscribe({
+				next : () => {
+					const loginModel: LoginModel = {
+						userName: model.userName,
+						password: model.password
+					};
+					this.login(loginModel);
+				},
+				error: (err) => {
+					console.log(err);
+				}
+			});
+
+			return task;
 		});
 	}
 }

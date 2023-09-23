@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthenticationService } from '../authentication.service';
 import { CheckInModel } from '../checkInModel';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
 	selector: 'app-check-in-page',
@@ -39,7 +40,15 @@ export class CheckInPageComponent implements OnInit {
 	checkIn(){
 		if(this.form.valid){
 			this.model = this.form.value as CheckInModel;
-			this.service.checkIn(this.model);
+			this.service.checkIn(this.model).subscribe({
+				error: (errResponse: HttpErrorResponse) => {
+					Object.keys(this.form.controls).forEach(controlKey => {
+						const errs = errResponse.error[`${controlKey[0].toUpperCase()}${controlKey.substring(1)}`];
+						const currentControl = Object(this.form.controls)[controlKey] as FormControl;
+						currentControl.setErrors(errs);
+					});
+				}
+			});
 		}
 	}
 }
