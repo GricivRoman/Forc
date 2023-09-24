@@ -3,6 +3,9 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthenticationService } from '../authentication.service';
 import { LoginModel } from '../loginModel';
+import { HttpErrorResponse } from '@angular/common/http';
+import { AlertService } from 'src/app/modules/shared/module-frontend/forc-alert/alert.service';
+import { AlertDialogStates } from 'src/app/modules/shared/module-frontend/forc-alert/alertDialogStates';
 
 @Component({
 	selector: 'app-login-page',
@@ -19,7 +22,8 @@ export class LoginPageComponent implements OnInit{
 
 	constructor(protected router: Router,
         private route: ActivatedRoute,
-        private service: AuthenticationService){
+        private authenticationService: AuthenticationService,
+		private alertService: AlertService){
 	}
 
 	ngOnInit(): void {
@@ -31,8 +35,12 @@ export class LoginPageComponent implements OnInit{
 
 	login(){
 		if(this.form.valid){
-			this.model = this.form.value as LoginModel;
-			this.service.login(this.model);
+			this.authenticationService.login(this.form).subscribe({
+				error: (errResponse: HttpErrorResponse) => {
+					if(typeof errResponse.error === 'string' )
+						this.alertService.showMessage(errResponse.error, AlertDialogStates.error);
+				}
+			});
 		}
 	}
 

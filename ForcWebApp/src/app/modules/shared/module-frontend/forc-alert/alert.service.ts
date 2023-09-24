@@ -16,7 +16,8 @@ export class AlertService {
 
 			hasBackdrop: false,
 			ariaModal: true,
-			maxWidth: '300px',
+			maxWidth: '350px',
+			maxHeight: '250px',
 			panelClass: ['alert-dialog', alertDialogState],
 			animation: {
 				outgoingOptions: {

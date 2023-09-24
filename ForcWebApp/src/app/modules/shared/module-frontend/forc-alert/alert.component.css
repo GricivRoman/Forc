@@ -1,3 +1,7 @@
+.alert-dialog :host ::ng-deep  .mat-mdc-dialog-content {
+    text-wrap: balance;
+}
+
 .alert-dialog.alert-succes :host ::ng-deep  .mat-mdc-dialog-content{
     background-color: rgba(114, 243, 120, 0.849);
 }
@@ -7,5 +11,5 @@
 }
 
 .alert-dialog.alert-error :host ::ng-deep  .mat-mdc-dialog-content{
-    background-color: rgba(255, 72, 72, 0.945);
+    background-color: rgba(243, 56, 24, 0.945);
 }

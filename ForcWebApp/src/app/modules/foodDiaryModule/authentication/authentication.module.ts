@@ -7,6 +7,7 @@ import { CommonModule } from '@angular/common';
 import { AuthenticationService } from './authentication.service';
 import { HttpClientModule } from '@angular/common/http';
 import { ForcControlsModule } from '../../shared/module-frontend/controls/forc-controls.module';
+import { AlertService } from '../../shared/module-frontend/forc-alert/alert.service';
 
 @NgModule({
 	imports: [
@@ -22,7 +23,8 @@ import { ForcControlsModule } from '../../shared/module-frontend/controls/forc-c
 		CheckInPageComponent
 	],
 	providers: [
-		AuthenticationService
+		AuthenticationService,
+		AlertService
 	]
 })
 export class AuthenticationModule {
