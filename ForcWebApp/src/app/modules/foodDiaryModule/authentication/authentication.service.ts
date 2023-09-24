@@ -4,43 +4,51 @@ import { LoginModel } from './loginModel';
 import { CheckInModel } from './checkInModel';
 import { LocalStorageService } from '../../shared/localStorage.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Observable, catchError, map, throwError } from 'rxjs';
+import { ApiValidationErrorsResolvingService } from '../../shared/apiValidationErrorsResolving.service';
+import { FormGroup } from '@angular/forms';
 
 @Injectable()
 export class AuthenticationService {
 	constructor(private http: HttpClient,
         private localStorageService: LocalStorageService,
         private router: Router,
-        private route: ActivatedRoute){
+        private route: ActivatedRoute,
+		private errorsResolver: ApiValidationErrorsResolvingService){
 	}
 
 	get loginRequired(): boolean {
 		return this.localStorageService.authInfo == null || new Date(this.localStorageService.authInfo.expiration) < new Date(Date.now());
 	}
 
-	login(model: LoginModel){
-		this.http.post('account/login', model).subscribe({
-			next : (response) => {
-				this.localStorageService.authInfo = response;
-				this.router.navigate([this.route.snapshot.queryParams['returnUrl']]);
-			},
-			error: (err) => {
-				console.log(err);
-			}
-		});
+
+	login(form: FormGroup): Observable<any>{
+		return this.loginRequest(form.value, form);
 	}
 
-	checkIn(model: CheckInModel){
-		this.http.post('account/checkin', model).subscribe({
-			next : () => {
-				const loginModel: LoginModel = {
-					userName: model.userName,
-					password: model.password
-				};
-				this.login(loginModel);
-			},
-			error: (err) => {
-				console.log(err);
+	checkIn(form: FormGroup): Observable<any>{
+		const model = form.value as CheckInModel;
+		return this.http.post('account/checkin', model).pipe(map(() => {
+			const loginModel: LoginModel = {
+				userNameOrEmail: model.email,
+				password: model.password
+			};
+			this.loginRequest(loginModel);
+		}), catchError(err => {
+			this.errorsResolver.resolveApiValidationErrors(form, err);
+			return throwError(err);
+		}));
+	}
+
+	private loginRequest(model: LoginModel, form?: FormGroup): Observable<any>{
+		return this.http.post('account/login', model).pipe(map((response) => {
+			this.localStorageService.authInfo = response;
+			this.router.navigate([this.route.snapshot.queryParams['returnUrl']]);
+		}), catchError(err => {
+			if(form){
+				this.errorsResolver.resolveApiValidationErrors(form, err);
 			}
-		});
+			return throwError(err);
+		}));
 	}
 }

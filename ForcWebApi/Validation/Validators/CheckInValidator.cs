@@ -9,10 +9,10 @@ namespace ForcWebApi.Validation.Validators
         {
             RuleFor(x => x.UserName)
                 .NotEmpty()
-                .WithName("UserName")
+                .WithName("User name")
                 .WithMessage("{PropertyName} is required")
                 .MinimumLength(3)
-                .WithName("UserName")
+                .WithName("User name")
                 .WithMessage("Required min length for {PropertyName} is 3");
 
             RuleFor(x => x.Password)
@@ -25,10 +25,10 @@ namespace ForcWebApi.Validation.Validators
 
             RuleFor(x => x.Email)
                 .NotEmpty()
-                .WithName("Email")
+                .WithName("E-mail")
                 .WithMessage("{PropertyName} is required")
                 .EmailAddress()
-                .WithName("Email")
+                .WithName("E-mail")
                 .WithMessage("{PropertyName} must be an e-male type string");
         }
     }

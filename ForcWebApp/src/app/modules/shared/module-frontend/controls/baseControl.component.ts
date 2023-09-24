@@ -16,21 +16,24 @@ export class BaseControlComponent implements OnInit {
 	@Input()
 		control: FormControl;
 
-	mapErrorMessage(key: string): string {
+	mapErrorMessage(err: ValidationErrors): string {
+		const key = err[0];
+		const errBody = err[1];
 		switch(key){
 		case 'required':
 			return `${this.label} field is required`;
 		case 'minlength':
-			return `Required min length is ${this.control.getError('minlength').requiredLength} but you entered ${this.control.getError('minlength').actualLength}`;
+			return `Required min length is ${errBody.requiredLength} but you entered ${errBody.actualLength}`;
 		case 'email':
 			return 'Field must contains an e-male type string';
 		default:
-			return '';
+			return errBody;
 		}
 	}
 
 	ngOnInit(): void {
 		this.control.valueChanges.subscribe(() => this.checkErrors());
+		this.control.statusChanges.subscribe(() => this.checkErrors());
 	}
 
 	checkErrors() {
@@ -43,7 +46,7 @@ export class BaseControlComponent implements OnInit {
 
 	showError() {
 		const errors: ValidationErrors = this.control.errors as ValidationErrors;
-		this.err = this.mapErrorMessage(Object.keys(errors)[0]);
+		this.err = this.mapErrorMessage(Object.entries(errors)[0]);
 	}
 
 	onControlFocus() {

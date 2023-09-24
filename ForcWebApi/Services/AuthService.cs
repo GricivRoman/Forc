@@ -48,7 +48,7 @@ namespace ForcWebApi.Services
 
             if (result != IdentityResult.Success)
             {
-                throw new InvalidOperationException("Invalid password");
+                throw new InvalidOperationException(result.Errors.First().Description);
             }
         }
 
