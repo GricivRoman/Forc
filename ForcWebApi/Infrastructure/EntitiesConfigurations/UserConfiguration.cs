@@ -16,22 +16,22 @@ namespace ForcWebApi.Infrastructure.EntitiesConfigurations
                 .OnDelete(DeleteBehavior.NoAction);
 
             builder.HasMany<WeightCondition>()
-                .WithOne()
+                .WithOne(x => x.User)
                 .HasForeignKey(x => x.UserId)
                 .OnDelete(DeleteBehavior.Cascade);
 
             builder.HasMany<UserTarget>()
-                .WithOne()
+                .WithOne(x => x.User)
                 .HasForeignKey(x => x.UserId)
                 .OnDelete(DeleteBehavior.Cascade);
 
             builder.HasMany<Meal>()
-                .WithOne()
+                .WithOne(x => x.User)
                 .HasForeignKey(x => x.UserId)
                 .OnDelete(DeleteBehavior.Cascade);
 
             builder.HasOne<UserDishCollection>()
-                .WithOne()
+                .WithOne(x => x.User)
                 .HasForeignKey<User>(x => x.UserDishCollectionId)
                 .IsRequired()
                 .OnDelete(DeleteBehavior.Cascade);

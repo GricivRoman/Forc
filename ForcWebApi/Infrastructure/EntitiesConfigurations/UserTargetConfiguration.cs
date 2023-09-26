@@ -17,7 +17,7 @@ namespace ForcWebApi.Infrastructure.EntitiesConfigurations
                 .OnDelete(DeleteBehavior.NoAction);
 
             builder.HasOne<DailyRate>()
-                .WithOne()
+                .WithOne(x => x.UserTarget)
                 .HasForeignKey<UserTarget>(x => x.DailyRateId)
                 .IsRequired()
                 .OnDelete(DeleteBehavior.Cascade);

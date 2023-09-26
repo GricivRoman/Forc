@@ -8,8 +8,13 @@ namespace ForcWebApi.Infrastructure.Entities
     public class SpecNutritionValue : BaseFoodEntity<Guid>
     {
         /// <summary>
-        /// Ресурсная спецификация
+        /// ID ресурсной спецификации
         /// </summary>
         public Guid ResourceSpecificationId { get; set; }
+
+        /// <summary>
+        /// Ресурсная спецификация
+        /// </summary>
+        public ResourceSpecification ResourceSpecification { get; set; }
     }
 }

@@ -17,12 +17,12 @@ namespace ForcWebApi.Infrastructure.EntitiesConfigurations
                 .OnDelete(DeleteBehavior.Restrict);
 
             builder.HasMany<CompositionItem>()
-                .WithOne()
+                .WithOne(x => x.ResourceSpecification)
                 .HasForeignKey(x => x.ResourceSpecificationId)
                 .OnDelete(DeleteBehavior.Cascade);
 
             builder.HasOne<SpecNutritionValue>()
-                .WithOne()
+                .WithOne(x => x.ResourceSpecification)
                 .HasForeignKey<ResourceSpecification>(x => x.SpecNutritionValueId)
                 .IsRequired()
                 .OnDelete(DeleteBehavior.Cascade);

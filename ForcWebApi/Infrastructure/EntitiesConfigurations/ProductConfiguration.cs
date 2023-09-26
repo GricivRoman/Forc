@@ -12,7 +12,7 @@ namespace ForcWebApi.Infrastructure.EntitiesConfigurations
             builder.HasKey(x => x.Id);
 
             builder.HasMany<CompositionItem>()
-                .WithOne()
+                .WithOne(x => x.Product)
                 .HasForeignKey(x => x.ProductId)
                 .OnDelete(DeleteBehavior.NoAction);
 

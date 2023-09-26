@@ -8,14 +8,24 @@ namespace ForcWebApi.Infrastructure.Entities
     public class CompositionItem : BaseEntity<Guid>
     {
         /// <summary>
-        /// Ресурсная спецификация
+        /// ID ресурсной спецификации
         /// </summary>
         public Guid ResourceSpecificationId { get; set; }
 
         /// <summary>
-        /// Используемый продукт
+        /// Ресурсная спецификация
+        /// </summary>
+        public ResourceSpecification ResourceSpecification { get; set; }
+
+        /// <summary>
+        /// Id используемого продукта
         /// </summary>
         public Guid ProductId { get; set; }
+
+        /// <summary>
+        /// Используемый продукт
+        /// </summary>
+        public Product Product { get; set; }
 
         /// <summary>
         /// Вес продукта

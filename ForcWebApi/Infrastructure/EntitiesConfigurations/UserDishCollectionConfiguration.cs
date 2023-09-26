@@ -20,7 +20,7 @@ namespace ForcWebApi.Infrastructure.EntitiesConfigurations
             builder.HasMany(x => x.Dishes)
                 .WithMany(x => x.UserDishCollections)
                 .UsingEntity(
-                    i => i.HasOne(typeof(DishCategory)).WithMany().HasForeignKey("UserDishCollectionId"),
+                    i => i.HasOne(typeof(UserDishCollection)).WithMany().HasForeignKey("UserDishCollectionId"),
                     j => j.HasOne(typeof(Dish)).WithMany().HasForeignKey("DishId"));
         }
     }

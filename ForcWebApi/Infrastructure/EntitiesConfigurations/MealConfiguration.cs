@@ -17,7 +17,7 @@ namespace ForcWebApi.Infrastructure.EntitiesConfigurations
                 .OnDelete(DeleteBehavior.NoAction);
 
             builder.HasMany<MealItem>()
-                .WithOne()
+                .WithOne(x => x.Meal)
                 .HasForeignKey(x => x.MealId)
                 .OnDelete(DeleteBehavior.Cascade);
         }
