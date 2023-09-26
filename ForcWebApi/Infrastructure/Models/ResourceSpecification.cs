@@ -5,13 +5,13 @@ namespace ForcWebApi.Infrastructure.Entities
     /// <summary>
     /// Ресурсная спецификация блюда - список ингридиентов с количеством
     /// </summary>
-    public class ResourseSpecification : BaseEntity<Guid>
+    public class ResourceSpecification : BaseEntity<Guid>
     {
         /// <summary>
         /// Блюдо
         /// </summary>
-        [ForeignKey(nameof(Dish))]
         public Guid DishId { get; set; }
+        public Dish Dish { get; set; }
 
         /// <summary>
         /// Набор ингридиентов с количеством
@@ -26,7 +26,6 @@ namespace ForcWebApi.Infrastructure.Entities
         /// <summary>
         /// ID энергетическая ценность блюда по текущей ресурсной спецификации
         /// </summary>
-        [ForeignKey(nameof(SpecNutritionValue))]
         public Guid SpecNutritionValueId { get; set; }
 
         /// <summary>

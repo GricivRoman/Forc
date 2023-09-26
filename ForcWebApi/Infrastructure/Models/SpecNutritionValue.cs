@@ -10,7 +10,6 @@ namespace ForcWebApi.Infrastructure.Entities
         /// <summary>
         /// Ресурсная спецификация
         /// </summary>
-        [ForeignKey(nameof(ResourseSpecification))]
-        public Guid ResourseSpecificationId { get; set; }
+        public Guid ResourceSpecificationId { get; set; }
     }
 }

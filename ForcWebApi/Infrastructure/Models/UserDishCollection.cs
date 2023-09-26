@@ -10,7 +10,6 @@ namespace ForcWebApi.Infrastructure.Entities
         /// <summary>
         /// Пользоваталь
         /// </summary>
-        [ForeignKey(nameof(User))]
         public Guid UserId { get; set; }
 
         /// <summary>

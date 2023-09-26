@@ -8,7 +8,7 @@ namespace ForcWebApi.Infrastructure.Entities
     /// <summary>
     /// Пользователь
     /// </summary>
-    public class User : IdentityUser
+    public class User : IdentityUser<Guid>
     {
         /// <summary>
         /// Имя пользователя
@@ -33,7 +33,6 @@ namespace ForcWebApi.Infrastructure.Entities
         /// <summary>
         /// ID категории физической активности
         /// </summary>
-        [ForeignKey(nameof(PhysicalActivityCatalog))]
         public Guid? PhysicalActivityId { get; set; }
 
         /// <summary>
@@ -49,7 +48,7 @@ namespace ForcWebApi.Infrastructure.Entities
         /// <summary>
         /// Цели
         /// </summary>
-        public ICollection<Target> Targets { get; set; }
+        public ICollection<UserTarget> Targets { get; set; }
 
         /// <summary>
         /// Приемы пищи
@@ -59,7 +58,6 @@ namespace ForcWebApi.Infrastructure.Entities
         /// <summary>
         /// Id каталога блюд пользователя
         /// </summary>
-        [ForeignKey(nameof(UserDishCollection))]
         public Guid UserDishCollectionId { get; set; }
 
         /// <summary>
@@ -69,7 +67,7 @@ namespace ForcWebApi.Infrastructure.Entities
 
         /// <summary>
         /// Рост
-        /// </summary>        
+        /// </summary>
         public double Height { get; set; }
     }
 }

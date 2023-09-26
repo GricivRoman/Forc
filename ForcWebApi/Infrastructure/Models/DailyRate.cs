@@ -10,8 +10,7 @@ namespace ForcWebApi.Infrastructure.Entities
         /// <summary>
         /// Ссылка на цель
         /// </summary>
-        [ForeignKey(nameof(Target))]
-        public Guid TargetId { get; set; }
+        public Guid UserTargetId { get; set; }
 
         /// <summary>
         /// Норма потребления каллорий

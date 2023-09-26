@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using ForcWebApi.Infrastructure.Models;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ForcWebApi.Infrastructure.Entities
 {
@@ -15,17 +16,26 @@ namespace ForcWebApi.Infrastructure.Entities
         /// <summary>
         /// Ресурсная спецификация
         /// </summary>
-        public ResourseSpecification ResourseSpecification { get; set; }
+        public ResourceSpecification ResourseSpecification { get; set; }
 
         /// <summary>
         /// Id песурсной спецификации
         /// </summary>
-        [ForeignKey(nameof(ResourseSpecification))]
-        public Guid ResourseSpecificationId { get; set; }
+        public Guid ResourceSpecificationId { get; set; }
 
         /// <summary>
         /// В каких наборах блюд присутствует это блюдо
         /// </summary>
         public ICollection<UserDishCollection> UserDishCollections { get; set; }
+
+        /// <summary>
+        /// Категории, в которые входит блюдо
+        /// </summary>
+        public ICollection<DishCategory> Categoties { get; set; }
+
+        /// <summary>
+        /// Приемы пищи, в которые входит блюдо
+        /// </summary>
+        public ICollection<MealItem> MealItems { get; set; }
     }
 }
