@@ -8,10 +8,14 @@ namespace ForcWebApi.Infrastructure.Entities
     public class DailyRate : BaseEntity<Guid>
     {
         /// <summary>
-        /// Ссылка на цель
+        /// Id цели
         /// </summary>
-        [ForeignKey(nameof(Target))]
-        public Guid TargetId { get; set; }
+        public Guid UserTargetId { get; set; }
+
+        /// <summary>
+        /// Цель
+        /// </summary>
+        public UserTarget UserTarget { get; set; }
 
         /// <summary>
         /// Норма потребления каллорий

@@ -19,5 +19,7 @@
         /// Множитель физической активности
         /// </summary>
         public double PhysicalActivityMultiplier { get; set; }
+
+        public ICollection<User> Users { get; set; }
     }
 }

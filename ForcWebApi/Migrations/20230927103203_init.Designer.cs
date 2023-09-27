@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace ForcWebApi.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20230914084958_init")]
+    [Migration("20230927103203_init")]
     partial class init
     {
         /// <inheritdoc />
@@ -25,17 +25,32 @@ namespace ForcWebApi.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
+            modelBuilder.Entity("DishDishCategory", b =>
+                {
+                    b.Property<Guid>("DishCategoryId")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("DishId")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("DishCategoryId", "DishId");
+
+                    b.HasIndex("DishId");
+
+                    b.ToTable("DishDishCategory");
+                });
+
             modelBuilder.Entity("DishUserDishCollection", b =>
                 {
-                    b.Property<Guid>("DishesId")
+                    b.Property<Guid>("DishId")
                         .HasColumnType("uuid");
 
-                    b.Property<Guid>("UserDishCollectionsId")
+                    b.Property<Guid>("UserDishCollectionId")
                         .HasColumnType("uuid");
 
-                    b.HasKey("DishesId", "UserDishCollectionsId");
+                    b.HasKey("DishId", "UserDishCollectionId");
 
-                    b.HasIndex("UserDishCollectionsId");
+                    b.HasIndex("UserDishCollectionId");
 
                     b.ToTable("DishUserDishCollection");
                 });
@@ -52,14 +67,14 @@ namespace ForcWebApi.Migrations
                     b.Property<double>("ProductWeightG")
                         .HasColumnType("double precision");
 
-                    b.Property<Guid>("ResourseSpecificationId")
+                    b.Property<Guid>("ResourceSpecificationId")
                         .HasColumnType("uuid");
 
                     b.HasKey("Id");
 
                     b.HasIndex("ProductId");
 
-                    b.HasIndex("ResourseSpecificationId");
+                    b.HasIndex("ResourceSpecificationId");
 
                     b.ToTable("CompositionItem");
                 });
@@ -82,7 +97,7 @@ namespace ForcWebApi.Migrations
                     b.Property<double>("ProteinRate")
                         .HasColumnType("double precision");
 
-                    b.Property<Guid>("TargetId")
+                    b.Property<Guid>("UserTargetId")
                         .HasColumnType("uuid");
 
                     b.HasKey("Id");
@@ -97,15 +112,12 @@ namespace ForcWebApi.Migrations
                         .HasColumnType("uuid");
 
                     b.Property<string>("DishName")
-                        .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<Guid>("ResourseSpecificationId")
+                    b.Property<Guid>("ResourceSpecificationId")
                         .HasColumnType("uuid");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("ResourseSpecificationId");
 
                     b.ToTable("Dish");
                 });
@@ -122,12 +134,9 @@ namespace ForcWebApi.Migrations
                     b.Property<Guid>("UserId")
                         .HasColumnType("uuid");
 
-                    b.Property<string>("UserId1")
-                        .HasColumnType("text");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("UserId1");
+                    b.HasIndex("UserId");
 
                     b.ToTable("Meal");
                 });
@@ -149,6 +158,8 @@ namespace ForcWebApi.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("DishId");
+
                     b.HasIndex("MealId");
 
                     b.ToTable("MealItem");
@@ -161,11 +172,9 @@ namespace ForcWebApi.Migrations
                         .HasColumnType("uuid");
 
                     b.Property<string>("Description")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("Name")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<double>("PhysicalActivityMultiplier")
@@ -192,18 +201,22 @@ namespace ForcWebApi.Migrations
                         .HasColumnType("double precision");
 
                     b.Property<string>("Name")
-                        .IsRequired()
                         .HasColumnType("text");
+
+                    b.Property<Guid?>("ProductGroupId")
+                        .HasColumnType("uuid");
 
                     b.Property<double>("Protein")
                         .HasColumnType("double precision");
 
                     b.HasKey("Id");
 
+                    b.HasIndex("ProductGroupId");
+
                     b.ToTable("Product");
                 });
 
-            modelBuilder.Entity("ForcWebApi.Infrastructure.Entities.ResourseSpecification", b =>
+            modelBuilder.Entity("ForcWebApi.Infrastructure.Entities.ResourceSpecification", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -220,9 +233,10 @@ namespace ForcWebApi.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("SpecNutritionValueId");
+                    b.HasIndex("DishId")
+                        .IsUnique();
 
-                    b.ToTable("ResourseSpecification");
+                    b.ToTable("ResourceSpecification");
                 });
 
             modelBuilder.Entity("ForcWebApi.Infrastructure.Entities.SpecNutritionValue", b =>
@@ -243,57 +257,22 @@ namespace ForcWebApi.Migrations
                     b.Property<double>("Protein")
                         .HasColumnType("double precision");
 
-                    b.Property<Guid>("ResourseSpecificationId")
+                    b.Property<Guid>("ResourceSpecificationId")
                         .HasColumnType("uuid");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ResourceSpecificationId")
+                        .IsUnique();
 
                     b.ToTable("SpecNutritionValue");
                 });
 
-            modelBuilder.Entity("ForcWebApi.Infrastructure.Entities.Target", b =>
+            modelBuilder.Entity("ForcWebApi.Infrastructure.Entities.User", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
-
-                    b.Property<double>("CurrentBodyWeight")
-                        .HasColumnType("double precision");
-
-                    b.Property<Guid>("DailyRateId")
-                        .HasColumnType("uuid");
-
-                    b.Property<DateTime>("DateFinish")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<DateTime>("DateStart")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<bool>("Relevance")
-                        .HasColumnType("boolean");
-
-                    b.Property<double>("TargetBodyWeight")
-                        .HasColumnType("double precision");
-
-                    b.Property<Guid>("UserId")
-                        .HasColumnType("uuid");
-
-                    b.Property<string>("UserId1")
-                        .HasColumnType("text");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("DailyRateId");
-
-                    b.HasIndex("UserId1");
-
-                    b.ToTable("Target");
-                });
-
-            modelBuilder.Entity("ForcWebApi.Infrastructure.Entities.User", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("text");
 
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("integer");
@@ -374,7 +353,8 @@ namespace ForcWebApi.Migrations
 
                     b.HasIndex("PhysicalActivityId");
 
-                    b.HasIndex("UserDishCollectionId");
+                    b.HasIndex("UserDishCollectionId")
+                        .IsUnique();
 
                     b.ToTable("AspNetUsers", (string)null);
                 });
@@ -393,6 +373,43 @@ namespace ForcWebApi.Migrations
                     b.ToTable("UserDishCollection");
                 });
 
+            modelBuilder.Entity("ForcWebApi.Infrastructure.Entities.UserTarget", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<double>("CurrentBodyWeight")
+                        .HasColumnType("double precision");
+
+                    b.Property<Guid>("DailyRateId")
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime>("DateFinish")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<DateTime>("DateStart")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<bool>("Relevance")
+                        .HasColumnType("boolean");
+
+                    b.Property<double>("TargetBodyWeight")
+                        .HasColumnType("double precision");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DailyRateId")
+                        .IsUnique();
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("UserTarget");
+                });
+
             modelBuilder.Entity("ForcWebApi.Infrastructure.Entities.WeightCondition", b =>
                 {
                     b.Property<Guid>("Id")
@@ -408,20 +425,46 @@ namespace ForcWebApi.Migrations
                     b.Property<Guid>("UserId")
                         .HasColumnType("uuid");
 
-                    b.Property<string>("UserId1")
-                        .HasColumnType("text");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("UserId1");
+                    b.HasIndex("UserId");
 
                     b.ToTable("WeightCondition");
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
+            modelBuilder.Entity("ForcWebApi.Infrastructure.Models.DishCategory", b =>
                 {
-                    b.Property<string>("Id")
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("CategoryName")
                         .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("DishCategory");
+                });
+
+            modelBuilder.Entity("ForcWebApi.Infrastructure.Models.ProductGroup", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("GroupName")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ProductGroup");
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole<System.Guid>", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
@@ -444,7 +487,7 @@ namespace ForcWebApi.Migrations
                     b.ToTable("AspNetRoles", (string)null);
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -458,9 +501,8 @@ namespace ForcWebApi.Migrations
                     b.Property<string>("ClaimValue")
                         .HasColumnType("text");
 
-                    b.Property<string>("RoleId")
-                        .IsRequired()
-                        .HasColumnType("text");
+                    b.Property<Guid>("RoleId")
+                        .HasColumnType("uuid");
 
                     b.HasKey("Id");
 
@@ -469,7 +511,7 @@ namespace ForcWebApi.Migrations
                     b.ToTable("AspNetRoleClaims", (string)null);
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<System.Guid>", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -483,9 +525,8 @@ namespace ForcWebApi.Migrations
                     b.Property<string>("ClaimValue")
                         .HasColumnType("text");
 
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("text");
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uuid");
 
                     b.HasKey("Id");
 
@@ -494,7 +535,7 @@ namespace ForcWebApi.Migrations
                     b.ToTable("AspNetUserClaims", (string)null);
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<System.Guid>", b =>
                 {
                     b.Property<string>("LoginProvider")
                         .HasColumnType("text");
@@ -505,9 +546,8 @@ namespace ForcWebApi.Migrations
                     b.Property<string>("ProviderDisplayName")
                         .HasColumnType("text");
 
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("text");
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uuid");
 
                     b.HasKey("LoginProvider", "ProviderKey");
 
@@ -516,13 +556,13 @@ namespace ForcWebApi.Migrations
                     b.ToTable("AspNetUserLogins", (string)null);
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<System.Guid>", b =>
                 {
-                    b.Property<string>("UserId")
-                        .HasColumnType("text");
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uuid");
 
-                    b.Property<string>("RoleId")
-                        .HasColumnType("text");
+                    b.Property<Guid>("RoleId")
+                        .HasColumnType("uuid");
 
                     b.HasKey("UserId", "RoleId");
 
@@ -531,10 +571,10 @@ namespace ForcWebApi.Migrations
                     b.ToTable("AspNetUserRoles", (string)null);
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<System.Guid>", b =>
                 {
-                    b.Property<string>("UserId")
-                        .HasColumnType("text");
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uuid");
 
                     b.Property<string>("LoginProvider")
                         .HasColumnType("text");
@@ -550,99 +590,128 @@ namespace ForcWebApi.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("DishDishCategory", b =>
+                {
+                    b.HasOne("ForcWebApi.Infrastructure.Models.DishCategory", null)
+                        .WithMany()
+                        .HasForeignKey("DishCategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ForcWebApi.Infrastructure.Entities.Dish", null)
+                        .WithMany()
+                        .HasForeignKey("DishId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("DishUserDishCollection", b =>
                 {
                     b.HasOne("ForcWebApi.Infrastructure.Entities.Dish", null)
                         .WithMany()
-                        .HasForeignKey("DishesId")
+                        .HasForeignKey("DishId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("ForcWebApi.Infrastructure.Entities.UserDishCollection", null)
                         .WithMany()
-                        .HasForeignKey("UserDishCollectionsId")
+                        .HasForeignKey("UserDishCollectionId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
             modelBuilder.Entity("ForcWebApi.Infrastructure.Entities.CompositionItem", b =>
                 {
-                    b.HasOne("ForcWebApi.Infrastructure.Entities.Product", null)
+                    b.HasOne("ForcWebApi.Infrastructure.Entities.Product", "Product")
                         .WithMany("CompositionItems")
                         .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.HasOne("ForcWebApi.Infrastructure.Entities.ResourseSpecification", null)
+                    b.HasOne("ForcWebApi.Infrastructure.Entities.ResourceSpecification", "ResourceSpecification")
                         .WithMany("Composition")
-                        .HasForeignKey("ResourseSpecificationId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("ForcWebApi.Infrastructure.Entities.Dish", b =>
-                {
-                    b.HasOne("ForcWebApi.Infrastructure.Entities.ResourseSpecification", "ResourseSpecification")
-                        .WithMany()
-                        .HasForeignKey("ResourseSpecificationId")
+                        .HasForeignKey("ResourceSpecificationId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("ResourseSpecification");
+                    b.Navigation("Product");
+
+                    b.Navigation("ResourceSpecification");
                 });
 
             modelBuilder.Entity("ForcWebApi.Infrastructure.Entities.Meal", b =>
                 {
-                    b.HasOne("ForcWebApi.Infrastructure.Entities.User", null)
+                    b.HasOne("ForcWebApi.Infrastructure.Entities.User", "User")
                         .WithMany("Meals")
-                        .HasForeignKey("UserId1");
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("ForcWebApi.Infrastructure.Entities.MealItem", b =>
                 {
-                    b.HasOne("ForcWebApi.Infrastructure.Entities.Meal", null)
+                    b.HasOne("ForcWebApi.Infrastructure.Entities.Dish", "Dish")
+                        .WithMany("MealItems")
+                        .HasForeignKey("DishId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("ForcWebApi.Infrastructure.Entities.Meal", "Meal")
                         .WithMany("MealItems")
                         .HasForeignKey("MealId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
+
+                    b.Navigation("Dish");
+
+                    b.Navigation("Meal");
                 });
 
-            modelBuilder.Entity("ForcWebApi.Infrastructure.Entities.ResourseSpecification", b =>
+            modelBuilder.Entity("ForcWebApi.Infrastructure.Entities.Product", b =>
                 {
-                    b.HasOne("ForcWebApi.Infrastructure.Entities.SpecNutritionValue", "SpecNutritionValue")
-                        .WithMany()
-                        .HasForeignKey("SpecNutritionValueId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.HasOne("ForcWebApi.Infrastructure.Models.ProductGroup", "ProductGroup")
+                        .WithMany("Products")
+                        .HasForeignKey("ProductGroupId")
+                        .OnDelete(DeleteBehavior.NoAction);
 
-                    b.Navigation("SpecNutritionValue");
+                    b.Navigation("ProductGroup");
                 });
 
-            modelBuilder.Entity("ForcWebApi.Infrastructure.Entities.Target", b =>
+            modelBuilder.Entity("ForcWebApi.Infrastructure.Entities.ResourceSpecification", b =>
                 {
-                    b.HasOne("ForcWebApi.Infrastructure.Entities.DailyRate", "DailyRate")
-                        .WithMany()
-                        .HasForeignKey("DailyRateId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                    b.HasOne("ForcWebApi.Infrastructure.Entities.Dish", "Dish")
+                        .WithOne("ResourseSpecification")
+                        .HasForeignKey("ForcWebApi.Infrastructure.Entities.ResourceSpecification", "DishId")
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("ForcWebApi.Infrastructure.Entities.User", null)
-                        .WithMany("Targets")
-                        .HasForeignKey("UserId1");
+                    b.Navigation("Dish");
+                });
 
-                    b.Navigation("DailyRate");
+            modelBuilder.Entity("ForcWebApi.Infrastructure.Entities.SpecNutritionValue", b =>
+                {
+                    b.HasOne("ForcWebApi.Infrastructure.Entities.ResourceSpecification", "ResourceSpecification")
+                        .WithOne("SpecNutritionValue")
+                        .HasForeignKey("ForcWebApi.Infrastructure.Entities.SpecNutritionValue", "ResourceSpecificationId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("ResourceSpecification");
                 });
 
             modelBuilder.Entity("ForcWebApi.Infrastructure.Entities.User", b =>
                 {
                     b.HasOne("ForcWebApi.Infrastructure.Entities.PhysicalActivityCatalog", "PhysicalActivity")
-                        .WithMany()
-                        .HasForeignKey("PhysicalActivityId");
+                        .WithMany("Users")
+                        .HasForeignKey("PhysicalActivityId")
+                        .OnDelete(DeleteBehavior.NoAction);
 
                     b.HasOne("ForcWebApi.Infrastructure.Entities.UserDishCollection", "UserDishCollection")
-                        .WithMany()
-                        .HasForeignKey("UserDishCollectionId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .WithOne("User")
+                        .HasForeignKey("ForcWebApi.Infrastructure.Entities.User", "UserDishCollectionId")
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("PhysicalActivity");
@@ -650,23 +719,46 @@ namespace ForcWebApi.Migrations
                     b.Navigation("UserDishCollection");
                 });
 
+            modelBuilder.Entity("ForcWebApi.Infrastructure.Entities.UserTarget", b =>
+                {
+                    b.HasOne("ForcWebApi.Infrastructure.Entities.DailyRate", "DailyRate")
+                        .WithOne("UserTarget")
+                        .HasForeignKey("ForcWebApi.Infrastructure.Entities.UserTarget", "DailyRateId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ForcWebApi.Infrastructure.Entities.User", "User")
+                        .WithMany("Targets")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("DailyRate");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("ForcWebApi.Infrastructure.Entities.WeightCondition", b =>
                 {
-                    b.HasOne("ForcWebApi.Infrastructure.Entities.User", null)
+                    b.HasOne("ForcWebApi.Infrastructure.Entities.User", "User")
                         .WithMany("WeightConditions")
-                        .HasForeignKey("UserId1");
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("User");
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole<System.Guid>", null)
                         .WithMany()
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<System.Guid>", b =>
                 {
                     b.HasOne("ForcWebApi.Infrastructure.Entities.User", null)
                         .WithMany()
@@ -675,7 +767,7 @@ namespace ForcWebApi.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<System.Guid>", b =>
                 {
                     b.HasOne("ForcWebApi.Infrastructure.Entities.User", null)
                         .WithMany()
@@ -684,9 +776,9 @@ namespace ForcWebApi.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<System.Guid>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole<System.Guid>", null)
                         .WithMany()
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -699,12 +791,26 @@ namespace ForcWebApi.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<System.Guid>", b =>
                 {
                     b.HasOne("ForcWebApi.Infrastructure.Entities.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("ForcWebApi.Infrastructure.Entities.DailyRate", b =>
+                {
+                    b.Navigation("UserTarget")
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("ForcWebApi.Infrastructure.Entities.Dish", b =>
+                {
+                    b.Navigation("MealItems");
+
+                    b.Navigation("ResourseSpecification")
                         .IsRequired();
                 });
 
@@ -713,14 +819,22 @@ namespace ForcWebApi.Migrations
                     b.Navigation("MealItems");
                 });
 
+            modelBuilder.Entity("ForcWebApi.Infrastructure.Entities.PhysicalActivityCatalog", b =>
+                {
+                    b.Navigation("Users");
+                });
+
             modelBuilder.Entity("ForcWebApi.Infrastructure.Entities.Product", b =>
                 {
                     b.Navigation("CompositionItems");
                 });
 
-            modelBuilder.Entity("ForcWebApi.Infrastructure.Entities.ResourseSpecification", b =>
+            modelBuilder.Entity("ForcWebApi.Infrastructure.Entities.ResourceSpecification", b =>
                 {
                     b.Navigation("Composition");
+
+                    b.Navigation("SpecNutritionValue")
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("ForcWebApi.Infrastructure.Entities.User", b =>
@@ -730,6 +844,16 @@ namespace ForcWebApi.Migrations
                     b.Navigation("Targets");
 
                     b.Navigation("WeightConditions");
+                });
+
+            modelBuilder.Entity("ForcWebApi.Infrastructure.Entities.UserDishCollection", b =>
+                {
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("ForcWebApi.Infrastructure.Models.ProductGroup", b =>
+                {
+                    b.Navigation("Products");
                 });
 #pragma warning restore 612, 618
         }

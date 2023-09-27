@@ -8,11 +8,15 @@ namespace ForcWebApi.Infrastructure.Entities
     public class Meal : BaseEntity<Guid>
     {
         /// <summary>
+        /// ID пользователя
+        /// </summary>
+        public Guid UserId { get; set; }
+
+        /// <summary>
         /// Пользователь
         /// </summary>
-        [ForeignKey(nameof(User))]
-        public Guid UserId { get; set; }
-        
+        public User User { get; set; }
+
         /// <summary>
         /// Время приема пищи
         /// </summary>

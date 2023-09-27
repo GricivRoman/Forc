@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-
-namespace ForcWebApi.Infrastructure.Entities
+﻿namespace ForcWebApi.Infrastructure.Entities
 {
     /// <summary>
     /// Элемент приема пищи
@@ -8,16 +6,24 @@ namespace ForcWebApi.Infrastructure.Entities
     public class MealItem : BaseEntity<Guid>
     {
         /// <summary>
+        /// ID приема пищи
+        /// </summary>
+        public Guid MealId { get; set; }
+
+        /// <summary>
         /// Прием пищи
         /// </summary>
-        [ForeignKey(nameof(Meal))]
-        public Guid MealId { get; set; }
+        public Meal Meal { get; set; }
+
+        /// <summary>
+        /// Id блюда
+        /// </summary>
+        public Guid DishId { get; set; }
 
         /// <summary>
         /// Блюдо
         /// </summary>
-        [ForeignKey(nameof(Dish))]
-        public Guid DishId { get; set; }
+        public Dish Dish { get; set; }
 
         /// <summary>
         /// Вес блюда

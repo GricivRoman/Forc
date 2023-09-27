@@ -26,7 +26,7 @@ namespace ForcWebApi
         {
             services.AddDbContext<DataContext>();
 
-            services.AddIdentity<User, IdentityRole>(cfg =>
+            services.AddIdentity<User, IdentityRole<Guid>>(cfg =>
             {
                 cfg.User.RequireUniqueEmail = true;
                 cfg.Password.RequireDigit = false;

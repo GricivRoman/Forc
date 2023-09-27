@@ -8,10 +8,14 @@ namespace ForcWebApi.Infrastructure.Entities
     public class UserDishCollection : BaseEntity<Guid>
     {
         /// <summary>
-        /// Пользоваталь
+        /// ID пользователя
         /// </summary>
-        [ForeignKey(nameof(User))]
         public Guid UserId { get; set; }
+
+        /// <summary>
+        /// Пользователь
+        /// </summary>
+        public User User { get; set; }
 
         /// <summary>
         /// Набор блюд

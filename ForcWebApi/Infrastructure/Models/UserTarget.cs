@@ -5,13 +5,17 @@ namespace ForcWebApi.Infrastructure.Entities
     /// <summary>
     /// Цель пользователя
     /// </summary>
-    public class Target : BaseEntity<Guid>
+    public class UserTarget : BaseEntity<Guid>
     {
+        /// <summary>
+        /// ID пользователя
+        /// </summary>
+        public Guid UserId { get; set; }
+
         /// <summary>
         /// Пользователь
         /// </summary>
-        [ForeignKey(nameof(User))]
-        public Guid UserId { get; set; }
+        public User User { get; set; }
 
         /// <summary>
         /// Актуальность
@@ -41,8 +45,6 @@ namespace ForcWebApi.Infrastructure.Entities
         /// <summary>
         /// ID дневной нормы в соответствии с актуальной целью
         /// </summary>
-
-        [ForeignKey(nameof(DailyRate))]
         public Guid DailyRateId { get; set; }
 
         /// <summary>
