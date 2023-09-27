@@ -10,27 +10,27 @@ namespace ForcWebApi.Infrastructure.EntitiesConfigurations
         {
             builder.HasKey(x => x.Id);
 
-            builder.HasOne<PhysicalActivityCatalog>()
+            builder.HasOne(x => x.PhysicalActivity)
                 .WithMany(x => x.Users)
                 .HasForeignKey(x => x.PhysicalActivityId)
                 .OnDelete(DeleteBehavior.NoAction);
 
-            builder.HasMany<WeightCondition>()
+            builder.HasMany(x => x.WeightConditions)
                 .WithOne(x => x.User)
                 .HasForeignKey(x => x.UserId)
                 .OnDelete(DeleteBehavior.Cascade);
 
-            builder.HasMany<UserTarget>()
+            builder.HasMany(x => x.Targets)
                 .WithOne(x => x.User)
                 .HasForeignKey(x => x.UserId)
                 .OnDelete(DeleteBehavior.Cascade);
 
-            builder.HasMany<Meal>()
+            builder.HasMany(x => x.Meals)
                 .WithOne(x => x.User)
                 .HasForeignKey(x => x.UserId)
                 .OnDelete(DeleteBehavior.Cascade);
 
-            builder.HasOne<UserDishCollection>()
+            builder.HasOne(x => x.UserDishCollection)
                 .WithOne(x => x.User)
                 .HasForeignKey<User>(x => x.UserDishCollectionId)
                 .IsRequired()

@@ -16,7 +16,7 @@ namespace ForcWebApi.Migrations
                 name: "AspNetRoles",
                 columns: table => new
                 {
-                    Id = table.Column<string>(type: "text", nullable: false),
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
                     Name = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
                     NormalizedName = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
                     ConcurrencyStamp = table.Column<string>(type: "text", nullable: true)
@@ -31,7 +31,7 @@ namespace ForcWebApi.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
-                    TargetId = table.Column<Guid>(type: "uuid", nullable: false),
+                    UserTargetId = table.Column<Guid>(type: "uuid", nullable: false),
                     CaloriesRate = table.Column<double>(type: "double precision", nullable: false),
                     CarbohydrateRate = table.Column<double>(type: "double precision", nullable: false),
                     FatRate = table.Column<double>(type: "double precision", nullable: false),
@@ -43,12 +43,37 @@ namespace ForcWebApi.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Dish",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    DishName = table.Column<string>(type: "text", nullable: true),
+                    ResourceSpecificationId = table.Column<Guid>(type: "uuid", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Dish", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "DishCategory",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    CategoryName = table.Column<string>(type: "text", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_DishCategory", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "PhysicalActivityCatalog",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
-                    Name = table.Column<string>(type: "text", nullable: false),
-                    Description = table.Column<string>(type: "text", nullable: false),
+                    Name = table.Column<string>(type: "text", nullable: true),
+                    Description = table.Column<string>(type: "text", nullable: true),
                     PhysicalActivityMultiplier = table.Column<double>(type: "double precision", nullable: false)
                 },
                 constraints: table =>
@@ -57,35 +82,15 @@ namespace ForcWebApi.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Product",
+                name: "ProductGroup",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
-                    Name = table.Column<string>(type: "text", nullable: false),
-                    Calories = table.Column<double>(type: "double precision", nullable: false),
-                    Carbohydrate = table.Column<double>(type: "double precision", nullable: false),
-                    Fat = table.Column<double>(type: "double precision", nullable: false),
-                    Protein = table.Column<double>(type: "double precision", nullable: false)
+                    GroupName = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Product", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "SpecNutritionValue",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "uuid", nullable: false),
-                    ResourseSpecificationId = table.Column<Guid>(type: "uuid", nullable: false),
-                    Calories = table.Column<double>(type: "double precision", nullable: false),
-                    Carbohydrate = table.Column<double>(type: "double precision", nullable: false),
-                    Fat = table.Column<double>(type: "double precision", nullable: false),
-                    Protein = table.Column<double>(type: "double precision", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_SpecNutritionValue", x => x.Id);
+                    table.PrimaryKey("PK_ProductGroup", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -106,7 +111,7 @@ namespace ForcWebApi.Migrations
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    RoleId = table.Column<string>(type: "text", nullable: false),
+                    RoleId = table.Column<Guid>(type: "uuid", nullable: false),
                     ClaimType = table.Column<string>(type: "text", nullable: true),
                     ClaimValue = table.Column<string>(type: "text", nullable: true)
                 },
@@ -122,7 +127,7 @@ namespace ForcWebApi.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "ResourseSpecification",
+                name: "ResourceSpecification",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
@@ -132,20 +137,66 @@ namespace ForcWebApi.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ResourseSpecification", x => x.Id);
+                    table.PrimaryKey("PK_ResourceSpecification", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_ResourseSpecification_SpecNutritionValue_SpecNutritionValue~",
-                        column: x => x.SpecNutritionValueId,
-                        principalTable: "SpecNutritionValue",
+                        name: "FK_ResourceSpecification_Dish_DishId",
+                        column: x => x.DishId,
+                        principalTable: "Dish",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "DishDishCategory",
+                columns: table => new
+                {
+                    DishCategoryId = table.Column<Guid>(type: "uuid", nullable: false),
+                    DishId = table.Column<Guid>(type: "uuid", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_DishDishCategory", x => new { x.DishCategoryId, x.DishId });
+                    table.ForeignKey(
+                        name: "FK_DishDishCategory_DishCategory_DishCategoryId",
+                        column: x => x.DishCategoryId,
+                        principalTable: "DishCategory",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_DishDishCategory_Dish_DishId",
+                        column: x => x.DishId,
+                        principalTable: "Dish",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Product",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    Name = table.Column<string>(type: "text", nullable: true),
+                    ProductGroupId = table.Column<Guid>(type: "uuid", nullable: true),
+                    Calories = table.Column<double>(type: "double precision", nullable: false),
+                    Carbohydrate = table.Column<double>(type: "double precision", nullable: false),
+                    Fat = table.Column<double>(type: "double precision", nullable: false),
+                    Protein = table.Column<double>(type: "double precision", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Product", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Product_ProductGroup_ProductGroupId",
+                        column: x => x.ProductGroupId,
+                        principalTable: "ProductGroup",
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
                 name: "AspNetUsers",
                 columns: table => new
                 {
-                    Id = table.Column<string>(type: "text", nullable: false),
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
                     Name = table.Column<string>(type: "text", nullable: true),
                     BirthDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
                     Gender = table.Column<string>(type: "text", nullable: true),
@@ -181,7 +232,53 @@ namespace ForcWebApi.Migrations
                         column: x => x.UserDishCollectionId,
                         principalTable: "UserDishCollection",
                         principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "DishUserDishCollection",
+                columns: table => new
+                {
+                    DishId = table.Column<Guid>(type: "uuid", nullable: false),
+                    UserDishCollectionId = table.Column<Guid>(type: "uuid", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_DishUserDishCollection", x => new { x.DishId, x.UserDishCollectionId });
+                    table.ForeignKey(
+                        name: "FK_DishUserDishCollection_Dish_DishId",
+                        column: x => x.DishId,
+                        principalTable: "Dish",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_DishUserDishCollection_UserDishCollection_UserDishCollectio~",
+                        column: x => x.UserDishCollectionId,
+                        principalTable: "UserDishCollection",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "SpecNutritionValue",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    ResourceSpecificationId = table.Column<Guid>(type: "uuid", nullable: false),
+                    Calories = table.Column<double>(type: "double precision", nullable: false),
+                    Carbohydrate = table.Column<double>(type: "double precision", nullable: false),
+                    Fat = table.Column<double>(type: "double precision", nullable: false),
+                    Protein = table.Column<double>(type: "double precision", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_SpecNutritionValue", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_SpecNutritionValue_ResourceSpecification_ResourceSpecificat~",
+                        column: x => x.ResourceSpecificationId,
+                        principalTable: "ResourceSpecification",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -189,7 +286,7 @@ namespace ForcWebApi.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
-                    ResourseSpecificationId = table.Column<Guid>(type: "uuid", nullable: false),
+                    ResourceSpecificationId = table.Column<Guid>(type: "uuid", nullable: false),
                     ProductId = table.Column<Guid>(type: "uuid", nullable: false),
                     ProductWeightG = table.Column<double>(type: "double precision", nullable: false)
                 },
@@ -200,31 +297,11 @@ namespace ForcWebApi.Migrations
                         name: "FK_CompositionItem_Product_ProductId",
                         column: x => x.ProductId,
                         principalTable: "Product",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_CompositionItem_ResourseSpecification_ResourseSpecification~",
-                        column: x => x.ResourseSpecificationId,
-                        principalTable: "ResourseSpecification",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Dish",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "uuid", nullable: false),
-                    DishName = table.Column<string>(type: "text", nullable: false),
-                    ResourseSpecificationId = table.Column<Guid>(type: "uuid", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Dish", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Dish_ResourseSpecification_ResourseSpecificationId",
-                        column: x => x.ResourseSpecificationId,
-                        principalTable: "ResourseSpecification",
+                        name: "FK_CompositionItem_ResourceSpecification_ResourceSpecification~",
+                        column: x => x.ResourceSpecificationId,
+                        principalTable: "ResourceSpecification",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -235,7 +312,7 @@ namespace ForcWebApi.Migrations
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    UserId = table.Column<string>(type: "text", nullable: false),
+                    UserId = table.Column<Guid>(type: "uuid", nullable: false),
                     ClaimType = table.Column<string>(type: "text", nullable: true),
                     ClaimValue = table.Column<string>(type: "text", nullable: true)
                 },
@@ -257,7 +334,7 @@ namespace ForcWebApi.Migrations
                     LoginProvider = table.Column<string>(type: "text", nullable: false),
                     ProviderKey = table.Column<string>(type: "text", nullable: false),
                     ProviderDisplayName = table.Column<string>(type: "text", nullable: true),
-                    UserId = table.Column<string>(type: "text", nullable: false)
+                    UserId = table.Column<Guid>(type: "uuid", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -274,8 +351,8 @@ namespace ForcWebApi.Migrations
                 name: "AspNetUserRoles",
                 columns: table => new
                 {
-                    UserId = table.Column<string>(type: "text", nullable: false),
-                    RoleId = table.Column<string>(type: "text", nullable: false)
+                    UserId = table.Column<Guid>(type: "uuid", nullable: false),
+                    RoleId = table.Column<Guid>(type: "uuid", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -298,7 +375,7 @@ namespace ForcWebApi.Migrations
                 name: "AspNetUserTokens",
                 columns: table => new
                 {
-                    UserId = table.Column<string>(type: "text", nullable: false),
+                    UserId = table.Column<Guid>(type: "uuid", nullable: false),
                     LoginProvider = table.Column<string>(type: "text", nullable: false),
                     Name = table.Column<string>(type: "text", nullable: false),
                     Value = table.Column<string>(type: "text", nullable: true)
@@ -320,21 +397,21 @@ namespace ForcWebApi.Migrations
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
                     UserId = table.Column<Guid>(type: "uuid", nullable: false),
-                    MealTime = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    UserId1 = table.Column<string>(type: "text", nullable: true)
+                    MealTime = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Meal", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Meal_AspNetUsers_UserId1",
-                        column: x => x.UserId1,
+                        name: "FK_Meal_AspNetUsers_UserId",
+                        column: x => x.UserId,
                         principalTable: "AspNetUsers",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Target",
+                name: "UserTarget",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
@@ -344,19 +421,18 @@ namespace ForcWebApi.Migrations
                     DateFinish = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     CurrentBodyWeight = table.Column<double>(type: "double precision", nullable: false),
                     TargetBodyWeight = table.Column<double>(type: "double precision", nullable: false),
-                    DailyRateId = table.Column<Guid>(type: "uuid", nullable: false),
-                    UserId1 = table.Column<string>(type: "text", nullable: true)
+                    DailyRateId = table.Column<Guid>(type: "uuid", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Target", x => x.Id);
+                    table.PrimaryKey("PK_UserTarget", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Target_AspNetUsers_UserId1",
-                        column: x => x.UserId1,
+                        name: "FK_UserTarget_AspNetUsers_UserId",
+                        column: x => x.UserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_Target_DailyRate_DailyRateId",
+                        name: "FK_UserTarget_DailyRate_DailyRateId",
                         column: x => x.DailyRateId,
                         principalTable: "DailyRate",
                         principalColumn: "Id",
@@ -370,41 +446,16 @@ namespace ForcWebApi.Migrations
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
                     UserId = table.Column<Guid>(type: "uuid", nullable: false),
                     Date = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    BodyWeight = table.Column<double>(type: "double precision", nullable: false),
-                    UserId1 = table.Column<string>(type: "text", nullable: true)
+                    BodyWeight = table.Column<double>(type: "double precision", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_WeightCondition", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_WeightCondition_AspNetUsers_UserId1",
-                        column: x => x.UserId1,
+                        name: "FK_WeightCondition_AspNetUsers_UserId",
+                        column: x => x.UserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id");
-                });
-
-            migrationBuilder.CreateTable(
-                name: "DishUserDishCollection",
-                columns: table => new
-                {
-                    DishesId = table.Column<Guid>(type: "uuid", nullable: false),
-                    UserDishCollectionsId = table.Column<Guid>(type: "uuid", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_DishUserDishCollection", x => new { x.DishesId, x.UserDishCollectionsId });
-                    table.ForeignKey(
-                        name: "FK_DishUserDishCollection_Dish_DishesId",
-                        column: x => x.DishesId,
-                        principalTable: "Dish",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_DishUserDishCollection_UserDishCollection_UserDishCollectio~",
-                        column: x => x.UserDishCollectionsId,
-                        principalTable: "UserDishCollection",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -420,11 +471,16 @@ namespace ForcWebApi.Migrations
                 {
                     table.PrimaryKey("PK_MealItem", x => x.Id);
                     table.ForeignKey(
+                        name: "FK_MealItem_Dish_DishId",
+                        column: x => x.DishId,
+                        principalTable: "Dish",
+                        principalColumn: "Id");
+                    table.ForeignKey(
                         name: "FK_MealItem_Meal_MealId",
                         column: x => x.MealId,
                         principalTable: "Meal",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateIndex(
@@ -466,7 +522,8 @@ namespace ForcWebApi.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetUsers_UserDishCollectionId",
                 table: "AspNetUsers",
-                column: "UserDishCollectionId");
+                column: "UserDishCollectionId",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "UserNameIndex",
@@ -480,24 +537,29 @@ namespace ForcWebApi.Migrations
                 column: "ProductId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_CompositionItem_ResourseSpecificationId",
+                name: "IX_CompositionItem_ResourceSpecificationId",
                 table: "CompositionItem",
-                column: "ResourseSpecificationId");
+                column: "ResourceSpecificationId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Dish_ResourseSpecificationId",
-                table: "Dish",
-                column: "ResourseSpecificationId");
+                name: "IX_DishDishCategory_DishId",
+                table: "DishDishCategory",
+                column: "DishId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_DishUserDishCollection_UserDishCollectionsId",
+                name: "IX_DishUserDishCollection_UserDishCollectionId",
                 table: "DishUserDishCollection",
-                column: "UserDishCollectionsId");
+                column: "UserDishCollectionId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Meal_UserId1",
+                name: "IX_Meal_UserId",
                 table: "Meal",
-                column: "UserId1");
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_MealItem_DishId",
+                table: "MealItem",
+                column: "DishId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_MealItem_MealId",
@@ -505,24 +567,37 @@ namespace ForcWebApi.Migrations
                 column: "MealId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ResourseSpecification_SpecNutritionValueId",
-                table: "ResourseSpecification",
-                column: "SpecNutritionValueId");
+                name: "IX_Product_ProductGroupId",
+                table: "Product",
+                column: "ProductGroupId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Target_DailyRateId",
-                table: "Target",
-                column: "DailyRateId");
+                name: "IX_ResourceSpecification_DishId",
+                table: "ResourceSpecification",
+                column: "DishId",
+                unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_Target_UserId1",
-                table: "Target",
-                column: "UserId1");
+                name: "IX_SpecNutritionValue_ResourceSpecificationId",
+                table: "SpecNutritionValue",
+                column: "ResourceSpecificationId",
+                unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_WeightCondition_UserId1",
+                name: "IX_UserTarget_DailyRateId",
+                table: "UserTarget",
+                column: "DailyRateId",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_UserTarget_UserId",
+                table: "UserTarget",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_WeightCondition_UserId",
                 table: "WeightCondition",
-                column: "UserId1");
+                column: "UserId");
         }
 
         /// <inheritdoc />
@@ -547,13 +622,19 @@ namespace ForcWebApi.Migrations
                 name: "CompositionItem");
 
             migrationBuilder.DropTable(
+                name: "DishDishCategory");
+
+            migrationBuilder.DropTable(
                 name: "DishUserDishCollection");
 
             migrationBuilder.DropTable(
                 name: "MealItem");
 
             migrationBuilder.DropTable(
-                name: "Target");
+                name: "SpecNutritionValue");
+
+            migrationBuilder.DropTable(
+                name: "UserTarget");
 
             migrationBuilder.DropTable(
                 name: "WeightCondition");
@@ -565,22 +646,25 @@ namespace ForcWebApi.Migrations
                 name: "Product");
 
             migrationBuilder.DropTable(
-                name: "Dish");
+                name: "DishCategory");
 
             migrationBuilder.DropTable(
                 name: "Meal");
 
             migrationBuilder.DropTable(
+                name: "ResourceSpecification");
+
+            migrationBuilder.DropTable(
                 name: "DailyRate");
 
             migrationBuilder.DropTable(
-                name: "ResourseSpecification");
+                name: "ProductGroup");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
 
             migrationBuilder.DropTable(
-                name: "SpecNutritionValue");
+                name: "Dish");
 
             migrationBuilder.DropTable(
                 name: "PhysicalActivityCatalog");

@@ -1,5 +1,4 @@
 ﻿using ForcWebApi.Infrastructure.Entities;
-using ForcWebApi.Infrastructure.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -11,7 +10,7 @@ namespace ForcWebApi.Infrastructure.EntitiesConfigurations
         {
             builder.HasKey(x => x.Id);
 
-            builder.HasOne<User>()
+            builder.HasOne(x => x.User)
                 .WithOne(x => x.UserDishCollection)
                 .HasForeignKey<User>(x => x.UserDishCollectionId)
                 .IsRequired()

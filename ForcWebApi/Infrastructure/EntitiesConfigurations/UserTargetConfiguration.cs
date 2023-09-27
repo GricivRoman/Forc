@@ -10,13 +10,13 @@ namespace ForcWebApi.Infrastructure.EntitiesConfigurations
         {
             builder.HasKey(x => x.Id);
 
-            builder.HasOne<User>()
+            builder.HasOne(x => x.User)
                 .WithMany(x => x.Targets)
                 .HasForeignKey(x => x.UserId)
                 .IsRequired()
                 .OnDelete(DeleteBehavior.NoAction);
 
-            builder.HasOne<DailyRate>()
+            builder.HasOne(x => x.DailyRate)
                 .WithOne(x => x.UserTarget)
                 .HasForeignKey<UserTarget>(x => x.DailyRateId)
                 .IsRequired()

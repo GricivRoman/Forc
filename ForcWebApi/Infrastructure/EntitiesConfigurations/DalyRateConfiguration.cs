@@ -10,7 +10,7 @@ namespace ForcWebApi.Infrastructure.EntitiesConfigurations
         {
             builder.HasKey(x => x.Id);
 
-            builder.HasOne<UserTarget>()
+            builder.HasOne(x => x.UserTarget)
                 .WithOne(x => x.DailyRate)
                 .HasForeignKey<DailyRate>(x => x.UserTargetId)
                 .IsRequired()

@@ -10,7 +10,7 @@ namespace ForcWebApi.Infrastructure.EntitiesConfigurations
         {
             builder.HasKey(x => x.Id);
 
-            builder.HasOne<ResourceSpecification>()
+            builder.HasOne(x => x.ResourceSpecification)
                 .WithOne(x => x.SpecNutritionValue)
                 .HasForeignKey<SpecNutritionValue>(x => x.ResourceSpecificationId)
                 .IsRequired()

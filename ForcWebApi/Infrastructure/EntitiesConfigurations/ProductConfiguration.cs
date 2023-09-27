@@ -1,5 +1,4 @@
 ﻿using ForcWebApi.Infrastructure.Entities;
-using ForcWebApi.Infrastructure.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -11,12 +10,12 @@ namespace ForcWebApi.Infrastructure.EntitiesConfigurations
         {
             builder.HasKey(x => x.Id);
 
-            builder.HasMany<CompositionItem>()
+            builder.HasMany(x => x.CompositionItems)
                 .WithOne(x => x.Product)
                 .HasForeignKey(x => x.ProductId)
                 .OnDelete(DeleteBehavior.NoAction);
 
-            builder.HasOne<ProductGroup>()
+            builder.HasOne(x => x.ProductGroup)
                 .WithMany(x => x.Products)
                 .HasForeignKey(x => x.ProductGroupId)
                 .OnDelete(DeleteBehavior.NoAction);

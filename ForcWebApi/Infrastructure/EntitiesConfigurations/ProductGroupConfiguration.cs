@@ -1,5 +1,4 @@
-﻿using ForcWebApi.Infrastructure.Entities;
-using ForcWebApi.Infrastructure.Models;
+﻿using ForcWebApi.Infrastructure.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 

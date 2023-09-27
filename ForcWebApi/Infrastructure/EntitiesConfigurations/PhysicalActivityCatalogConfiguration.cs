@@ -10,7 +10,7 @@ namespace ForcWebApi.Infrastructure.EntitiesConfigurations
         {
             builder.HasKey(x => x.Id);
 
-            builder.HasMany<User>()
+            builder.HasMany(x => x.Users)
                 .WithOne(x => x.PhysicalActivity)
                 .HasForeignKey(x => x.PhysicalActivityId)
                 .OnDelete(DeleteBehavior.NoAction);

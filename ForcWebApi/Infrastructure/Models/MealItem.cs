@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-
-namespace ForcWebApi.Infrastructure.Entities
+﻿namespace ForcWebApi.Infrastructure.Entities
 {
     /// <summary>
     /// Элемент приема пищи
@@ -18,9 +16,14 @@ namespace ForcWebApi.Infrastructure.Entities
         public Meal Meal { get; set; }
 
         /// <summary>
-        /// Блюдо
+        /// Id блюда
         /// </summary>
         public Guid DishId { get; set; }
+
+        /// <summary>
+        /// Блюдо
+        /// </summary>
+        public Dish Dish { get; set; }
 
         /// <summary>
         /// Вес блюда
