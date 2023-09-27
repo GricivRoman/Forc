@@ -3,7 +3,8 @@ import { BaseControlComponent } from '../baseControl.component';
 
 @Component({
 	selector: 'app-forc-number',
-	templateUrl: 'numberControlComponent.html'
+	templateUrl: 'numberControl.component.html',
+	styleUrls: ['numberControl.component.css']
 })
 export class NumberControlComponent extends BaseControlComponent {
 }

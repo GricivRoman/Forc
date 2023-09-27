@@ -98,7 +98,9 @@ namespace ForcWebApi.Services
             {
                 Token = new JwtSecurityTokenHandler().WriteToken(token),
                 Expiration = token.ValidTo,
-                UserName = user.UserName
+                UserId = user.Id,
+                UserName = user.UserName,
+                Roles = userRoles
             };
 
             return userCredentials;

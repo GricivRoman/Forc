@@ -1,7 +1,7 @@
 import { Injectable, inject } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivateFn, Router, RouterStateSnapshot } from '@angular/router';
 import { AuthenticationService } from './authentication.service';
-import { LocalStorageService } from '../../shared/localStorage.service';
+import { LocalStorageService } from '../../shared/local-storage/localStorage.service';
 
 @Injectable()
 export class AuthActivatorService{

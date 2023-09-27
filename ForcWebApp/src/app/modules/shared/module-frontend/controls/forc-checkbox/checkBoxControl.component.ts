@@ -3,7 +3,7 @@ import { BaseControlComponent } from '../baseControl.component';
 
 @Component({
 	selector: 'app-forc-checkbox',
-	templateUrl: 'checkBoxControlComponent.html'
+	templateUrl: 'checkBoxControl.component.html'
 })
 export class CheckBoxControlComponent extends BaseControlComponent {
 }

@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ForcWebApi.Controllers
 {
+    [Route("/account/")]
     public class AuthController : BaseController
     {
         private readonly IAccountService _accountService;
@@ -14,7 +15,7 @@ namespace ForcWebApi.Controllers
         }
 
         [HttpPost]
-        [Route("/account/checkin")]
+        [Route("checkin")]
         public async Task<IActionResult> CheckInAsync([FromBody]CheckInViewModel userModel)
         {
             await _accountService.CreateUserAsync(userModel);
@@ -22,7 +23,7 @@ namespace ForcWebApi.Controllers
         }
 
         [HttpPost]
-        [Route("/account/login")]
+        [Route("login")]
         public async Task<IActionResult> CreateTokenAsync([FromBody] LoginViewModel model)
         {
             var creds = await _accountService.CreateTokenAsync(model);
