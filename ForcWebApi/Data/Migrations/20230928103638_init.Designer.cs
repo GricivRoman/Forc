@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Forc.WebApi.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20230927103203_init")]
+    [Migration("20230928103638_init")]
     partial class init
     {
         /// <inheritdoc />
@@ -165,7 +165,7 @@ namespace Forc.WebApi.Migrations
                     b.ToTable("MealItem");
                 });
 
-            modelBuilder.Entity("Forc.WebApi.Infrastructure.Entities.PhysicalActivityCatalog", b =>
+            modelBuilder.Entity("Forc.WebApi.Infrastructure.Entities.PhysicalActivity", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -182,7 +182,7 @@ namespace Forc.WebApi.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("PhysicalActivityCatalog");
+                    b.ToTable("PhysicalActivity");
                 });
 
             modelBuilder.Entity("Forc.WebApi.Infrastructure.Entities.Product", b =>
@@ -294,7 +294,7 @@ namespace Forc.WebApi.Migrations
                     b.Property<string>("Gender")
                         .HasColumnType("text");
 
-                    b.Property<double>("Height")
+                    b.Property<double?>("Height")
                         .HasColumnType("double precision");
 
                     b.Property<bool>("LockoutEnabled")
@@ -703,7 +703,7 @@ namespace Forc.WebApi.Migrations
 
             modelBuilder.Entity("Forc.WebApi.Infrastructure.Entities.User", b =>
                 {
-                    b.HasOne("Forc.WebApi.Infrastructure.Entities.PhysicalActivityCatalog", "PhysicalActivity")
+                    b.HasOne("Forc.WebApi.Infrastructure.Entities.PhysicalActivity", "PhysicalActivity")
                         .WithMany("Users")
                         .HasForeignKey("PhysicalActivityId")
                         .OnDelete(DeleteBehavior.NoAction);
@@ -819,7 +819,7 @@ namespace Forc.WebApi.Migrations
                     b.Navigation("MealItems");
                 });
 
-            modelBuilder.Entity("Forc.WebApi.Infrastructure.Entities.PhysicalActivityCatalog", b =>
+            modelBuilder.Entity("Forc.WebApi.Infrastructure.Entities.PhysicalActivity", b =>
                 {
                     b.Navigation("Users");
                 });

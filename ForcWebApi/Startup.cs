@@ -8,6 +8,7 @@ using Forc.WebApi.Validation;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
+using Newtonsoft.Json;
 using System.Reflection;
 using System.Text;
 
@@ -25,6 +26,7 @@ namespace Forc.WebApi
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<DataContext>();
+            AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 
             services.AddIdentity<User, IdentityRole<Guid>>(cfg =>
             {
@@ -68,10 +70,11 @@ namespace Forc.WebApi
                 fv.ImplicitlyValidateChildProperties = true;
                 fv.ImplicitlyValidateRootCollectionElements = true;
                 fv.RegisterValidatorsFromAssembly(Assembly.GetExecutingAssembly());
-            });
+            }).AddNewtonsoftJson(opt => opt.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore);
 
             services.AddScoped<IAccountService, AuthService>();
             services.AddScoped<ValidationFilterAttribute>();
+            services.AddScoped<IUserService, UserService>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

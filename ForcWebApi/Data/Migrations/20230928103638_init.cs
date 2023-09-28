@@ -68,7 +68,7 @@ namespace Forc.WebApi.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "PhysicalActivityCatalog",
+                name: "PhysicalActivity",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
@@ -78,7 +78,7 @@ namespace Forc.WebApi.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_PhysicalActivityCatalog", x => x.Id);
+                    table.PrimaryKey("PK_PhysicalActivity", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -203,7 +203,7 @@ namespace Forc.WebApi.Migrations
                     Sex = table.Column<int>(type: "integer", nullable: true),
                     PhysicalActivityId = table.Column<Guid>(type: "uuid", nullable: true),
                     UserDishCollectionId = table.Column<Guid>(type: "uuid", nullable: false),
-                    Height = table.Column<double>(type: "double precision", nullable: false),
+                    Height = table.Column<double>(type: "double precision", nullable: true),
                     UserName = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
@@ -223,9 +223,9 @@ namespace Forc.WebApi.Migrations
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_AspNetUsers_PhysicalActivityCatalog_PhysicalActivityId",
+                        name: "FK_AspNetUsers_PhysicalActivity_PhysicalActivityId",
                         column: x => x.PhysicalActivityId,
-                        principalTable: "PhysicalActivityCatalog",
+                        principalTable: "PhysicalActivity",
                         principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_AspNetUsers_UserDishCollection_UserDishCollectionId",
@@ -667,7 +667,7 @@ namespace Forc.WebApi.Migrations
                 name: "Dish");
 
             migrationBuilder.DropTable(
-                name: "PhysicalActivityCatalog");
+                name: "PhysicalActivity");
 
             migrationBuilder.DropTable(
                 name: "UserDishCollection");

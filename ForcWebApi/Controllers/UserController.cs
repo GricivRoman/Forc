@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http.HttpResults;
+﻿using Forc.WebApi.Dto;
+using Forc.WebApi.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Forc.WebApi.Controllers
@@ -6,25 +7,35 @@ namespace Forc.WebApi.Controllers
     [Route("/user")]
     public class UserController : BaseController
     {
-        [HttpGet]
-        [Route("{id}")]
-        public IActionResult GetUser(Guid id)
+        private readonly IUserService _userService;
+
+        public UserController(IUserService userService)
         {
-            return Ok();
+            _userService = userService;
         }
 
-        [HttpPost, HttpPut]
-        [Route("")]
-        public Task<IActionResult> SaveUser(Guid id)
+        [HttpGet]
+        [Route("{id}")]
+        public async Task<IActionResult> GetUser(Guid id)
         {
-            return null;
+            var user = await _userService.GetUser(id);
+            return Ok(user);
+        }
+
+        [HttpPut]
+        [Route("")]
+        public async Task<IActionResult> UpdateUser([FromBody]UserViewModel model)
+        {
+            await _userService.UpdateUser(model);
+            return Ok();
         }
 
         [HttpDelete]
         [Route("{id}")]
-        public Task<IActionResult> DeleteUser(Guid id)
+        public async Task<IActionResult> DeleteUser(Guid id)
         {
-            return null;
+            await _userService.DeleteUser(id);
+            return Ok();
         }
     }
 }

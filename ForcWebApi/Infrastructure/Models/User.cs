@@ -66,6 +66,6 @@ namespace Forc.WebApi.Infrastructure.Entities
         /// <summary>
         /// Рост
         /// </summary>
-        public double Height { get; set; }
+        public double? Height { get; set; }
     }
 }

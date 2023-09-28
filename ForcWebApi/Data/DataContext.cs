@@ -24,11 +24,5 @@ namespace Forc.WebApi.Data
             base.OnModelCreating(modelBuilder);
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(DataContext).Assembly);
         }
-
-        public DbSet<User> User { get; set; }
-        public DbSet<Product> Product { get; set; }
-        public DbSet<Dish> Dish { get; set; }
-        public DbSet<PhysicalActivity> PhysicalActivityCatalog { get; set; }
-        public DbSet<Meal> Meal { get; set; }
     }
 }

@@ -55,6 +55,7 @@ export class ReactiveFromComponent<TEntity extends BaseEntity> implements OnInit
 		if(!this.form?.valid){
 			this.alertService.showMessage('The form invalid', AlertDialogStates.error);
 		}
+		this.updateModel();
 		if(this.model?.id){
 			this.dataService.update(this.model).pipe(takeUntil(this.destroy$)).subscribe(this.afterSaveOrUpdateAction(saveAction));
 		} else {
@@ -72,7 +73,6 @@ export class ReactiveFromComponent<TEntity extends BaseEntity> implements OnInit
 				emitEvent: false
 			});
 		});
-
 	}
 
 	ngOnDestroy(){
@@ -97,7 +97,13 @@ export class ReactiveFromComponent<TEntity extends BaseEntity> implements OnInit
 
 	private showError(err: any){
 		if(typeof err.error === 'string' ){
-			this.alertService.showMessage(err.error, err.error);
+			this.alertService.showMessage(err.error, AlertDialogStates.error);
 		}
+	}
+
+	protected updateModel(){
+		Object.keys(this.form.controls).forEach((controlKey) => {
+			Object(this.model)[controlKey] = (Object(this.form.controls[controlKey]) as AbstractControl).value;
+		});
 	}
 }

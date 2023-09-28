@@ -15,7 +15,7 @@ export class UserProfileComponent extends ReactiveFromComponent<UserModel> {
 	override form = new FormGroup({
 		name: new FormControl(''),
 		gender: new FormControl(''),
-		birthDate: new FormControl(''),
+		birthDate: new FormControl(new Date()),
 		sex: new FormControl(''),
 		physicalActivity: new FormControl(''),
 		height: new FormControl('')

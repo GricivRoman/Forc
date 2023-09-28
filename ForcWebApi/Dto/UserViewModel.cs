@@ -4,7 +4,7 @@ namespace Forc.WebApi.Dto
 {
     public class UserViewModel
     {
-        public Guid? Id { get; set; }
+        public Guid Id { get; set; }
 
         /// <summary>
         /// Имя пользователя
@@ -64,6 +64,6 @@ namespace Forc.WebApi.Dto
         /// <summary>
         /// Рост
         /// </summary>
-        public double Height { get; set; }
+        public double? Height { get; set; }
     }
 }
