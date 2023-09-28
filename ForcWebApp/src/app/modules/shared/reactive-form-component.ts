@@ -69,9 +69,15 @@ export class ReactiveFromComponent<TEntity extends BaseEntity> implements OnInit
 
 	public initFrom(data: TEntity){
 		Object.keys(this.form.controls).forEach((controlKey) => {
-			(Object(this.form.controls[controlKey]) as AbstractControl).setValue(Object(data)[controlKey], {
+			(Object(this.form.controls[controlKey]) as AbstractControl).setValue(this.getValueToSetToForm(data, controlKey), {
 				emitEvent: false
 			});
+		});
+	}
+
+	protected updateModel(){
+		Object.keys(this.form.controls).forEach((controlKey) => {
+			Object(this.model)[controlKey] = (Object(this.form.controls[controlKey]) as AbstractControl).value;
 		});
 	}
 
@@ -101,9 +107,10 @@ export class ReactiveFromComponent<TEntity extends BaseEntity> implements OnInit
 		}
 	}
 
-	protected updateModel(){
-		Object.keys(this.form.controls).forEach((controlKey) => {
-			Object(this.model)[controlKey] = (Object(this.form.controls[controlKey]) as AbstractControl).value;
-		});
+	private getValueToSetToForm(data: TEntity, controlKey: string): any{
+		const fieldValue = Object(data)[controlKey];
+		const date = new Date(fieldValue);
+
+		return typeof fieldValue === 'string' && isFinite(+date) ? date.toISOString().substring(0,10) : fieldValue;
 	}
 }

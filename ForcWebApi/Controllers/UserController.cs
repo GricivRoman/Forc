@@ -1,10 +1,12 @@
 ﻿using Forc.WebApi.Dto;
 using Forc.WebApi.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Forc.WebApi.Controllers
 {
     [Route("/user")]
+    [Authorize]
     public class UserController : BaseController
     {
         private readonly IUserService _userService;

@@ -1,10 +1,12 @@
 ﻿using Forc.WebApi.Dto;
 using Forc.WebApi.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Forc.WebApi.Controllers
 {
     [Route("/account")]
+    [AllowAnonymous]
     public class AuthController : BaseController
     {
         private readonly IAccountService _accountService;
