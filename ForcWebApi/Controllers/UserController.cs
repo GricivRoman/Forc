@@ -7,10 +7,10 @@ namespace ForcWebApi.Controllers
     public class UserController : BaseController
     {
         [HttpGet]
-        [Route("/{id}")]
-        public Task<IActionResult> GetUser(Guid userId)
+        [Route("{id}")]
+        public IActionResult GetUser(Guid id)
         {
-            return null;
+            return Ok();
         }
 
         [HttpPost, HttpPut]
@@ -21,8 +21,8 @@ namespace ForcWebApi.Controllers
         }
 
         [HttpDelete]
-        [Route("/{id}")]
-        public Task<IActionResult> DeleteUser(Guid userId)
+        [Route("{id}")]
+        public Task<IActionResult> DeleteUser(Guid id)
         {
             return null;
         }
