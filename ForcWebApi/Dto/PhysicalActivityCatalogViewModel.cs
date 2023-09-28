@@ -1,10 +1,12 @@
-﻿namespace ForcWebApi.Infrastructure.Entities
+﻿namespace ForcWebApi.Dto
 {
     /// <summary>
     /// Набор категорий физической активности
     /// </summary>
-    public class PhysicalActivityCatalog : BaseEntity<Guid>
+    public class PhysicalActivityCatalogViewModel
     {
+        public Guid? Id { get; set; }
+
         /// <summary>
         /// Наименование
         /// </summary>
@@ -23,6 +25,6 @@
         /// <summary>
         /// Пользователи, у которых установлена категория физ. активности
         /// </summary>
-        public ICollection<User> Users { get; set; }
+        public ICollection<UserViewModel> Users { get; set; }
     }
 }

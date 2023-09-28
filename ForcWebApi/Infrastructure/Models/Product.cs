@@ -17,12 +17,14 @@ namespace ForcWebApi.Infrastructure.Entities
         /// </summary>
         public ICollection<CompositionItem> CompositionItems { get; set; }
 
-
         /// <summary>
         /// Группа, в которую входит продукт
         /// </summary>
         public Guid? ProductGroupId { get; set; }
 
+        /// <summary>
+        /// Гуппа, в которую входит продукт
+        /// </summary>
         public ProductGroup ProductGroup { get; set; }
     }
 }

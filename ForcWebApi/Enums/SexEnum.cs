@@ -1,4 +1,4 @@
-﻿namespace ForcWebApi.Infrastructure.Enums
+﻿namespace ForcWebApi.Enums
 {
     public enum SexEnum
     {

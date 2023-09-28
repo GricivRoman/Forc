@@ -1,19 +1,16 @@
-﻿namespace ForcWebApi.Infrastructure.Entities
+﻿namespace ForcWebApi.Dto
 {
     /// <summary>
     /// Прием пищи
     /// </summary>
-    public class Meal : BaseEntity<Guid>
+    public class MealViewModel
     {
+        public Guid? Id { get; set; }
+
         /// <summary>
         /// ID пользователя
         /// </summary>
         public Guid UserId { get; set; }
-
-        /// <summary>
-        /// Пользователь
-        /// </summary>
-        public User User { get; set; }
 
         /// <summary>
         /// Время приема пищи
@@ -23,6 +20,6 @@
         /// <summary>
         /// Набор блюд
         /// </summary>
-        public ICollection<MealItem> MealItems { get; set; }
+        public ICollection<MealItemViewModel> MealItems { get; set; }
     }
 }

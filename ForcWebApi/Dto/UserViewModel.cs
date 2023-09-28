@@ -1,13 +1,11 @@
 ﻿using ForcWebApi.Enums;
-using Microsoft.AspNetCore.Identity;
 
-namespace ForcWebApi.Infrastructure.Entities
+namespace ForcWebApi.Dto
 {
-    /// <summary>
-    /// Пользователь
-    /// </summary>
-    public class User : IdentityUser<Guid>
+    public class UserViewModel
     {
+        public Guid? Id { get; set; }
+
         /// <summary>
         /// Имя пользователя
         /// </summary>
@@ -27,31 +25,31 @@ namespace ForcWebApi.Infrastructure.Entities
         /// Пол
         /// </summary>
         public SexEnum? Sex { get; set; }
-        
+
         /// <summary>
-        /// ID категории физической активности
+        /// Категория физической активности
         /// </summary>
         public Guid? PhysicalActivityId { get; set; }
 
         /// <summary>
         /// Категория физической активности
         /// </summary>
-        public PhysicalActivityCatalog PhysicalActivity { get; set; }
+        public PhysicalActivityCatalogViewModel PhysicalActivity { get; set; }
 
         /// <summary>
         /// Взвешивания
         /// </summary>
-        public ICollection<WeightCondition> WeightConditions { get; set; }
+        public ICollection<WeightConditionViewModel> WeightConditions { get; set; }
 
         /// <summary>
         /// Цели
         /// </summary>
-        public ICollection<UserTarget> Targets { get; set; }
+        public ICollection<UserTargetViewModel> Targets { get; set; }
 
         /// <summary>
         /// Приемы пищи
         /// </summary>
-        public ICollection<Meal> Meals { get; set; }
+        public ICollection<MealViewModel> Meals { get; set; }
 
         /// <summary>
         /// Id каталога блюд пользователя
@@ -61,7 +59,7 @@ namespace ForcWebApi.Infrastructure.Entities
         /// <summary>
         /// Каталог блюд пользователя
         /// </summary>
-        public UserDishCollection UserDishCollection { get; set; }
+        public UserDishCollectionViewModel UserDishCollection { get; set; }
 
         /// <summary>
         /// Рост

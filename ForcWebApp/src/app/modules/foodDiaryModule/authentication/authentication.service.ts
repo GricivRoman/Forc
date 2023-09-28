@@ -7,7 +7,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, catchError, map, throwError } from 'rxjs';
 import { ApiValidationErrorsResolvingService } from '../../shared/apiValidationErrorsResolving.service';
 import { FormGroup } from '@angular/forms';
-import { AuthResponse } from '../../shared/auth-response';
+import { AuthResponse } from '../../shared/local-storage/auth-response';
 
 @Injectable()
 export class AuthenticationService {
