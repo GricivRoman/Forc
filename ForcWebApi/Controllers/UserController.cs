@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 
-namespace ForcWebApi.Controllers
+namespace Forc.WebApi.Controllers
 {
     [Route("/user")]
     public class UserController : BaseController

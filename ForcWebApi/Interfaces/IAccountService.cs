@@ -1,6 +1,6 @@
-﻿using ForcWebApi.Dto;
+﻿using Forc.WebApi.Dto;
 
-namespace ForcWebApi.Interfaces
+namespace Forc.WebApi.Interfaces
 {
     public interface IAccountService
     {

@@ -1,17 +1,17 @@
 ﻿using FluentValidation.AspNetCore;
-using ForcWebApi.Infrastructure;
-using ForcWebApi.Infrastructure.Entities;
-using ForcWebApi.Interfaces;
-using ForcWebApi.Middlewares;
-using ForcWebApi.Services;
-using ForcWebApi.Validation;
+using Forc.WebApi.Data;
+using Forc.WebApi.Infrastructure.Entities;
+using Forc.WebApi.Interfaces;
+using Forc.WebApi.Middlewares;
+using Forc.WebApi.Services;
+using Forc.WebApi.Validation;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
 using System.Reflection;
 using System.Text;
 
-namespace ForcWebApi
+namespace Forc.WebApi
 {
     public class Startup
     {

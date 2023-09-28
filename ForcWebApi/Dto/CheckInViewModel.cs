@@ -1,4 +1,4 @@
-﻿namespace ForcWebApi.Dto
+﻿namespace Forc.WebApi.Dto
 {
     /// <summary>
     /// Модель регистрации нового пользователя

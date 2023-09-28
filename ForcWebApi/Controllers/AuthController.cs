@@ -1,8 +1,8 @@
-﻿using ForcWebApi.Dto;
-using ForcWebApi.Interfaces;
+﻿using Forc.WebApi.Dto;
+using Forc.WebApi.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
-namespace ForcWebApi.Controllers
+namespace Forc.WebApi.Controllers
 {
     [Route("/account")]
     public class AuthController : BaseController

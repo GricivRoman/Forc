@@ -1,6 +1,6 @@
-﻿using ForcWebApi.Infrastructure.Models;
+﻿using Forc.WebApi.Infrastructure.Models;
 
-namespace ForcWebApi.Infrastructure.Entities
+namespace Forc.WebApi.Infrastructure.Entities
 {
     /// <summary>
     /// Блюдо

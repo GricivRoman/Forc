@@ -1,4 +1,4 @@
-﻿namespace ForcWebApi.Dto
+﻿namespace Forc.WebApi.Dto
 {
     /// <summary>
     /// Энергитическая ценность блюда на 100 грамм

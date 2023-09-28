@@ -1,9 +1,9 @@
-﻿using ForcWebApi.Infrastructure.Entities;
-using ForcWebApi.Infrastructure.Models;
+﻿using Forc.WebApi.Infrastructure.Entities;
+using Forc.WebApi.Infrastructure.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace ForcWebApi.Infrastructure.EntitiesConfigurations
+namespace Forc.WebApi.Data.EntitiesConfigurations
 {
     public class DishCategoryConfiguration : IEntityTypeConfiguration<DishCategory>
     {

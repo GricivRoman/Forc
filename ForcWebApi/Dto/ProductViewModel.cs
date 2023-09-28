@@ -1,4 +1,4 @@
-﻿namespace ForcWebApi.Dto
+﻿namespace Forc.WebApi.Dto
 {
     public class ProductViewModel
     {

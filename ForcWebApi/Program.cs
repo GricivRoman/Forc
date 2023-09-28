@@ -1,5 +1,4 @@
-
-namespace ForcWebApi
+namespace Forc.WebApi
 {
     public class Program
     {
@@ -11,7 +10,6 @@ namespace ForcWebApi
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
-
                 .ConfigureWebHostDefaults(webBuilder =>
                 {                   
                     webBuilder.UseStartup<Startup>();

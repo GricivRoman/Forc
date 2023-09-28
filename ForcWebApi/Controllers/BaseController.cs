@@ -1,7 +1,7 @@
-﻿using ForcWebApi.Validation;
+﻿using Forc.WebApi.Validation;
 using Microsoft.AspNetCore.Mvc;
 
-namespace ForcWebApi.Controllers
+namespace Forc.WebApi.Controllers
 {
     [ServiceFilter(typeof(ValidationFilterAttribute))]
     public class BaseController : Controller

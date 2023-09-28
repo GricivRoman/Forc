@@ -1,7 +1,7 @@
-﻿using ForcWebApi.Enums;
+﻿using Forc.WebApi.Enums;
 using Microsoft.AspNetCore.Identity;
 
-namespace ForcWebApi.Infrastructure.Entities
+namespace Forc.WebApi.Infrastructure.Entities
 {
     /// <summary>
     /// Пользователь

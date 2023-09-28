@@ -1,4 +1,4 @@
-﻿namespace ForcWebApi.Infrastructure.Entities
+﻿namespace Forc.WebApi.Infrastructure.Entities
 {
     /// <summary>
     /// Набор категорий физической активности

@@ -1,8 +1,8 @@
-﻿using ForcWebApi.Infrastructure.Entities;
+﻿using Forc.WebApi.Infrastructure.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace ForcWebApi.Infrastructure.EntitiesConfigurations
+namespace Forc.WebApi.Data.EntitiesConfigurations
 {
     public class PhysicalActivityCatalogConfiguration : IEntityTypeConfiguration<PhysicalActivityCatalog>
     {

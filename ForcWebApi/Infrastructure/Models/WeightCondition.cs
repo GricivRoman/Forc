@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 
-namespace ForcWebApi.Infrastructure.Entities
+namespace Forc.WebApi.Infrastructure.Entities
 {
     /// <summary>
     /// Вес пользователя

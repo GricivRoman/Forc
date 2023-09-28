@@ -1,9 +1,9 @@
-﻿using ForcWebApi.Infrastructure.Entities;
+﻿using Forc.WebApi.Infrastructure.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 
-namespace ForcWebApi.Infrastructure
+namespace Forc.WebApi.Data
 {
     public class DataContext : IdentityDbContext<User, IdentityRole<Guid>, Guid>
     {

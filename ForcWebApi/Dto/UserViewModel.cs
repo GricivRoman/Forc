@@ -1,6 +1,6 @@
-﻿using ForcWebApi.Enums;
+﻿using Forc.WebApi.Enums;
 
-namespace ForcWebApi.Dto
+namespace Forc.WebApi.Dto
 {
     public class UserViewModel
     {
