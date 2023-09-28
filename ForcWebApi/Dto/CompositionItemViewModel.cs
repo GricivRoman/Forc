@@ -13,6 +13,11 @@
         public Guid ResourceSpecificationId { get; set; }
 
         /// <summary>
+        /// Ресурсная спецификация
+        /// </summary>
+        public ResourceSpecificationViewModel ResourceSpecification { get; set; }
+
+        /// <summary>
         /// Id используемого продукта
         /// </summary>
         public Guid ProductId { get; set; }

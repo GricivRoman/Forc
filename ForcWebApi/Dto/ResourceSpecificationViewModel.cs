@@ -8,9 +8,14 @@
         public Guid? Id { get; set; }
 
         /// <summary>
-        /// Блюдо
+        /// ID блюда
         /// </summary>
         public Guid DishId { get; set; }
+
+        /// <summary>
+        /// Блюдо
+        /// </summary>
+        public DishViewModel Dish { get; set; }
 
         /// <summary>
         /// Набор ингридиентов с количеством

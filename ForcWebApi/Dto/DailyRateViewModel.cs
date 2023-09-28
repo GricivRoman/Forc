@@ -13,6 +13,11 @@
         public Guid UserTargetId { get; set; }
 
         /// <summary>
+        /// Цель
+        /// </summary>
+        public UserTargetViewModel UserTarget { get; set; }
+
+        /// <summary>
         /// Норма потребления каллорий
         /// </summary>
         public double CaloriesRate { get; set; }

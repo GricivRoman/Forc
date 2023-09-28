@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Forc.WebApi.Data.EntitiesConfigurations
 {
-    public class PhysicalActivityCatalogConfiguration : IEntityTypeConfiguration<PhysicalActivityCatalog>
+    public class PhysicalActivityCatalogConfiguration : IEntityTypeConfiguration<PhysicalActivity>
     {
-        public void Configure(EntityTypeBuilder<PhysicalActivityCatalog> builder)
+        public void Configure(EntityTypeBuilder<PhysicalActivity> builder)
         {
             builder.HasKey(x => x.Id);
 

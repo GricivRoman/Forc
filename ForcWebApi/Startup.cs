@@ -61,6 +61,8 @@ namespace Forc.WebApi
                 });
             });
 
+            services.AddAutoMapper(Assembly.GetExecutingAssembly());
+
             services.AddControllers().AddFluentValidation(fv =>
             {
                 fv.ImplicitlyValidateChildProperties = true;

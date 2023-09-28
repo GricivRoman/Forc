@@ -34,7 +34,7 @@ namespace Forc.WebApi.Dto
         /// <summary>
         /// Категория физической активности
         /// </summary>
-        public PhysicalActivityCatalogViewModel PhysicalActivity { get; set; }
+        public PhysicalActivityViewModel PhysicalActivity { get; set; }
 
         /// <summary>
         /// Взвешивания

@@ -36,7 +36,7 @@ namespace Forc.WebApi.Infrastructure.Entities
         /// <summary>
         /// Категория физической активности
         /// </summary>
-        public PhysicalActivityCatalog PhysicalActivity { get; set; }
+        public PhysicalActivity PhysicalActivity { get; set; }
 
         /// <summary>
         /// Взвешивания

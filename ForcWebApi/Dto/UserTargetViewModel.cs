@@ -13,6 +13,11 @@
         public Guid UserId { get; set; }
 
         /// <summary>
+        /// Пользователь
+        /// </summary>
+        public UserViewModel User { get; set; }
+
+        /// <summary>
         /// Актуальность
         /// </summary>
         public bool Relevance { get; set; }
