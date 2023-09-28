@@ -1,0 +1,6 @@
+<label for="select">Sex</label>
+<mat-select class="form-control p-0 m-0 mb-1" id="select" [multiple]="true">
+    <mat-option *ngFor="let sex of sexList" [value]="sex.value">
+      {{sex.viewValue}}
+    </mat-option>
+</mat-select>
