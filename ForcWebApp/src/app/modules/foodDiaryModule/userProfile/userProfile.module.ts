@@ -5,6 +5,7 @@ import { ForcControlsModule } from '../../shared/module-frontend/controls/forc-c
 import { DataService } from '../../shared/data.service';
 import { AlertService } from '../../shared/module-frontend/forc-alert/alert.service';
 import { SelectModule } from '../../shared/module-frontend/forc-select/select.module';
+import { SelectServiceResolver } from '../../shared/select-services/selectServieResolver';
 
 @NgModule({
 	imports: [
@@ -17,7 +18,8 @@ import { SelectModule } from '../../shared/module-frontend/forc-select/select.mo
 	],
 	providers: [
 		DataService,
-		AlertService
+		AlertService,
+		SelectServiceResolver
 	]
 })
 export class UserProfileModule {

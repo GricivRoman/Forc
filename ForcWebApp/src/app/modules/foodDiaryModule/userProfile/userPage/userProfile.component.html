@@ -16,7 +16,7 @@
                         label="Gender"
                         [control]="form.controls.gender"
                     ></app-forc-text>
-                </div>   
+                </div>
                 <div class="col-xl-3 col-sm-4 col-4">
                     <app-forc-date
                         label="Birth date"
@@ -25,11 +25,12 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-xl-1 col-sm-2 col-2">                    
-                    <app-forc-text
-                        label="Пол"
+                <div class="col-xl-2 col-sm-3 col-3">
+                    <app-select-single
+                        label="Sex"
                         [control]="form.controls.sex"
-                    ></app-forc-text>
+                        [selectService]="sexSelectService"
+                    ></app-select-single>
                 </div>
                 <div class="col-xl-3 col-sm-4 col-4">
                     <app-forc-text
@@ -50,6 +51,3 @@
         </div>
     </div>
 </div>
-<app-select-single>
-                        
-</app-select-single>

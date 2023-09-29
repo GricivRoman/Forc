@@ -70,7 +70,7 @@ export class ReactiveFromComponent<TEntity extends BaseEntity> implements OnInit
 	public initFrom(data: TEntity){
 		Object.keys(this.form.controls).forEach((controlKey) => {
 			(Object(this.form.controls[controlKey]) as AbstractControl).setValue(this.getValueToSetToForm(data, controlKey), {
-				emitEvent: false
+				emitEvent: true
 			});
 		});
 	}
