@@ -6,12 +6,14 @@ import { DataService } from '../../shared/data.service';
 import { AlertService } from '../../shared/module-frontend/forc-alert/alert.service';
 import { SelectModule } from '../../shared/module-frontend/forc-select/select.module';
 import { SelectServiceResolver } from '../../shared/select-services/selectServieResolver';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
 	imports: [
 		UserProfileRoutingModule,
 		ForcControlsModule,
-		SelectModule
+		SelectModule,
+		CommonModule
 	],
 	declarations: [
 		UserProfileComponent

@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { SelectItem } from './select-item';
+import { SelectItem } from '../../../selectItem';
 import { FormControl } from '@angular/forms';
 import { SelectService } from '../../../select-services/select.service';
 import { first } from 'rxjs';
@@ -20,24 +20,29 @@ export class SelectSingleComponent implements OnInit {
 	@Input()
 		control: FormControl;
 
-	private emptyResult: SelectItem[] = [
-		{
-			key: undefined,
-			value: '(empty)'
-		}
-	];
+	private emptyItem: SelectItem = {
+		id: undefined,
+		value: '(empty)'
+	};
 
-	selectList: any[] = [{key: undefined, value: 'loading..'}];
+	private loadingItem: SelectItem = {
+		id: undefined,
+		value: 'loading..'
+	};
+
+	selectList: any[] = [this.loadingItem];
 
 	ngOnInit(): void {
-		this.control.valueChanges.pipe(first()).subscribe(() => {
-			this.selectService.getCurrentItem(this.control.value).subscribe({
-				next: (item: SelectItem | undefined) => {
-					if(item){
-						this.selectList = [item];
+		this.control.valueChanges.pipe(first()).subscribe({
+			next: () => {
+				if(this.control.value) {
+					if(!this.control?.value.length) {
+						this.selectList = [this.control.value as SelectItem];
+					} else {
+						this.selectList = this.control.value as SelectItem[];
 					}
 				}
-			});
+			}
 		});
 	}
 
@@ -45,10 +50,10 @@ export class SelectSingleComponent implements OnInit {
 		this.selectService.getItemList().subscribe({
 			next: (items: SelectItem[]) => {
 				if(items.length > 0){
-					const itemsToPush = items.filter(x => !this.selectList.includes(x));
-					this.selectList = this.selectList.concat(itemsToPush);
+					const itemsToPush = items.filter(x => !this.selectList.map(i => i.id).includes(x.id));
+					this.selectList = this.selectList.concat(itemsToPush).filter(x => x !== this.loadingItem);
 				} else {
-					this.selectList = this.emptyResult;
+					this.selectList = [this.emptyItem];
 				}
 			}
 		});

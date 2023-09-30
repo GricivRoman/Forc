@@ -39,8 +39,8 @@ namespace Forc.WebApi.Services
             user.Name = model.Name;
             user.Gender = model.Gender;
             user.BirthDate = model.BirthDate;
-            user.Sex = model.Sex;
-            user.PhysicalActivityId = model.PhysicalActivityId;
+            user.Sex = model.Sex?.Id;
+            user.PhysicalActivityId = model.PhysicalActivity?.Id;
             user.Height = model.Height;
 
             await _context.SaveChangesAsync();

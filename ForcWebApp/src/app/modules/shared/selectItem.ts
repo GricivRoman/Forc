@@ -1,4 +1,4 @@
 export class SelectItem {
-	key: any;
+	id: any;
 	value: string;
 }

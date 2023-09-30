@@ -24,17 +24,12 @@ namespace Forc.WebApi.Dto
         /// <summary>
         /// Пол
         /// </summary>
-        public SexEnum? Sex { get; set; }
+        public SelectItem<SexEnum?> Sex { get; set; }
 
         /// <summary>
         /// Категория физической активности
         /// </summary>
-        public Guid? PhysicalActivityId { get; set; }
-
-        /// <summary>
-        /// Категория физической активности
-        /// </summary>
-        public PhysicalActivityViewModel PhysicalActivity { get; set; }
+        public SelectItem<Guid?> PhysicalActivity { get; set; }
 
         /// <summary>
         /// Взвешивания

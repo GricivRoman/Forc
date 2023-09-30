@@ -33,10 +33,11 @@
                     ></app-select-single>
                 </div>
                 <div class="col-xl-3 col-sm-4 col-4">
-                    <app-forc-text
-                        label="Физическая активность"
+                    <app-select-single
+                        label="Physical activity"
                         [control]="form.controls.physicalActivity"
-                    ></app-forc-text>
+                        [selectService]="sexSelectService"
+                    ></app-select-single>
                 </div>
                 <div class="col-xl-2 col-sm-3 col-3">
                     <app-forc-number

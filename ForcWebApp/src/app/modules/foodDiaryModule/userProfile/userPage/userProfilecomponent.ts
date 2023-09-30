@@ -42,6 +42,5 @@ export class UserProfileComponent extends ReactiveFromComponent<UserModel> {
 
 	override save(){
 		super.save();
-		console.log(1);
 	}
 }

@@ -1,25 +1,21 @@
 import { Observable, of } from 'rxjs';
-import { SelectItem } from '../../module-frontend/forc-select/select-single/select-item';
+import { SelectItem } from '../../selectItem';
 import { SelectService } from '../select.service';
+import { SexEnum, SexEnumDictionary } from '../../enums/sexEnum';
 
 export class SexSelectService implements SelectService {
 	items: SelectItem[] = [
 		{
-			key: 1,
-			value: 'Male'
+			id: SexEnum.male,
+			value: SexEnumDictionary.list.get(SexEnum.male) as string
 		},
 		{
-			key: 2,
-			value: 'Female'
+			id: SexEnum.female,
+			value: SexEnumDictionary.list.get(SexEnum.female) as string
 		}
 	];
 
 	public getItemList(): Observable<SelectItem[]> {
 		return of(this.items);
-	}
-
-	getCurrentItem(key: any): Observable<SelectItem | undefined> {
-		const item = this.items.find(x => x.key === key);
-		return of(item);
 	}
 }
