@@ -10,7 +10,7 @@
         /// <summary>
         /// Наименование группы
         /// </summary>
-        public string CategoryName { get; set; }
+        public string Name { get; set; }
 
         /// <summary>
         /// Блюда, входящие в группу

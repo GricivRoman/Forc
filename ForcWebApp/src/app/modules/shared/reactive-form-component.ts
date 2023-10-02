@@ -7,6 +7,7 @@ import { ApiValidationErrorsResolvingService } from './apiValidationErrorsResolv
 import { Observer, takeUntil, Subject } from 'rxjs';
 import { Guid } from 'guid-typescript';
 import { AlertDialogStates } from './module-frontend/forc-alert/alertDialogStates';
+import { DatePipe } from '@angular/common';
 
 @Component({
 	selector: 'app-reactive-form-component',
@@ -18,8 +19,11 @@ export class ReactiveFromComponent<TEntity extends BaseEntity> implements OnInit
 
 	public form: FormGroup;
 	public model: TEntity;
+	protected modelSource: TEntity;
 	public apiUrl: string;
 	public modelId?: Guid;
+
+	public saveButtonDisabled: boolean;
 
 	constructor(
         protected dataService: DataService<TEntity>,
@@ -34,15 +38,21 @@ export class ReactiveFromComponent<TEntity extends BaseEntity> implements OnInit
 			this.setModel(this.modelId);
 		}
 
-		this.form.valueChanges.pipe(takeUntil(this.destroy$)).subscribe(() => {
-			this.form.markAsTouched();
-		});
+		this.form.valueChanges.pipe(takeUntil(this.destroy$)).subscribe(() => this.onFormValueChange());
+	}
+
+	onFormValueChange(){
+		this.form.markAsTouched();
+
+		// TODO реализовать метод Equals, для сравнения равенства значений всех полей
+		// this.saveButtonDisabled = this.model === this.modelSource;
 	}
 
 	public setModel(id: Guid) {
 		this.dataService.get(id).pipe(takeUntil(this.destroy$)).subscribe({
 			next: (data: TEntity) => {
 				this.model = data;
+				this.modelSource = { ... this.model };
 				this.initFrom(this.model);
 			},
 			error: (err) => {
@@ -111,6 +121,13 @@ export class ReactiveFromComponent<TEntity extends BaseEntity> implements OnInit
 		const fieldValue = Object(data)[controlKey];
 		const date = new Date(fieldValue);
 
-		return typeof fieldValue === 'string' && isFinite(+date) ? date.toISOString().substring(0,10) : fieldValue;
+		//return typeof fieldValue === 'string' && isFinite(+date) ? date.toISOString().substring(0,10) : fieldValue;
+		return typeof fieldValue === 'string' && isFinite(+date) ? this.getDateString(date) : fieldValue;
+	}
+
+	private getDateString(date: Date): string {
+		const datePipe: DatePipe = new DatePipe('en-US');
+		const dateString = datePipe.transform(date, 'YYY-MM-dd');
+		return dateString as string;
 	}
 }

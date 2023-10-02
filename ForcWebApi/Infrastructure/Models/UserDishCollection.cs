@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-
-namespace Forc.WebApi.Infrastructure.Entities
+﻿namespace Forc.WebApi.Infrastructure.Entities
 {
     /// <summary>
     /// Каталог блюд пользователя

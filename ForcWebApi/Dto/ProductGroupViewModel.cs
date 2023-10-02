@@ -10,7 +10,7 @@
         /// <summary>
         /// Наименование группы товаров
         /// </summary>
-        public string GroupName { get; set; }
+        public string Name { get; set; }
 
         /// <summary>
         /// Товары, входящие в группу

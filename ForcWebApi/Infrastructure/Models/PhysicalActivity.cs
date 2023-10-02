@@ -3,13 +3,8 @@
     /// <summary>
     /// Набор категорий физической активности
     /// </summary>
-    public class PhysicalActivity : BaseEntity<Guid>
+    public class PhysicalActivity : EntityWithName<Guid>
     {
-        /// <summary>
-        /// Наименование
-        /// </summary>
-        public string Name { get; set; }
-
         /// <summary>
         /// Описание
         /// </summary>

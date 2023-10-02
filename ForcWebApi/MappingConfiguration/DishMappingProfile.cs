@@ -10,7 +10,7 @@ namespace Forc.WebApi.MappingConfiguration
         {
             CreateMap<Dish, DishViewModel>()
                 .ForMember(x => x.Id, i => i.MapFrom(u => u.Id))
-                .ForMember(x => x.DishName, i => i.MapFrom(u => u.DishName))
+                .ForMember(x => x.Name, i => i.MapFrom(u => u.Name))
                 .ForMember(x => x.ResourceSpecificationId, i => i.MapFrom(u => u.ResourceSpecificationId))
                 .ForMember(x => x.ResourseSpecification, i => i.MapFrom(u => u.ResourseSpecification))
                 .ForMember(x => x.UserDishCollections, i => i.MapFrom(u => u.UserDishCollections))

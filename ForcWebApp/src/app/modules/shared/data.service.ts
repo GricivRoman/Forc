@@ -15,8 +15,14 @@ export class DataService<T extends BaseEntity> {
 		return this.http.get<T>(`${this.url}/${id}`);
 	}
 
+	// TODO пагинация
 	public getList(): Observable<T[]>{
 		return this.http.get<T[]>(`${this.url}/list`);
+	}
+
+	// TODO пагинация
+	public getSelectItemList(): Observable<T[]>{
+		return this.http.get<T[]>(`${this.url}/select-list`);
 	}
 
 	public save(model: T){

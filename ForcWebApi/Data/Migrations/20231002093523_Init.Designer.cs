@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Forc.WebApi.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20230928103638_init")]
-    partial class init
+    [Migration("20231002093523_Init")]
+    partial class Init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -111,7 +111,7 @@ namespace Forc.WebApi.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
-                    b.Property<string>("DishName")
+                    b.Property<string>("Name")
                         .HasColumnType("text");
 
                     b.Property<Guid>("ResourceSpecificationId")
@@ -129,7 +129,7 @@ namespace Forc.WebApi.Migrations
                         .HasColumnType("uuid");
 
                     b.Property<DateTime>("MealTime")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp without time zone");
 
                     b.Property<Guid>("UserId")
                         .HasColumnType("uuid");
@@ -183,6 +183,29 @@ namespace Forc.WebApi.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("PhysicalActivity");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("4ae56dc2-4f4d-4cb2-a90d-898ec1aae801"),
+                            Description = "Low physical activity",
+                            Name = "Low",
+                            PhysicalActivityMultiplier = 1.0
+                        },
+                        new
+                        {
+                            Id = new Guid("90877285-0c4a-4f19-8c2a-955b12aaf58f"),
+                            Description = "Medium physical activity",
+                            Name = "Medium",
+                            PhysicalActivityMultiplier = 1.25
+                        },
+                        new
+                        {
+                            Id = new Guid("b6433404-b898-4ab2-ab85-dc41d09361a4"),
+                            Description = "Height physical activity",
+                            Name = "Height",
+                            PhysicalActivityMultiplier = 1.5
+                        });
                 });
 
             modelBuilder.Entity("Forc.WebApi.Infrastructure.Entities.Product", b =>
@@ -278,7 +301,7 @@ namespace Forc.WebApi.Migrations
                         .HasColumnType("integer");
 
                     b.Property<DateTime?>("BirthDate")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp without time zone");
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
@@ -386,10 +409,10 @@ namespace Forc.WebApi.Migrations
                         .HasColumnType("uuid");
 
                     b.Property<DateTime>("DateFinish")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp without time zone");
 
                     b.Property<DateTime>("DateStart")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp without time zone");
 
                     b.Property<bool>("Relevance")
                         .HasColumnType("boolean");
@@ -420,7 +443,7 @@ namespace Forc.WebApi.Migrations
                         .HasColumnType("double precision");
 
                     b.Property<DateTime>("Date")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp without time zone");
 
                     b.Property<Guid>("UserId")
                         .HasColumnType("uuid");
@@ -438,7 +461,7 @@ namespace Forc.WebApi.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
-                    b.Property<string>("CategoryName")
+                    b.Property<string>("Name")
                         .HasColumnType("text");
 
                     b.HasKey("Id");
@@ -452,7 +475,7 @@ namespace Forc.WebApi.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
-                    b.Property<string>("GroupName")
+                    b.Property<string>("Name")
                         .HasColumnType("text");
 
                     b.HasKey("Id");

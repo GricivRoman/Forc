@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { SelectItem } from '../../../selectItem';
 import { FormControl } from '@angular/forms';
-import { SelectService } from '../../../select-services/select.service';
+import { SelectService } from '../select.service';
 import { first } from 'rxjs';
 
 @Component({

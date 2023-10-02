@@ -4,10 +4,12 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
+#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
+
 namespace Forc.WebApi.Migrations
 {
     /// <inheritdoc />
-    public partial class init : Migration
+    public partial class Init : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -47,8 +49,8 @@ namespace Forc.WebApi.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
-                    DishName = table.Column<string>(type: "text", nullable: true),
-                    ResourceSpecificationId = table.Column<Guid>(type: "uuid", nullable: false)
+                    ResourceSpecificationId = table.Column<Guid>(type: "uuid", nullable: false),
+                    Name = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -60,7 +62,7 @@ namespace Forc.WebApi.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
-                    CategoryName = table.Column<string>(type: "text", nullable: true)
+                    Name = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -72,9 +74,9 @@ namespace Forc.WebApi.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
-                    Name = table.Column<string>(type: "text", nullable: true),
                     Description = table.Column<string>(type: "text", nullable: true),
-                    PhysicalActivityMultiplier = table.Column<double>(type: "double precision", nullable: false)
+                    PhysicalActivityMultiplier = table.Column<double>(type: "double precision", nullable: false),
+                    Name = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -86,7 +88,7 @@ namespace Forc.WebApi.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
-                    GroupName = table.Column<string>(type: "text", nullable: true)
+                    Name = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -198,7 +200,7 @@ namespace Forc.WebApi.Migrations
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
                     Name = table.Column<string>(type: "text", nullable: true),
-                    BirthDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
+                    BirthDate = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
                     Gender = table.Column<string>(type: "text", nullable: true),
                     Sex = table.Column<int>(type: "integer", nullable: true),
                     PhysicalActivityId = table.Column<Guid>(type: "uuid", nullable: true),
@@ -397,7 +399,7 @@ namespace Forc.WebApi.Migrations
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
                     UserId = table.Column<Guid>(type: "uuid", nullable: false),
-                    MealTime = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
+                    MealTime = table.Column<DateTime>(type: "timestamp without time zone", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -417,8 +419,8 @@ namespace Forc.WebApi.Migrations
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
                     UserId = table.Column<Guid>(type: "uuid", nullable: false),
                     Relevance = table.Column<bool>(type: "boolean", nullable: false),
-                    DateStart = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    DateFinish = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    DateStart = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    DateFinish = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
                     CurrentBodyWeight = table.Column<double>(type: "double precision", nullable: false),
                     TargetBodyWeight = table.Column<double>(type: "double precision", nullable: false),
                     DailyRateId = table.Column<Guid>(type: "uuid", nullable: false)
@@ -445,7 +447,7 @@ namespace Forc.WebApi.Migrations
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
                     UserId = table.Column<Guid>(type: "uuid", nullable: false),
-                    Date = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    Date = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
                     BodyWeight = table.Column<double>(type: "double precision", nullable: false)
                 },
                 constraints: table =>
@@ -481,6 +483,16 @@ namespace Forc.WebApi.Migrations
                         principalTable: "Meal",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.InsertData(
+                table: "PhysicalActivity",
+                columns: new[] { "Id", "Description", "Name", "PhysicalActivityMultiplier" },
+                values: new object[,]
+                {
+                    { new Guid("4ae56dc2-4f4d-4cb2-a90d-898ec1aae801"), "Low physical activity", "Low", 1.0 },
+                    { new Guid("90877285-0c4a-4f19-8c2a-955b12aaf58f"), "Medium physical activity", "Medium", 1.25 },
+                    { new Guid("b6433404-b898-4ab2-ab85-dc41d09361a4"), "Height physical activity", "Height", 1.5 }
                 });
 
             migrationBuilder.CreateIndex(

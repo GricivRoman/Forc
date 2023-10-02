@@ -10,7 +10,7 @@ namespace Forc.WebApi.MappingConfiguration
         {
             CreateMap<ProductGroup, ProductGroupViewModel>()
                 .ForMember(x => x.Id, i => i.MapFrom(u => u.Id))
-                .ForMember(x => x.GroupName, i => i.MapFrom(u => u.GroupName))
+                .ForMember(x => x.Name, i => i.MapFrom(u => u.Name))
                 .ForMember(x => x.Products, i => i.MapFrom(u => u.Products))
                 .ReverseMap();
         }

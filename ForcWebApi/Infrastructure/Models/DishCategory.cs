@@ -5,13 +5,8 @@ namespace Forc.WebApi.Infrastructure.Models
     /// <summary>
     /// Категории блюд
     /// </summary>
-    public class DishCategory: BaseEntity<Guid>
+    public class DishCategory: EntityWithName<Guid>
     {
-        /// <summary>
-        /// Наименование группы
-        /// </summary>
-        public string CategoryName { get; set; }
-
         /// <summary>
         /// Блюда, входящие в группу
         /// </summary>

@@ -10,7 +10,7 @@
         /// <summary>
         /// Наименование блюда
         /// </summary>
-        public string DishName { get; set; }
+        public string Name { get; set; }
 
         /// <summary>
         /// Id песурсной спецификации

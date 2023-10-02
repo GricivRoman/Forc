@@ -1,8 +1,10 @@
 import { Observable, of } from 'rxjs';
 import { SelectItem } from '../../selectItem';
-import { SelectService } from '../select.service';
+import { SelectService } from '../../module-frontend/forc-select/select.service';
 import { SexEnum, SexEnumDictionary } from '../../enums/sexEnum';
+import { Injectable } from '@angular/core';
 
+@Injectable()
 export class SexSelectService implements SelectService {
 	items: SelectItem[] = [
 		{

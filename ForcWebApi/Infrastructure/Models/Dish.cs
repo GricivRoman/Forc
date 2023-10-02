@@ -5,13 +5,8 @@ namespace Forc.WebApi.Infrastructure.Entities
     /// <summary>
     /// Блюдо
     /// </summary>
-    public class Dish : BaseEntity<Guid>
+    public class Dish : EntityWithName<Guid>
     {
-        /// <summary>
-        /// Наименование блюда
-        /// </summary>
-        public string DishName { get; set; }
-
         /// <summary>
         /// Id песурсной спецификации
         /// </summary>

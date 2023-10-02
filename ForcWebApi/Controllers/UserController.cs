@@ -20,7 +20,7 @@ namespace Forc.WebApi.Controllers
         [Route("{id}")]
         public async Task<IActionResult> GetUser(Guid id)
         {
-            var user = await _userService.GetUser(id);
+            var user = await _userService.GetUserAsync(id);
             return Ok(user);
         }
 
@@ -28,7 +28,7 @@ namespace Forc.WebApi.Controllers
         [Route("")]
         public async Task<IActionResult> UpdateUser([FromBody]UserViewModel model)
         {
-            await _userService.UpdateUser(model);
+            await _userService.UpdateUserAsync(model);
             return Ok();
         }
 
@@ -36,7 +36,7 @@ namespace Forc.WebApi.Controllers
         [Route("{id}")]
         public async Task<IActionResult> DeleteUser(Guid id)
         {
-            await _userService.DeleteUser(id);
+            await _userService.DeleteUserAsync(id);
             return Ok();
         }
     }
