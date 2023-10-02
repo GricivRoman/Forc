@@ -3,7 +3,7 @@ import { BaseControlComponent } from '../baseControl.component';
 
 @Component({
 	selector: 'app-forc-text',
-	templateUrl: 'textControlComponent.html'
+	templateUrl: 'textControl.component.html'
 })
 export class TextControlComponent extends BaseControlComponent {
 }

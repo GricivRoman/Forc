@@ -2,11 +2,12 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { LoginModel } from './loginModel';
 import { CheckInModel } from './checkInModel';
-import { LocalStorageService } from '../../shared/localStorage.service';
+import { LocalStorageService } from '../../shared/local-storage/localStorage.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, catchError, map, throwError } from 'rxjs';
 import { ApiValidationErrorsResolvingService } from '../../shared/apiValidationErrorsResolving.service';
 import { FormGroup } from '@angular/forms';
+import { AuthResponse } from '../../shared/local-storage/auth-response';
 
 @Injectable()
 export class AuthenticationService {
@@ -33,7 +34,7 @@ export class AuthenticationService {
 				userNameOrEmail: model.email,
 				password: model.password
 			};
-			this.loginRequest(loginModel);
+			this.loginRequest(loginModel).subscribe();
 		}), catchError(err => {
 			this.errorsResolver.resolveApiValidationErrors(form, err);
 			return throwError(err);
@@ -42,7 +43,7 @@ export class AuthenticationService {
 
 	private loginRequest(model: LoginModel, form?: FormGroup): Observable<any>{
 		return this.http.post('account/login', model).pipe(map((response) => {
-			this.localStorageService.authInfo = response;
+			this.localStorageService.authInfo = response as AuthResponse;
 			this.router.navigate([this.route.snapshot.queryParams['returnUrl']]);
 		}), catchError(err => {
 			if(form){

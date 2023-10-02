@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 
-namespace ForcWebApi.Validation
+namespace Forc.WebApi.Validation
 {
     public class ValidationFilterAttribute : IActionFilter
     {

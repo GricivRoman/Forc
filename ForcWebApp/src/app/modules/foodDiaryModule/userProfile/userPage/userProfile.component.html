@@ -1,0 +1,52 @@
+<div>
+    <div>
+        Аватар
+    </div>
+    <div class="row offset-2">
+        <div>
+            <div class="row">
+                <div class="col-xl-3 col-sm-4 col-4">
+                    <app-forc-text
+                        label="Name"
+                        [control]="form.controls.name"
+                    ></app-forc-text>
+                </div>
+                <div class="col-xl-3 col-sm-4 col-4">
+                    <app-forc-text
+                        label="Gender"
+                        [control]="form.controls.gender"
+                    ></app-forc-text>
+                </div>
+                <div class="col-xl-3 col-sm-4 col-4">
+                    <app-forc-date
+                        label="Birth date"
+                        [control]="form.controls.birthDate"
+                    ></app-forc-date>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xl-2 col-sm-3 col-3">
+                    <app-select-sex
+                        label="Sex"
+                        [control]="form.controls.sex"
+                    ></app-select-sex>
+                </div>
+                <div class="col-xl-3 col-sm-4 col-4">
+                    <app-select-physical-activity
+                        label="Physical activity"
+                        [control]="form.controls.physicalActivity"
+                    ></app-select-physical-activity>
+                </div>
+                <div class="col-xl-2 col-sm-3 col-3">
+                    <app-forc-number
+                        label="Height, cm"
+                        [control]="form.controls.height"
+                    ></app-forc-number>
+                </div>
+            </div>
+            <div class="row col-xl-1 offset-8 mt-3 col-sm-2 col-2">
+                <button class="btn btn-success" (click)="save()">Save</button>
+            </div>
+        </div>
+    </div>
+</div>

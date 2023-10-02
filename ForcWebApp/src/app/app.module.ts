@@ -10,6 +10,7 @@ import { ApiInterceptor } from './modules/shared/api-interceptor';
 import { AuthActivatorService } from './modules/foodDiaryModule/authentication/authGuard';
 import { AuthenticationService } from './modules/foodDiaryModule/authentication/authentication.service';
 import { MatDialogModule } from '@angular/material/dialog';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
 	declarations: [
@@ -23,7 +24,8 @@ import { MatDialogModule } from '@angular/material/dialog';
 		ReactiveFormsModule,
 		CommonModule,
 		HttpClientModule,
-		MatDialogModule
+		MatDialogModule,
+		BrowserAnimationsModule
 	],
 	providers: [
 		{

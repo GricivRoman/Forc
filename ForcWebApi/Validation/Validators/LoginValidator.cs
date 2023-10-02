@@ -1,7 +1,7 @@
 ﻿using FluentValidation;
-using ForcWebApi.Dto;
+using Forc.WebApi.Dto;
 
-namespace ForcWebApi.Validation.Validators
+namespace Forc.WebApi.Validation.Validators
 {
     public class LoginValidator : AbstractValidator<LoginViewModel>
     {

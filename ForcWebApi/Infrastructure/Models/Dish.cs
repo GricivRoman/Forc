@@ -1,27 +1,21 @@
-﻿using ForcWebApi.Infrastructure.Models;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using Forc.WebApi.Infrastructure.Models;
 
-namespace ForcWebApi.Infrastructure.Entities
+namespace Forc.WebApi.Infrastructure.Entities
 {
     /// <summary>
     /// Блюдо
     /// </summary>
-    public class Dish : BaseEntity<Guid>
+    public class Dish : EntityWithName<Guid>
     {
         /// <summary>
-        /// Наименование блюда
+        /// Id песурсной спецификации
         /// </summary>
-        public string DishName { get; set; }
+        public Guid ResourceSpecificationId { get; set; }
 
         /// <summary>
         /// Ресурсная спецификация
         /// </summary>
         public ResourceSpecification ResourseSpecification { get; set; }
-
-        /// <summary>
-        /// Id песурсной спецификации
-        /// </summary>
-        public Guid ResourceSpecificationId { get; set; }
 
         /// <summary>
         /// В каких наборах блюд присутствует это блюдо

@@ -1,9 +1,7 @@
-﻿using ForcWebApi.Infrastructure.Enums;
+﻿using Forc.WebApi.Enums;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
-using System.ComponentModel.DataAnnotations.Schema;
 
-namespace ForcWebApi.Infrastructure.Entities
+namespace Forc.WebApi.Infrastructure.Entities
 {
     /// <summary>
     /// Пользователь
@@ -38,7 +36,7 @@ namespace ForcWebApi.Infrastructure.Entities
         /// <summary>
         /// Категория физической активности
         /// </summary>
-        public PhysicalActivityCatalog PhysicalActivity { get; set; }
+        public PhysicalActivity PhysicalActivity { get; set; }
 
         /// <summary>
         /// Взвешивания
@@ -68,6 +66,6 @@ namespace ForcWebApi.Infrastructure.Entities
         /// <summary>
         /// Рост
         /// </summary>
-        public double Height { get; set; }
+        public double? Height { get; set; }
     }
 }

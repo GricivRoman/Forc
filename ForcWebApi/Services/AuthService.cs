@@ -1,13 +1,13 @@
-﻿using ForcWebApi.Dto;
-using ForcWebApi.Infrastructure.Entities;
-using ForcWebApi.Interfaces;
+﻿using Forc.WebApi.Dto;
+using Forc.WebApi.Infrastructure.Entities;
+using Forc.WebApi.Interfaces;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 
-namespace ForcWebApi.Services
+namespace Forc.WebApi.Services
 {
     public class AuthService : IAccountService
     {
@@ -98,7 +98,9 @@ namespace ForcWebApi.Services
             {
                 Token = new JwtSecurityTokenHandler().WriteToken(token),
                 Expiration = token.ValidTo,
-                UserName = user.UserName
+                UserId = user.Id,
+                UserName = user.UserName,
+                Roles = userRoles
             };
 
             return userCredentials;

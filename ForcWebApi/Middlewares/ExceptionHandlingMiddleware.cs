@@ -1,6 +1,6 @@
 ﻿using System.Net;
 
-namespace ForcWebApi.Middlewares
+namespace Forc.WebApi.Middlewares
 {
     public class ExceptionHandlingMiddleware
     {

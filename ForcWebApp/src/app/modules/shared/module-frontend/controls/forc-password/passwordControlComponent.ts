@@ -3,7 +3,7 @@ import { BaseControlComponent } from '../baseControl.component';
 
 @Component({
 	selector: 'app-forc-password',
-	templateUrl: 'passwordControlComponent.html'
+	templateUrl: 'passwordControl.component.html'
 })
 export class PasswordControlComponent extends BaseControlComponent {
 }

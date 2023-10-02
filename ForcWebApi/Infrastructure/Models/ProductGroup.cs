@@ -1,17 +1,12 @@
-﻿using ForcWebApi.Infrastructure.Entities;
+﻿using Forc.WebApi.Infrastructure.Entities;
 
-namespace ForcWebApi.Infrastructure.Models
+namespace Forc.WebApi.Infrastructure.Models
 {
     /// <summary>
     /// Группа товаров
     /// </summary>
-    public class ProductGroup : BaseEntity<Guid>
+    public class ProductGroup : EntityWithName<Guid>
     {
-        /// <summary>
-        /// Наименование группы товаров
-        /// </summary>
-        public string GroupName { get; set; }
-
         /// <summary>
         /// Товары, входящие в группу
         /// </summary>

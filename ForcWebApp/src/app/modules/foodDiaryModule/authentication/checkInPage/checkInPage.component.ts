@@ -44,8 +44,9 @@ export class CheckInPageComponent implements OnInit {
 		if(this.form.valid){
 			this.authenticationService.checkIn(this.form).subscribe({
 				error: (errResponse: HttpErrorResponse) => {
-					if(typeof errResponse.error === 'string' )
+					if(typeof errResponse.error === 'string' ) {
 						this.alertService.showMessage(errResponse.error, AlertDialogStates.error);
+					}
 				}
 			});
 		}

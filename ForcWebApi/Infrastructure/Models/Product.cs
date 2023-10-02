@@ -1,6 +1,6 @@
-﻿using ForcWebApi.Infrastructure.Models;
+﻿using Forc.WebApi.Infrastructure.Models;
 
-namespace ForcWebApi.Infrastructure.Entities
+namespace Forc.WebApi.Infrastructure.Entities
 {
     /// <summary>
     /// Продукт
@@ -17,12 +17,14 @@ namespace ForcWebApi.Infrastructure.Entities
         /// </summary>
         public ICollection<CompositionItem> CompositionItems { get; set; }
 
-
         /// <summary>
         /// Группа, в которую входит продукт
         /// </summary>
         public Guid? ProductGroupId { get; set; }
 
+        /// <summary>
+        /// Гуппа, в которую входит продукт
+        /// </summary>
         public ProductGroup ProductGroup { get; set; }
     }
 }

@@ -1,4 +1,4 @@
-﻿namespace ForcWebApi.Infrastructure
+﻿namespace Forc.WebApi.Infrastructure
 {
     public class BaseEntity<TKey>
     {
