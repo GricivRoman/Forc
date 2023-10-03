@@ -9,7 +9,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{A422ADE9
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Forc.WebApi", "ForcWebApi\Forc.WebApi.csproj", "{FADDE499-5C9D-45B5-8E28-EB2872FD1268}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Forc.FileStorage", "Froc.FileStorage\Forc.FileStorage.csproj", "{75F19908-C847-476C-8D07-D6D4AEEB7D87}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Forc.FileStorage", "Froc.FileStorage\Forc.FileStorage.csproj", "{75F19908-C847-476C-8D07-D6D4AEEB7D87}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

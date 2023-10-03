@@ -1,4 +1,7 @@
-﻿namespace Forc.FileStorage
+﻿using Forc.FileStorage.Interfaces;
+using Forc.FileStorage.Services;
+
+namespace Forc.FileStorage
 {
     public class Startup
     {
@@ -18,7 +21,14 @@
                 });
             });
 
-            services.AddControllers();
+            services.AddControllers()
+                .AddJsonOptions(opt =>
+                {
+                    opt.JsonSerializerOptions.PropertyNameCaseInsensitive= true;
+                    opt.JsonSerializerOptions.PropertyNamingPolicy = null;
+                });
+
+            services.AddScoped<IUserService, UserService>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -28,7 +38,6 @@
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseStaticFiles();
             app.UseRouting();
 
             app.UseCors("allowedOrigins");
