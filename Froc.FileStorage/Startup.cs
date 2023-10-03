@@ -1,4 +1,5 @@
 ﻿using Forc.FileStorage.Interfaces;
+using Forc.FileStorage.Models;
 using Forc.FileStorage.Services;
 
 namespace Forc.FileStorage
@@ -27,6 +28,8 @@ namespace Forc.FileStorage
                     opt.JsonSerializerOptions.PropertyNameCaseInsensitive= true;
                     opt.JsonSerializerOptions.PropertyNamingPolicy = null;
                 });
+
+            services.Configure<FileStorageSettings>(_configuration.GetSection("FileStorageDB"));
 
             services.AddScoped<IUserService, UserService>();
         }

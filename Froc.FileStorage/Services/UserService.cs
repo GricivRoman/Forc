@@ -1,5 +1,6 @@
 ﻿using Forc.FileStorage.Interfaces;
 using Forc.FileStorage.Models;
+using Microsoft.Extensions.Options;
 using MongoDB.Driver;
 
 namespace Forc.FileStorage.Services
@@ -10,11 +11,11 @@ namespace Forc.FileStorage.Services
         private IMongoDatabase _mongoDatabase;
         private IMongoCollection<UserModel> _userCollection;
 
-        public UserService(IConfiguration config)
+        public UserService(IOptions<FileStorageSettings> dbSettings)
         {
-            _mongoClient = new MongoClient(config["FileStorageDB:ConnectionString"]);
-            _mongoDatabase = _mongoClient.GetDatabase(config["FileStorageDB:DatabaseName"]);
-            _userCollection = _mongoDatabase.GetCollection<UserModel>(config["FileStorageDB:UserCollectionName"]);
+            _mongoClient = new MongoClient(dbSettings.Value.ConnectionString);
+            _mongoDatabase = _mongoClient.GetDatabase(dbSettings.Value.DatabaseName);
+            _userCollection = _mongoDatabase.GetCollection<UserModel>(dbSettings.Value.Collections.UserCollection);
         }
 
         public async Task<UserModel> GetUser(Guid id)
