@@ -1,12 +1,15 @@
-<div>
-    <div>
-        <label for="file">Photo</label>
-        <form enctype="multipart/form-data">
-            <input id="file" type="file" (change)="photoChanges($event)">
-        </form>        
-        <img [src]="userPhoto" id="imgViewer" width="200px" height="200px">
+<div class="row">
+    <div class="col-2">
+        <div class="container">
+            <form enctype="multipart/form-data">
+                <label for="fileInput">
+                    <img [src]="picture" id="imgViewer">
+                </label>
+                <input id="fileInput" type="file" (change)="photoChanges($event)">
+            </form>
+        </div>
     </div>
-    <div class="row offset-2">
+    <div class="col-10">
         <div>
             <div class="row">
                 <div class="col-xl-3 col-sm-4 col-4">

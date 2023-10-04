@@ -12,12 +12,13 @@ import { Guid } from 'guid-typescript';
 @Component({
 	selector: 'app-personal-account',
 	templateUrl: 'userProfile.component.html',
+	styleUrls: ['userPage.component.css'],
 	providers: [{provide: 'DataService', useClass: DataService} ]
 })
 
 // TODO в дальнейшем вынести функционал работы с картинкой в базовый комбонент ReactiveFromWithPictureComponent
 export class UserProfileComponent extends ReactiveFromComponent<UserModel> implements OnInit {
-	public userPhoto: string;
+	public picture: string = 'assets/images/UploadPicture.jpg';
 	public selectedFile: File;
 
 	override form = new FormGroup({
@@ -48,7 +49,7 @@ export class UserProfileComponent extends ReactiveFromComponent<UserModel> imple
 		if(this.modelId){
 			this.fileStorageService.get(this.modelId).subscribe({
 				next: (data: any) => {
-					this.userPhoto = `data:image/jpg;base64,${data.file}`;
+					this.picture = `data:image/jpg;base64,${data.file}`;
 				}
 			});
 		}
@@ -57,7 +58,7 @@ export class UserProfileComponent extends ReactiveFromComponent<UserModel> imple
 	public photoChanges(event: any){
 		const filesList = event.target.files;
 		if(filesList){
-			this.userPhoto = window.URL.createObjectURL(filesList[0]);
+			this.picture = window.URL.createObjectURL(filesList[0]);
 			this.selectedFile = filesList[0];
 		}
 	}
