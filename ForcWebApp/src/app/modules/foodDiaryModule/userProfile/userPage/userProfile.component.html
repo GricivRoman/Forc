@@ -1,6 +1,10 @@
 <div>
     <div>
-        Аватар
+        <label for="file">Photo</label>
+        <form enctype="multipart/form-data">
+            <input id="file" type="file" (change)="photoChanges($event)">
+        </form>        
+        <img [src]="picture" id="imgViewer" width="200px" height="200px">
     </div>
     <div class="row offset-2">
         <div>

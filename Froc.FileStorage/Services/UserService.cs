@@ -1,7 +1,9 @@
-﻿using Forc.FileStorage.Interfaces;
+﻿using Forc.FileStorage.Helpers;
+using Forc.FileStorage.Interfaces;
 using Forc.FileStorage.Models;
 using Microsoft.Extensions.Options;
 using MongoDB.Driver;
+using Newtonsoft.Json;
 
 namespace Forc.FileStorage.Services
 {
@@ -9,40 +11,62 @@ namespace Forc.FileStorage.Services
     {
         private MongoClient _mongoClient;
         private IMongoDatabase _mongoDatabase;
-        private IMongoCollection<UserModel> _userCollection;
+        private IMongoCollection<FileModel> _userCollection;
 
         public UserService(IOptions<FileStorageSettings> dbSettings)
         {
             _mongoClient = new MongoClient(dbSettings.Value.ConnectionString);
             _mongoDatabase = _mongoClient.GetDatabase(dbSettings.Value.DatabaseName);
-            _userCollection = _mongoDatabase.GetCollection<UserModel>(dbSettings.Value.Collections.UserCollection);
+            _userCollection = _mongoDatabase.GetCollection<FileModel>(dbSettings.Value.Collections.UserCollection);
         }
 
-        public async Task<UserModel> GetUser(Guid id)
+        public async Task<FileModel> GetUser(Guid id)
         {
             var user = await _userCollection.Find(x => x.Id == id).FirstOrDefaultAsync();
             if(user == null)
             {
-                throw new ApplicationException("User with that Id doesn't exist");
+                throw new ApplicationException("Invalid ID");
             }
 
+            user.File = ImapeHelper.GetImage(Convert.ToBase64String(user.File));
             return user;
         }
 
-        public async Task<UserModel> SaveUser(UserModel userModel)
+        public async Task SaveUser(FileToUpload fileToUpload)
         {
-            var user = await _userCollection.Find(x => x.Id == userModel.Id).FirstOrDefaultAsync();
-
-            if(user == null)
+            if (fileToUpload == null || fileToUpload.File == null || fileToUpload.File.Length == 0)
             {
-                await _userCollection.InsertOneAsync(userModel);
-            }
-            else
-            {
-                await _userCollection.ReplaceOneAsync(x => x.Id == userModel.Id, userModel);
+                throw new ApplicationException("Invalid file");
             }
 
-            return user;
+            FileModel userModel;
+
+            try
+            {
+                userModel = JsonConvert.DeserializeObject<FileModel>(fileToUpload.Model);
+            }
+            catch (NullReferenceException ex)
+            {
+                throw new ApplicationException("Invalid ID");
+            }
+
+            using (var ms = new MemoryStream())
+            {
+                fileToUpload.File.CopyTo(ms);
+                var fileBytes = ms.ToArray();
+
+                userModel.File = fileBytes;
+                var user = await _userCollection.Find(x => x.Id == userModel.Id).FirstOrDefaultAsync();
+
+                if (user == null)
+                {
+                    await _userCollection.InsertOneAsync(userModel);
+                }
+                else
+                {
+                    await _userCollection.ReplaceOneAsync(x => x.Id == userModel.Id, userModel);
+                }
+            }
         }
     }
 }

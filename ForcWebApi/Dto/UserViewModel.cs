@@ -7,11 +7,6 @@ namespace Forc.WebApi.Dto
         public Guid Id { get; set; }
 
         /// <summary>
-        /// Фотография
-        /// </summary>
-        public byte[] Photo { get; set; }
-
-        /// <summary>
         /// Имя пользователя
         /// </summary>
         public string Name { get; set; }

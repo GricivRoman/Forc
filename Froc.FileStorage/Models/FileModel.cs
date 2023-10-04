@@ -3,11 +3,11 @@ using MongoDB.Bson.Serialization.Attributes;
 
 namespace Forc.FileStorage.Models
 {
-    public class UserModel
+    public class FileModel
     {
         [BsonGuidRepresentation(GuidRepresentation.Unspecified)]
         public Guid Id { get; set; }
 
-        public byte[] Photo { get; set; }
+        public byte[] File { get; set; }
     }
 }

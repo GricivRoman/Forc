@@ -70,7 +70,12 @@ namespace Forc.WebApi
                 fv.ImplicitlyValidateChildProperties = true;
                 fv.ImplicitlyValidateRootCollectionElements = true;
                 fv.RegisterValidatorsFromAssembly(Assembly.GetExecutingAssembly());
-            }).AddNewtonsoftJson(opt => opt.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore);
+            }).AddNewtonsoftJson(opt =>
+            {
+                opt.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+            });
+
+            services.AddHttpClient();
 
             services.AddScoped<IAccountService, AuthService>();
             services.AddScoped<ValidationFilterAttribute>();

@@ -24,4 +24,7 @@ export class UserModel extends BaseEntity {
 
 	/* Рост */
 	peight: number;
+
+	/* Фото */
+	photo: FormData;
 }

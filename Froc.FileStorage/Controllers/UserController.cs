@@ -1,8 +1,6 @@
-﻿using Forc.FileStorage.Helpers;
-using Forc.FileStorage.Interfaces;
+﻿using Forc.FileStorage.Interfaces;
 using Forc.FileStorage.Models;
 using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json;
 
 namespace Forc.FileStorage.Controllers
 {
@@ -21,33 +19,16 @@ namespace Forc.FileStorage.Controllers
         public async Task<IActionResult> GetUser(Guid id)
         {
             var user = await _userService.GetUser(id);
-            user.Photo = ImapeHelper.GetImage(Convert.ToBase64String(user.Photo));
             return Ok(user);
         }
 
         [HttpPost]
         [HttpPut]
         [Route("")]
-        public async Task<IActionResult> SaveUser(FileUpload fileObj)
+        public async Task<IActionResult> SaveUser([FromForm]FileToUpload fileToUpload)
         {
-            UserModel user = JsonConvert.DeserializeObject<UserModel>(fileObj.Model);
-            if (fileObj.File.Length > 0)
-            {
-                using(var ms = new MemoryStream())
-                {
-                    fileObj.File.CopyTo(ms);
-                    var fileBytes = ms.ToArray();
-
-                    user.Photo= fileBytes;
-                    user = await _userService.SaveUser(user);
-
-                    if(user.Id != Guid.Empty)
-                    {
-                        return Ok();
-                    }
-                }
-            }
-            return BadRequest("Save filed");
+            await _userService.SaveUser(fileToUpload);
+            return Ok();
         }
     }
 }
