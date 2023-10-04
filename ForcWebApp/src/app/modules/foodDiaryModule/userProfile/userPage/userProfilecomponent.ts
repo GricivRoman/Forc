@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit, AfterViewInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { DataService } from '../../../shared/data.service';
 import { AlertService } from '../../../shared/module-frontend/forc-alert/alert.service';
 import { UserModel } from './user';
@@ -6,16 +6,20 @@ import { ReactiveFromComponent } from '../../../shared/reactive-form-component';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ApiValidationErrorsResolvingService } from '../../../shared/apiValidationErrorsResolving.service';
 import { LocalStorageService } from 'src/app/modules/shared/local-storage/localStorage.service';
-import { HttpClient } from '@angular/common/http';
+import { FileStorageService } from 'src/app/modules/shared/fileStorage.service';
+import { Guid } from 'guid-typescript';
 
 @Component({
 	selector: 'app-personal-account',
 	templateUrl: 'userProfile.component.html',
 	providers: [{provide: 'DataService', useClass: DataService} ]
 })
-export class UserProfileComponent extends ReactiveFromComponent<UserModel> implements AfterViewInit {
-	public picture: string;
-	
+
+// TODO в дальнейшем вынести функционал работы с картинкой в базовый комбонент ReactiveFromWithPictureComponent
+export class UserProfileComponent extends ReactiveFromComponent<UserModel> implements OnInit {
+	public userPhoto: string;
+	public selectedFile: File;
+
 	override form = new FormGroup({
 		name: new FormControl(''),
 		gender: new FormControl(''),
@@ -30,41 +34,42 @@ export class UserProfileComponent extends ReactiveFromComponent<UserModel> imple
 		@Inject('DataService') protected override dataService: DataService<UserModel>,
 		protected override alertService: AlertService,
 		protected override errorResolvingService: ApiValidationErrorsResolvingService,
-		private localStorageService: LocalStorageService,
-		private http: HttpClient
+		protected override fileStorageService: FileStorageService,
+		private localStorageService: LocalStorageService
 	){
-		super(dataService, alertService, errorResolvingService);
+		super(dataService, alertService, errorResolvingService, fileStorageService);
 		this.apiUrl = 'user';
 		this.modelId = localStorageService.authInfo?.userId;
 	}
 
-	// TODO вынести в момент, после инициализации формы
-	ngAfterViewInit(): void {
+	override ngOnInit(): void {
+		super.ngOnInit();
 
-		this.http.get(`${this.apiUrl}/photo/${this.modelId}`).subscribe({
-			next: (data: any) => {
-				this.picture = `data:image/jpg;base64,${data.file}`;
-			}
-		});
+		if(this.modelId){
+			this.fileStorageService.get(this.modelId).subscribe({
+				next: (data: any) => {
+					this.userPhoto = `data:image/jpg;base64,${data.file}`;
+				}
+			});
+		}
 	}
 
-	override save(){
-		super.save();
-	}
-
-	// TODO фото загружаем отдельным обращением на сервер
 	public photoChanges(event: any){
 		const filesList = event.target.files;
 		if(filesList){
-			this.picture = window.URL.createObjectURL(filesList[0]);
+			this.userPhoto = window.URL.createObjectURL(filesList[0]);
+			this.selectedFile = filesList[0];
 		}
+	}
 
-		// TODO шлем запрос на сейв файла после основного запроса на сейв страницы, получаем ID и по нему сохраняем
-		const formData = new FormData();
-		if(this.model.id){
-			formData.append('File', filesList[0], filesList[0].name);
-			formData.append('Id', this.model.id.toString());	
-			this.http.post(`${this.apiUrl}/photo`, formData).subscribe();
-		}		
+	override save(){
+		super.save((id: Guid) => {
+			if(id){
+				const formData = new FormData();
+				formData.append('File', this.selectedFile, this.selectedFile.name);
+				formData.append('Id', id.toString());
+				this.fileStorageService.save(formData).subscribe();
+			}
+		});
 	}
 }

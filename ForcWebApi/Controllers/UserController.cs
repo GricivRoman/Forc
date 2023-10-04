@@ -29,8 +29,8 @@ namespace Forc.WebApi.Controllers
         [Route("")]
         public async Task<IActionResult> UpdateUser([FromBody]UserViewModel model)
         {
-            await _userService.UpdateUserAsync(model);
-            return Ok();
+            var userId = await _userService.UpdateUserAsync(model);
+            return Ok(userId);
         }
 
         [HttpPost]

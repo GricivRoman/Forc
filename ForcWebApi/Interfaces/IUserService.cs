@@ -7,7 +7,7 @@ namespace Forc.WebApi.Interfaces
     {
         Task<UserViewModel> GetUserAsync(Guid id);
 
-        Task UpdateUserAsync(UserViewModel model);
+        Task<Guid> UpdateUserAsync(UserViewModel model);
 
         Task DeleteUserAsync(Guid id);
 

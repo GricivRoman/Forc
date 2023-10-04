@@ -40,7 +40,7 @@ namespace Forc.WebApi.Services
             return _mapper.Map<UserViewModel>(user);
         }
 
-        public async Task UpdateUserAsync(UserViewModel model)
+        public async Task<Guid> UpdateUserAsync(UserViewModel model)
         {
             var user = await _context.Set<User>().Where(x => x.Id == model.Id).SingleOrDefaultAsync();
 
@@ -51,6 +51,8 @@ namespace Forc.WebApi.Services
             user.PhysicalActivityId = model.PhysicalActivity?.Id;
             user.Height = model.Height;
             await _context.SaveChangesAsync();
+
+            return user.Id;
         }
 
         public async Task UploadPhotoAsync(FileToUploadViewModel fileModel)

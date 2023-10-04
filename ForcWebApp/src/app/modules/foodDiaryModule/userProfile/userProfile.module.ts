@@ -8,7 +8,7 @@ import { CommonModule } from '@angular/common';
 import { PhysicalActiviTySelectModule } from '../../shared/select-controls/physicalActivity-select/physicalActivitySelect.module';
 import { SexSelectModule } from '../../shared/select-controls/sex-select/sexSelect.module';
 import { ReactiveFormsModule } from '@angular/forms';
-import { HttpClient } from '@angular/common/http';
+import { FileStorageService } from '../../shared/fileStorage.service';
 
 @NgModule({
 	imports: [
@@ -25,7 +25,7 @@ import { HttpClient } from '@angular/common/http';
 	],
 	providers: [
 		AlertService,
-		HttpClient
+		FileStorageService
 	]
 })
 export class UserProfileModule {

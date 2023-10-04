@@ -24,8 +24,7 @@ export class ApiInterceptor implements HttpInterceptor, OnDestroy {
 			url: `${baseUrl}/${req.url}`,
 			setHeaders: {
 				'Accept'       : 'application/json',
-				'Authorization': `Bearer ${this.authToken}`,
-				//'Content-Disposition': 'multipart/form-data'
+				'Authorization': `Bearer ${this.authToken}`
 			}
 		});
 		return next.handle(apiReq);
