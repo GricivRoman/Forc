@@ -81,6 +81,7 @@ namespace Forc.WebApi
             services.AddScoped<ValidationFilterAttribute>();
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IPhysicalActivityService, PhysicalActivityService>();
+            services.AddScoped<IFileStorageService, FileStorageService>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

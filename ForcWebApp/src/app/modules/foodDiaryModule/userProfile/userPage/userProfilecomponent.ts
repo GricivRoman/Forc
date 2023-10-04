@@ -58,7 +58,7 @@ export class UserProfileComponent extends ReactiveFromComponent<UserModel> imple
 		if(filesList){
 			this.picture = window.URL.createObjectURL(filesList[0]);
 		}
-		console.log(filesList[0]);
+
 		// TODO шлем запрос на сейв файла после основного запроса на сейв страницы, получаем ID и по нему сохраняем
 		const formData = new FormData();
 		if(this.model.id){

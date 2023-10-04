@@ -23,13 +23,7 @@ namespace Forc.FileStorage
             });
 
             services.AddControllers()
-                .AddNewtonsoftJson()
-                .AddJsonOptions(opt =>
-                {
-                    //opt.JsonSerializerOptions.PropertyNameCaseInsensitive= true;
-                    //opt.JsonSerializerOptions.PropertyNamingPolicy = null;
-                });
-
+                .AddNewtonsoftJson();
 
             services.Configure<FileStorageSettings>(_configuration.GetSection("FileStorageDB"));
 
