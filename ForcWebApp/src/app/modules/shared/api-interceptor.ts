@@ -23,7 +23,6 @@ export class ApiInterceptor implements HttpInterceptor, OnDestroy {
 		const apiReq = req.clone({
 			url: `${baseUrl}/${req.url}`,
 			setHeaders: {
-				'Content-Type' : 'application/json; charset=utf-8',
 				'Accept'       : 'application/json',
 				'Authorization': `Bearer ${this.authToken}`
 			}

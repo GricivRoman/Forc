@@ -1,4 +1,5 @@
 ﻿using Forc.WebApi.Dto;
+using Forc.WebApi.Dto.FileStorage;
 using Forc.WebApi.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -28,8 +29,25 @@ namespace Forc.WebApi.Controllers
         [Route("")]
         public async Task<IActionResult> UpdateUser([FromBody]UserViewModel model)
         {
-            await _userService.UpdateUserAsync(model);
+            var userId = await _userService.UpdateUserAsync(model);
+            return Ok(userId);
+        }
+
+        [HttpPost]
+        [Route("photo")]
+        public async Task<IActionResult> UploadPhoto([FromForm]FileToUploadViewModel fileModel)
+        {
+            await _userService.UploadPhotoAsync(fileModel);
             return Ok();
+        }
+
+        // TODO нормальный нэйминг роутинга
+        [HttpGet]
+        [Route("photo/{id}")]
+        public async Task<IActionResult> UploadPhoto(Guid id)
+        {
+            var userPhoto = await _userService.GetPhotoAsync(id);
+            return Ok(userPhoto);
         }
 
         [HttpDelete]

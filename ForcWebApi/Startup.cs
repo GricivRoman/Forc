@@ -70,12 +70,18 @@ namespace Forc.WebApi
                 fv.ImplicitlyValidateChildProperties = true;
                 fv.ImplicitlyValidateRootCollectionElements = true;
                 fv.RegisterValidatorsFromAssembly(Assembly.GetExecutingAssembly());
-            }).AddNewtonsoftJson(opt => opt.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore);
+            }).AddNewtonsoftJson(opt =>
+            {
+                opt.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+            });
+
+            services.AddHttpClient();
 
             services.AddScoped<IAccountService, AuthService>();
             services.AddScoped<ValidationFilterAttribute>();
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IPhysicalActivityService, PhysicalActivityService>();
+            services.AddScoped<IFileStorageService, FileStorageService>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

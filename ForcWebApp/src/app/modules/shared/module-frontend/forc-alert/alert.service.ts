@@ -26,7 +26,7 @@ export class AlertService {
 						{ opacity: 0.5 },
 						{ opacity: 0 },
 					],
-					keyframeAnimationOptions: { id: `${showedDialogsCount+1}`, duration: 2000 },
+					keyframeAnimationOptions: { id: `${showedDialogsCount+1}`, duration: 1500 },
 				}
 			},
 			position: {
@@ -38,7 +38,7 @@ export class AlertService {
 		dialogRef.afterOpened().subscribe(() => {
 			setTimeout(() => {
 				dialogRef.close();
-			}, 3000);
+			}, 2500);
 		});
 	}
 }

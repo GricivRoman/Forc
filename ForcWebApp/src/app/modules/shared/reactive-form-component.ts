@@ -8,6 +8,7 @@ import { Observer, takeUntil, Subject } from 'rxjs';
 import { Guid } from 'guid-typescript';
 import { AlertDialogStates } from './module-frontend/forc-alert/alertDialogStates';
 import { DatePipe } from '@angular/common';
+import { FileStorageService } from './fileStorage.service';
 
 @Component({
 	selector: 'app-reactive-form-component',
@@ -28,12 +29,13 @@ export class ReactiveFromComponent<TEntity extends BaseEntity> implements OnInit
 	constructor(
         protected dataService: DataService<TEntity>,
         protected alertService: AlertService,
-        protected errorResolvingService: ApiValidationErrorsResolvingService
+        protected errorResolvingService: ApiValidationErrorsResolvingService,
+		protected fileStorageService?: FileStorageService
 	){
 	}
 
 	ngOnInit() {
-		this.dataService.url = this.apiUrl;
+		this.setApiUrl(this.apiUrl);
 		if(this.modelId){
 			this.setModel(this.modelId);
 		}
@@ -61,7 +63,7 @@ export class ReactiveFromComponent<TEntity extends BaseEntity> implements OnInit
 		});
 	}
 
-	public save(saveAction?: () => void){
+	public save(saveAction?: (id: Guid) => void){
 		if(!this.form?.valid){
 			this.alertService.showMessage('The form invalid', AlertDialogStates.error);
 		}
@@ -85,23 +87,30 @@ export class ReactiveFromComponent<TEntity extends BaseEntity> implements OnInit
 		});
 	}
 
+	ngOnDestroy(){
+		this._destroy$.next();
+		this._destroy$.complete();
+	}
+
 	protected updateModel(){
 		Object.keys(this.form.controls).forEach((controlKey) => {
 			Object(this.model)[controlKey] = (Object(this.form.controls[controlKey]) as AbstractControl).value;
 		});
 	}
 
-	ngOnDestroy(){
-		this._destroy$.next();
-		this._destroy$.complete();
+	private setApiUrl(url: string){
+		this.dataService.url = url;
+		if(this.fileStorageService){
+			this.fileStorageService.url = url;
+		}
 	}
 
-	private afterSaveOrUpdateAction(saveAction?: () => void): Partial<Observer<any>>{
+	private afterSaveOrUpdateAction(saveAction?: (id: Guid) => void): Partial<Observer<any>>{
 		return {
-			next: () => {
+			next: (id: Guid) => {
 				this.alertService.showMessage('Saved successful', AlertDialogStates.success);
 				if(saveAction){
-					saveAction();
+					saveAction(id);
 				}
 			},
 			error: (err) => {
@@ -121,7 +130,6 @@ export class ReactiveFromComponent<TEntity extends BaseEntity> implements OnInit
 		const fieldValue = Object(data)[controlKey];
 		const date = new Date(fieldValue);
 
-		//return typeof fieldValue === 'string' && isFinite(+date) ? date.toISOString().substring(0,10) : fieldValue;
 		return typeof fieldValue === 'string' && isFinite(+date) ? this.getDateString(date) : fieldValue;
 	}
 

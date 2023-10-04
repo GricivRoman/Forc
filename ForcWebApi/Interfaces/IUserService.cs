@@ -1,4 +1,5 @@
 ﻿using Forc.WebApi.Dto;
+using Forc.WebApi.Dto.FileStorage;
 
 namespace Forc.WebApi.Interfaces
 {
@@ -6,8 +7,12 @@ namespace Forc.WebApi.Interfaces
     {
         Task<UserViewModel> GetUserAsync(Guid id);
 
-        Task UpdateUserAsync(UserViewModel model);
+        Task<Guid> UpdateUserAsync(UserViewModel model);
 
         Task DeleteUserAsync(Guid id);
+
+        Task UploadPhotoAsync(FileToUploadViewModel fileModel);
+
+        Task<FileViewModel> GetPhotoAsync(Guid id);
     }
 }
