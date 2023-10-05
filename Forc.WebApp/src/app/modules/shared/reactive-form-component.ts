@@ -8,7 +8,6 @@ import { Observer, takeUntil, Subject } from 'rxjs';
 import { Guid } from 'guid-typescript';
 import { AlertDialogStates } from './module-frontend/forc-alert/alertDialogStates';
 import { DatePipe } from '@angular/common';
-import { FileStorageService } from './fileStorage.service';
 
 @Component({
 	selector: 'app-reactive-form-component',
@@ -29,13 +28,12 @@ export class ReactiveFromComponent<TEntity extends BaseEntity> implements OnInit
 	constructor(
         protected dataService: DataService<TEntity>,
         protected alertService: AlertService,
-        protected errorResolvingService: ApiValidationErrorsResolvingService,
-		protected fileStorageService?: FileStorageService
+        protected errorResolvingService: ApiValidationErrorsResolvingService
 	){
 	}
 
 	ngOnInit() {
-		this.setApiUrl(this.apiUrl);
+		this.dataService.url = this.apiUrl;
 		if(this.modelId){
 			this.setModel(this.modelId);
 		}
@@ -96,13 +94,6 @@ export class ReactiveFromComponent<TEntity extends BaseEntity> implements OnInit
 		Object.keys(this.form.controls).forEach((controlKey) => {
 			Object(this.model)[controlKey] = (Object(this.form.controls[controlKey]) as AbstractControl).value;
 		});
-	}
-
-	private setApiUrl(url: string){
-		this.dataService.url = url;
-		if(this.fileStorageService){
-			this.fileStorageService.url = url;
-		}
 	}
 
 	private afterSaveOrUpdateAction(saveAction?: (id: Guid) => void): Partial<Observer<any>>{
