@@ -10,7 +10,7 @@ import { EntityWithImage } from '../../entityWithImage';
 	providers: [{provide: 'FileStorage', useClass: FileStorageService}]
 })
 export class ForcImageComponent implements OnInit {
-	public picture: string = 'assets/images/UploadPicture.jpg';
+	public picture: string = 'assets/images/LoadingPicture.jpg';
 	public selectedFile: File;
 
 	@Input()
@@ -32,6 +32,8 @@ export class ForcImageComponent implements OnInit {
 					this.picture = `data:image/jpg;base64,${data.file}`;
 				}
 			});
+		} else {
+			this.picture = 'assets/images/UploadPicture.jpg';
 		}
 	}
 
