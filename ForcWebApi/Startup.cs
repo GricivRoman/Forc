@@ -1,6 +1,6 @@
 ﻿using FluentValidation.AspNetCore;
-using Forc.WebApi.Data;
-using Forc.WebApi.Infrastructure.Entities;
+using Forc.Infrastructure.Data;
+using Forc.Infrastructure.Models;
 using Forc.WebApi.Interfaces;
 using Forc.WebApi.Middlewares;
 using Forc.WebApi.Services;
