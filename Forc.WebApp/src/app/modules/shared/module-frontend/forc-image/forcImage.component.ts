@@ -1,6 +1,7 @@
 import { Component, Input, Output, EventEmitter, OnInit, Inject } from '@angular/core';
 import { Guid } from 'guid-typescript';
 import { FileStorageService } from '../../fileStorage.service';
+import { EntityWithImage } from '../../entityWithImage';
 
 @Component({
 	selector: 'app-forc-image',
@@ -13,9 +14,6 @@ export class ForcImageComponent implements OnInit {
 	public selectedFile: File;
 
 	@Input()
-		modelId?: Guid;
-
-	@Input()
 		apiUrl: string;
 
 	@Output() fileChanged = new EventEmitter<File>;
@@ -25,8 +23,11 @@ export class ForcImageComponent implements OnInit {
 
 	ngOnInit(): void {
 		this.fileStorageService.url = this.apiUrl;
-		if(this.modelId){
-			this.fileStorageService.get(this.modelId).subscribe({
+	}
+
+	public setPicture(model: EntityWithImage){
+		if(model?.id && model.hasPhoto) {
+			this.fileStorageService.get(model.id).subscribe({
 				next: (data: any) => {
 					this.picture = `data:image/jpg;base64,${data.file}`;
 				}

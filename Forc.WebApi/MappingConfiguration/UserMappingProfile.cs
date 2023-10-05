@@ -30,6 +30,7 @@ namespace Forc.WebApi.MappingConfiguration
                 .ForMember(x => x.UserDishCollectionId, i => i.MapFrom(u => u.UserDishCollectionId))
                 .ForMember(x => x.UserDishCollection, i => i.MapFrom(u => u.UserDishCollection))
                 .ForMember(x => x.Height, i => i.MapFrom(u => u.Height))
+                .ForMember(x => x.HasPhoto, i => i.MapFrom(u => u.HasPhoto))
                 .ReverseMap()
                 .ForMember(x => x.Sex, i => i.MapFrom(u => u.Sex.Id))
                 .ForMember(x => x.PhysicalActivityId, i => i.MapFrom(u => u.PhysicalActivity.Id))

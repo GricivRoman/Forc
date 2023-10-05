@@ -1,8 +1,8 @@
 import { SelectItem } from 'src/app/modules/shared/selectItem';
-import { BaseEntity } from '../../../shared/baseEntity';
 import { Guid } from 'guid-typescript';
+import { EntityWithImage } from 'src/app/modules/shared/entityWithImage';
 
-export class UserModel extends BaseEntity {
+export class UserModel extends EntityWithImage {
 
 	/* Имя пользователя */
 	name: string;
@@ -24,7 +24,4 @@ export class UserModel extends BaseEntity {
 
 	/* Рост */
 	peight: number;
-
-	/* Фото */
-	photo: FormData;
 }

@@ -58,6 +58,11 @@ namespace Forc.WebApi.Services
         public async Task UploadPhotoAsync(FileToUploadViewModel fileModel)
         {
             await _fileStorageService.UploadFileAsync(_fileStoragePath, fileModel);
+
+            var user = await _context.Set<User>().Where(x => x.Id == fileModel.Id).SingleOrDefaultAsync();
+            user.HasPhoto = true;
+
+            await _context.SaveChangesAsync();
         }
 
         public async Task<FileViewModel> GetPhotoAsync(Guid id)

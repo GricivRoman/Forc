@@ -48,12 +48,16 @@ export class ReactiveFromComponent<TEntity extends BaseEntity> implements OnInit
 		// this.saveButtonDisabled = this.model === this.modelSource;
 	}
 
-	public setModel(id: Guid) {
+	public setModel(id: Guid, setModelAction?: () => void) {
 		this.dataService.get(id).pipe(takeUntil(this.destroy$)).subscribe({
 			next: (data: TEntity) => {
 				this.model = data;
 				this.modelSource = { ... this.model };
 				this.initFrom(this.model);
+
+				if(setModelAction){
+					setModelAction();
+				}
 			},
 			error: (err) => {
 				this.showError(err);
