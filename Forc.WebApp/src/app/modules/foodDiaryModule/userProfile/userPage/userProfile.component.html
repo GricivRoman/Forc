@@ -1,13 +1,9 @@
 <div class="row">
     <div class="col-2">
-        <div class="container">
-            <form enctype="multipart/form-data">
-                <label for="fileInput">
-                    <img [src]="picture" id="imgViewer">
-                </label>
-                <input id="fileInput" type="file" (change)="photoChanges($event)">
-            </form>
-        </div>
+        <app-forc-image
+            [apiUrl]="apiUrl"
+            [modelId]="modelId"
+        ></app-forc-image>
     </div>
     <div class="col-10">
         <div>

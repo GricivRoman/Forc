@@ -8,7 +8,7 @@ import { CommonModule } from '@angular/common';
 import { PhysicalActiviTySelectModule } from '../../shared/select-controls/physicalActivity-select/physicalActivitySelect.module';
 import { SexSelectModule } from '../../shared/select-controls/sex-select/sexSelect.module';
 import { ReactiveFormsModule } from '@angular/forms';
-import { FileStorageService } from '../../shared/fileStorage.service';
+import { ForcImageModule } from '../../shared/module-frontend/forc-image/forcImage.module';
 
 @NgModule({
 	imports: [
@@ -18,14 +18,14 @@ import { FileStorageService } from '../../shared/fileStorage.service';
 		CommonModule,
 		PhysicalActiviTySelectModule,
 		SexSelectModule,
-		ReactiveFormsModule
+		ReactiveFormsModule,
+		ForcImageModule
 	],
 	declarations: [
 		UserProfileComponent
 	],
 	providers: [
-		AlertService,
-		FileStorageService
+		AlertService
 	]
 })
 export class UserProfileModule {
