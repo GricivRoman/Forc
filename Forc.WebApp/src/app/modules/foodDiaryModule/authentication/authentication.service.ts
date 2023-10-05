@@ -5,7 +5,7 @@ import { CheckInModel } from './checkInModel';
 import { LocalStorageService } from '../../shared/local-storage/localStorage.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, catchError, map, throwError } from 'rxjs';
-import { ApiValidationErrorsResolvingService } from '../../shared/apiValidationErrorsResolving.service';
+import { ApiValidationErrorsResolvingService } from '../../shared/services/apiValidationErrorsResolving.service';
 import { FormGroup } from '@angular/forms';
 import { AuthResponse } from '../../shared/local-storage/auth-response';
 

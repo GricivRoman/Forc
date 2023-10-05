@@ -2,8 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Guid } from 'guid-typescript';
 import { Observable, catchError, throwError } from 'rxjs';
-import { AlertService } from './module-frontend/forc-alert/alert.service';
-import { AlertDialogStates } from './module-frontend/forc-alert/alertDialogStates';
+import { AlertService } from '../module-frontend/forc-alert/alert.service';
+import { AlertDialogStates } from '../module-frontend/forc-alert/alertDialogStates';
 
 @Injectable()
 export class FileStorageService {

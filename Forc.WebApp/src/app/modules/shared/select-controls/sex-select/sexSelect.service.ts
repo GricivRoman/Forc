@@ -1,5 +1,5 @@
 import { Observable, of } from 'rxjs';
-import { SelectItem } from '../../selectItem';
+import { SelectItem } from '../../models/selectItem';
 import { SelectService } from '../../module-frontend/forc-select/select.service';
 import { SexEnum, SexEnumDictionary } from '../../enums/sexEnum';
 import { Injectable } from '@angular/core';

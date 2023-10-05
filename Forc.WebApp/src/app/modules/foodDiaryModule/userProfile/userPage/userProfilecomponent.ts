@@ -1,11 +1,11 @@
 import { Component, Inject } from '@angular/core';
-import { DataService } from '../../../shared/data.service';
+import { DataService } from '../../../shared/services/data.service';
 import { AlertService } from '../../../shared/module-frontend/forc-alert/alert.service';
 import { UserModel } from './user';
 import { FormControl, FormGroup } from '@angular/forms';
-import { ApiValidationErrorsResolvingService } from '../../../shared/apiValidationErrorsResolving.service';
+import { ApiValidationErrorsResolvingService } from '../../../shared/services/apiValidationErrorsResolving.service';
 import { LocalStorageService } from 'src/app/modules/shared/local-storage/localStorage.service';
-import { ReactiveFromWithPicture } from 'src/app/modules/shared/reactiveFromWithPictire';
+import { ReactiveFromWithPicture } from 'src/app/modules/shared/base-components/reactiveFromWithPictire';
 
 @Component({
 	selector: 'app-personal-account',

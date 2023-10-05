@@ -1,9 +1,9 @@
 import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
 import { Injectable, OnDestroy } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
-import config from '../../../assets/configuration.json';
-import { LocalStorageService } from './local-storage/localStorage.service';
-import { AuthResponse } from './local-storage/auth-response';
+import config from '../../../../assets/configuration.json';
+import { LocalStorageService } from '../local-storage/localStorage.service';
+import { AuthResponse } from '../local-storage/auth-response';
 const baseUrl = config.serverUrl;
 
 @Injectable()

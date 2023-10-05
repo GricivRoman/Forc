@@ -1,4 +1,4 @@
-import { BaseEntity } from '../../shared/baseEntity';
+import { BaseEntity } from '../../shared/models/baseEntity';
 
 export class HumanModel extends BaseEntity{
 	name?: string;
