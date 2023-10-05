@@ -60,5 +60,10 @@ namespace Forc.WebApi.Dto
         /// Рост
         /// </summary>
         public double? Height { get; set; }
+
+        /// <summary>
+        /// Есть ли фото
+        /// </summary>
+        public bool HasPhoto { get; set; }
     }
 }
