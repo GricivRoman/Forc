@@ -7,16 +7,9 @@ namespace Forc.Infrastructure.Data
 {
     public class DataContext : IdentityDbContext<User, IdentityRole<Guid>, Guid>
     {
-        protected readonly IConfiguration _config;
-
-        public DataContext(IConfiguration config)
+        public DataContext(DbContextOptions<DataContext> options): base(options)
         {
-            _config = config;
-        }
-
-        protected override void OnConfiguring(DbContextOptionsBuilder options)
-        {
-            options.UseNpgsql(_config.GetConnectionString("ForcDB"));
+            
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

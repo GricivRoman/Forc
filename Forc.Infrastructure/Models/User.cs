@@ -67,5 +67,10 @@ namespace Forc.Infrastructure.Models
         /// Рост
         /// </summary>
         public double? Height { get; set; }
+
+        /// <summary>
+        /// Ползователь имеет фото
+        /// </summary>
+        public Boolean HasPhoto { get; set; } = false;
     }
 }
