@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
-var relativePathToConfig = @"../ForcWebApi";
+var relativePathToConfig = @"../Forc.WebApi";
 var pathToConfig = Path.GetFullPath(relativePathToConfig);
 
 

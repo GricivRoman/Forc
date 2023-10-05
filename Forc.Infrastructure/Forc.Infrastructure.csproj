@@ -7,8 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Include="..\ForcWebApi\appsettings.Development.json" Link="appsettings.Development.json" />
-    <Content Include="..\ForcWebApi\appsettings.json" Link="appsettings.json" />
+    <Content Include="..\Forc.WebApi\appsettings.Development.json" Link="appsettings.Development.json" />
+    <Content Include="..\Forc.WebApi\appsettings.json" Link="appsettings.json" />
   </ItemGroup>
 
   <ItemGroup>
