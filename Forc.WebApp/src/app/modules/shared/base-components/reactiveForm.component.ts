@@ -1,12 +1,12 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { DataService } from './data.service';
-import { BaseEntity } from './baseEntity';
-import { AlertService } from './module-frontend/forc-alert/alert.service';
+import { DataService } from '../services/data.service';
+import { BaseEntity } from '../models/baseEntity';
+import { AlertService } from '../module-frontend/forc-alert/alert.service';
 import { AbstractControl, FormGroup } from '@angular/forms';
-import { ApiValidationErrorsResolvingService } from './apiValidationErrorsResolving.service';
+import { ApiValidationErrorsResolvingService } from '../services/apiValidationErrorsResolving.service';
 import { Observer, takeUntil, Subject } from 'rxjs';
 import { Guid } from 'guid-typescript';
-import { AlertDialogStates } from './module-frontend/forc-alert/alertDialogStates';
+import { AlertDialogStates } from '../module-frontend/forc-alert/alertDialogStates';
 import { DatePipe } from '@angular/common';
 
 @Component({

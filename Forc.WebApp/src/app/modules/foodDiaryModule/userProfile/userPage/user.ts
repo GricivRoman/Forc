@@ -1,6 +1,6 @@
-import { SelectItem } from 'src/app/modules/shared/selectItem';
+import { SelectItem } from 'src/app/modules/shared/models/selectItem';
 import { Guid } from 'guid-typescript';
-import { EntityWithImage } from 'src/app/modules/shared/entityWithImage';
+import { EntityWithImage } from 'src/app/modules/shared/models/entityWithImage';
 
 export class UserModel extends EntityWithImage {
 

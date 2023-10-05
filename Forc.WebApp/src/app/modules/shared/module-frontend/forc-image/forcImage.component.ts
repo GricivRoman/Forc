@@ -1,7 +1,7 @@
 import { Component, Input, Output, EventEmitter, OnInit, Inject } from '@angular/core';
 import { Guid } from 'guid-typescript';
-import { FileStorageService } from '../../fileStorage.service';
-import { EntityWithImage } from '../../entityWithImage';
+import { FileStorageService } from '../../services/fileStorage.service';
+import { EntityWithImage } from '../../models/entityWithImage';
 
 @Component({
 	selector: 'app-forc-image',

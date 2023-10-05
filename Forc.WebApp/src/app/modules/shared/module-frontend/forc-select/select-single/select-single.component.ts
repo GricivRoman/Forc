@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { SelectItem } from '../../../selectItem';
+import { SelectItem } from '../../../models/selectItem';
 import { FormControl } from '@angular/forms';
 import { SelectService } from '../select.service';
 import { first } from 'rxjs';

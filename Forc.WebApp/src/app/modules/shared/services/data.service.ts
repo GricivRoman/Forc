@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Guid } from 'guid-typescript';
 import { Observable } from 'rxjs';
-import { BaseEntity } from './baseEntity';
+import { BaseEntity } from '../models/baseEntity';
 
 @Injectable()
 export class DataService<T extends BaseEntity> {
