@@ -1,4 +1,4 @@
-﻿using Forc.WebApi.Enums;
+﻿using Forc.Infrastructure.Enums;
 
 namespace Forc.WebApi.Dto
 {
