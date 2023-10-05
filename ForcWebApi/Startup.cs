@@ -1,12 +1,13 @@
 ﻿using FluentValidation.AspNetCore;
-using Forc.WebApi.Data;
-using Forc.WebApi.Infrastructure.Entities;
+using Forc.Infrastructure.Data;
+using Forc.Infrastructure.Models;
 using Forc.WebApi.Interfaces;
 using Forc.WebApi.Middlewares;
 using Forc.WebApi.Services;
 using Forc.WebApi.Validation;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json;
 using System.Reflection;
@@ -25,7 +26,11 @@ namespace Forc.WebApi
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<DataContext>();
+            services.AddDbContext<DataContext>(opt =>
+            {
+                opt.UseNpgsql(_config.GetConnectionString("ForcDB"));
+            });
+
             AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 
             services.AddIdentity<User, IdentityRole<Guid>>(cfg =>

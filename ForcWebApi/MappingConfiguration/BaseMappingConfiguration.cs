@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using Forc.WebApi.Dto;
-using Forc.WebApi.Infrastructure;
+using Forc.Infrastructure.Models.Base;
 
 namespace Forc.WebApi.MappingConfiguration
 {

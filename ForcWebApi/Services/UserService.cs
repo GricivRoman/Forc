@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
-using Forc.WebApi.Data;
+using Forc.Infrastructure.Data;
+using Forc.Infrastructure.Models;
 using Forc.WebApi.Dto;
 using Forc.WebApi.Dto.FileStorage;
-using Forc.WebApi.Infrastructure.Entities;
 using Forc.WebApi.Interfaces;
 using Microsoft.EntityFrameworkCore;
 

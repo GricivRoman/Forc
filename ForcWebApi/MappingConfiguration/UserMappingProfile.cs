@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using Forc.WebApi.Dto;
-using Forc.WebApi.Enums;
-using Forc.WebApi.Infrastructure.Entities;
+using Forc.Infrastructure.Enums;
+using Forc.Infrastructure.Models;
 
 namespace Forc.WebApi.MappingConfiguration
 {

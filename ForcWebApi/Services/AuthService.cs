@@ -1,5 +1,5 @@
-﻿using Forc.WebApi.Dto;
-using Forc.WebApi.Infrastructure.Entities;
+﻿using Forc.Infrastructure.Models;
+using Forc.WebApi.Dto;
 using Forc.WebApi.Interfaces;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
