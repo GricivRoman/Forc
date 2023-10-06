@@ -1,7 +1,7 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { DxDataGridComponent } from 'devextreme-angular';
-import { gridSelectionModeStates } from './gridElementsModeStates';
-import { GridOptionsInterface } from './grid-options.interface';
+import { GridSelectionModeStates } from './gridElementsModeStates';
+import { GridOptionsService } from './grid-options.service';
 import { Column } from 'devextreme/ui/data_grid';
 import { GridDataService } from './grid-data.service';
 import { BaseEntity } from '../../models/baseEntity';
@@ -15,7 +15,7 @@ export class GridComponent<TClass extends BaseEntity> implements OnInit {
 	@ViewChild(DxDataGridComponent, {static: false} ) grid: DxDataGridComponent;
 
 	@Input()
-	public optionsService: GridOptionsInterface;
+	public optionsService: GridOptionsService;
 	@Input()
 	public dataService: GridDataService<TClass>;
 
@@ -46,7 +46,7 @@ export class GridComponent<TClass extends BaseEntity> implements OnInit {
 		this.columns = options.columns;
 		this.loadData();
 
-		this.selectionMode = options.selectionMode ?? gridSelectionModeStates.multiple;
+		this.selectionMode = options.selectionMode ?? GridSelectionModeStates.multiple;
 		this.gridWidth = options.gridWidth ?? '100%';
 		this.pageSize = options.pageSize ?? 10;
 		this.searchPanel.visible = options.showSearchPanel ?? false;

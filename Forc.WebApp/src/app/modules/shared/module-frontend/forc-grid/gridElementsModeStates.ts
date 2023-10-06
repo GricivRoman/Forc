@@ -1,4 +1,4 @@
-export const gridSelectionModeStates = {
+export const GridSelectionModeStates = {
 	single: 'single',
 	multiple: 'multiple'
 };

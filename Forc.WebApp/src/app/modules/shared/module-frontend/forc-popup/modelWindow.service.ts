@@ -1,10 +1,10 @@
 import { ComponentRef, Injectable } from '@angular/core';
 import { ComponentType } from '@angular/cdk/portal';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
-import { PopupComponent } from './popup.component';
+import { ModalWindowComponent } from './modalWindow.component';
 
 @Injectable()
-export class PopupService {
+export class ModalWindowService {
 	constructor(private dialog: NgbModal){
 	}
 	private componentRef: ComponentRef<any>;
@@ -17,7 +17,7 @@ export class PopupService {
 		initAction: (componentRef: ComponentRef<any>, popupRef: NgbModalRef) => void = () => {},
 		closeAction: (componentRef: ComponentRef<any>, popupRef: NgbModalRef) => void = () => {}
 	){
-		const modalComponent = this.openGeneric(component, title, size, centered, initAction, undefined, closeAction).componentInstance as PopupComponent;
+		const modalComponent = this.openGeneric(component, title, size, centered, initAction, undefined, closeAction).componentInstance as ModalWindowComponent;
 		modalComponent.saveButtonVisible = false;
 	}
 
@@ -42,14 +42,14 @@ export class PopupService {
 		saveAction: (componentRef: ComponentRef<any>, popupRef: NgbModalRef) => void = () => {},
 		closeAction: (componentRef: ComponentRef<any>, popupRef: NgbModalRef) => void = () => {}
 	): NgbModalRef{
-		PopupComponent.componentToWrap = component;
-		const dialogRef = this.dialog.open(PopupComponent, {
+		ModalWindowComponent.componentToWrap = component;
+		const dialogRef = this.dialog.open(ModalWindowComponent, {
 			centered: centered,
 			size: size,
 			scrollable: true
 		});
 
-		const popupWindowInstance = dialogRef.componentInstance as PopupComponent;
+		const popupWindowInstance = dialogRef.componentInstance as ModalWindowComponent;
 		popupWindowInstance.title = title;
 
 		dialogRef.shown.subscribe(() => {

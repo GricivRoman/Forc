@@ -9,6 +9,12 @@ import { PhysicalActiviTySelectModule } from '../../shared/select-controls/physi
 import { SexSelectModule } from '../../shared/select-controls/sex-select/sexSelect.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ForcImageModule } from '../../shared/module-frontend/forc-image/forcImage.module';
+import { DailyRateComponent } from './userPage/dailyRate/dailyRate.component';
+import { ModalWindowService } from '../../shared/module-frontend/forc-popup/modelWindow.service';
+import { TargetCreationComponent } from './userPage/userTargets/targetCreation/targetCreation.component';
+import { GridModule } from '../../shared/module-frontend/forc-grid/grid.module';
+import { UserTargetsComponent } from './userPage/userTargets/userTargets.component';
+import { ForcButtonsModule } from '../../shared/module-frontend/forc-buttons/forc-buttons.module';
 
 @NgModule({
 	imports: [
@@ -19,13 +25,19 @@ import { ForcImageModule } from '../../shared/module-frontend/forc-image/forcIma
 		PhysicalActiviTySelectModule,
 		SexSelectModule,
 		ReactiveFormsModule,
-		ForcImageModule
+		ForcImageModule,
+		GridModule,
+		ForcButtonsModule
 	],
 	declarations: [
-		UserProfileComponent
+		UserProfileComponent,
+		DailyRateComponent,
+		TargetCreationComponent,
+		UserTargetsComponent
 	],
 	providers: [
-		AlertService
+		AlertService,
+		ModalWindowService
 	]
 })
 export class UserProfileModule {
