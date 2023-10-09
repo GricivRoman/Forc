@@ -5,6 +5,7 @@ import { GridOptionsService } from './grid-options.service';
 import { Column } from 'devextreme/ui/data_grid';
 import { GridDataService } from './grid-data.service';
 import { BaseEntity } from '../../models/baseEntity';
+import { Guid } from 'guid-typescript';
 
 @Component({
 	selector: 'app-grid',
@@ -18,6 +19,8 @@ export class GridComponent<TClass extends BaseEntity> implements OnInit {
 	public optionsService: GridOptionsService;
 	@Input()
 	public dataService: GridDataService<TClass>;
+	@Input()
+	public onRowDblClick: () => void;
 
 	public dataSource: TClass[];
 	protected columns: Column[];
@@ -63,7 +66,7 @@ export class GridComponent<TClass extends BaseEntity> implements OnInit {
 		return this.grid.instance.getSelectedRowsData();
 	}
 
-	public getSelectedRowsKeys(): TClass[] {
+	public getSelectedRowsKeys(): Guid[] {
 		return this.grid.instance.getSelectedRowKeys();
 	}
 

@@ -14,6 +14,7 @@
         [searchPanel]="searchPanel"
         [(autoNavigateToFocusedRow)]="autoNavigateToFocusedRow"
         [(focusedRowKey)]="focusedRowKey"
+        (onRowDblClick)="onRowDblClick()"
     >
         <dxo-selection [mode] = "selectionMode"></dxo-selection>
         <dxo-header-filter [visible]="true"></dxo-header-filter>

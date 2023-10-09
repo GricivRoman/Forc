@@ -4,7 +4,6 @@ import { DailyRate } from '../dailyRate/dailyRate';
 
 /* Цель пользователя */
 export class UserTarget extends BaseEntity {
-
 	/* ID пользователя */
 	userId: Guid;
 
@@ -24,8 +23,8 @@ export class UserTarget extends BaseEntity {
 	targetBodyWeight: number;
 
 	/* ID дневной нормы в соответствии с актуальной целью */
-	dailyRateId: Guid;
+	dailyRateId?: Guid;
 
 	/* Дневная норма в соответствии с актуальной целью */
-	dailyRate: DailyRate;
+	dailyRate?: DailyRate;
 }

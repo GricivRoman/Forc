@@ -11,8 +11,8 @@ import { Guid } from 'guid-typescript';
 export class ReactiveFromWithPicture<TEntity extends EntityWithImage> extends ReactiveFromComponent<TEntity> {
 	@ViewChild(ForcImageComponent, {static: false}) imageComponent: ForcImageComponent;
 
-	override setModel(id: Guid){
-		super.setModel(id, () => this.imageComponent.setPicture(this.model));
+	override setModelByModelId(id: Guid){
+		super.setModelByModelId(id, () => this.imageComponent.setPicture(this.model));
 	}
 
 	override save() {
