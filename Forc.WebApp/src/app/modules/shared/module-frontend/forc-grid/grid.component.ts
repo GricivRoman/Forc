@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnInit, ViewChild, Output, EventEmitter } from '@angular/core';
 import { DxDataGridComponent } from 'devextreme-angular';
 import { GridSelectionModeStates } from './gridElementsModeStates';
 import { GridOptionsService } from './grid-options.service';
@@ -21,6 +21,8 @@ export class GridComponent<TClass extends BaseEntity> implements OnInit {
 	public dataService: GridDataService<TClass>;
 	@Input()
 	public onRowDblClick: () => void;
+
+	@Output() gridDataLoaded = new EventEmitter<TClass[]>;
 
 	public dataSource: TClass[];
 	protected columns: Column[];
@@ -84,6 +86,7 @@ export class GridComponent<TClass extends BaseEntity> implements OnInit {
 	private async loadData() {
 		await this.dataService.getGridData().subscribe((data) => {
 			this.dataSource = data;
+			this.gridDataLoaded.emit(data);
 		});
 	}
 }

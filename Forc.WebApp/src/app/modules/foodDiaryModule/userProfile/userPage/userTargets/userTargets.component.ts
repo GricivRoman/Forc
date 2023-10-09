@@ -1,4 +1,4 @@
-import { Component, ComponentRef, Input, ViewChild } from '@angular/core';
+import { Component, ComponentRef, Input, ViewChild, Output, EventEmitter } from '@angular/core';
 import { UserTargetGridOptionsService } from './userTargetsGridOptions.service';
 import { UserTargetsGridDataService } from './userTargetsGridData.service';
 import { ModalWindowService } from 'src/app/modules/shared/module-frontend/forc-popup/modelWindow.service';
@@ -27,6 +27,8 @@ export class UserTargetsComponent {
 
 	@Input()
 	public userId?: Guid;
+
+	@Output() userTargetsLoaded = new EventEmitter<UserTarget[]>;
 
 	constructor(
         public gridOptionService: UserTargetGridOptionsService,
@@ -94,5 +96,9 @@ export class UserTargetsComponent {
 				popupRef.close();
 			}
 		);
+	}
+
+	gridDataLoaded(data: UserTarget[]){
+		this.userTargetsLoaded.emit(data);
 	}
 }

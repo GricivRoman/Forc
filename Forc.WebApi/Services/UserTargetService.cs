@@ -37,7 +37,10 @@ namespace Forc.WebApi.Services
         public async Task<List<UserTargetViewModel>> GetTargetListAsync(string userName)
         {
             var user = await _userManager.FindByNameAsync(userName);
-            var userTargets = await _context.Set<UserTarget>().Where(x => x.UserId == user.Id).ToListAsync();
+            var userTargets = await _context.Set<UserTarget>()
+                .Where(x => x.UserId == user.Id)
+                .Include(x => x.DailyRate)
+                .ToListAsync();
 
             return _mapper.Map<List<UserTargetViewModel>>(userTargets);
         }

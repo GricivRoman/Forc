@@ -7,9 +7,9 @@ import { FormControl, FormGroup } from '@angular/forms';
 })
 export class DailyRateComponent{
 	form = new FormGroup({
-		colories: new FormControl(''),
-		proteins: new FormControl(''),
-		fats: new FormControl(''),
-		carbohydrates: new FormControl('')
+		colories: new FormControl<number>(0),
+		proteins: new FormControl<number>(0),
+		fats: new FormControl<number>(0),
+		carbohydrates: new FormControl<number>(0)
 	});
 }

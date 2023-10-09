@@ -65,6 +65,6 @@
 </div>
 <div class="row mt-3">
     <div class="col-6">
-        <app-user-targets [userId]="this.modelId"></app-user-targets>
+        <app-user-targets [userId]="this.modelId" (userTargetsLoaded)="userTargetsLoaded($event)"></app-user-targets>
     </div>
 </div>
