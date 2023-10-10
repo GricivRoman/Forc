@@ -107,6 +107,18 @@ namespace Forc.WebApi.Services
             var target = await _context.Set<UserTarget>().Where(x => x.Id == id).SingleOrDefaultAsync();
             _context.Set<UserTarget>().Remove(target);
 
+            if (target.Relevance)
+            {
+                var previousTarget = await _context.Set<UserTarget>()
+                    .OrderBy(x => x.DateStart)
+                    .LastOrDefaultAsync();
+
+                if(previousTarget != null)
+                {
+                    previousTarget.Relevance = true;
+                }
+            }
+
             await _context.SaveChangesAsync();
         }
     }

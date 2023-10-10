@@ -42,13 +42,11 @@ export class UserProfileComponent extends ReactiveFromWithPicture<UserModel> {
 	userTargetsLoaded(data: UserTarget[]){
 		const lastTargetDailyRate = data[0]?.dailyRate;
 
-		if(lastTargetDailyRate){
-			this.dailyRate.form.patchValue({
-				colories: lastTargetDailyRate.caloriesRate,
-				carbohydrates: lastTargetDailyRate.carbohydrateRate,
-				fats: lastTargetDailyRate.fatRate,
-				proteins: lastTargetDailyRate.proteinRate
-			});
-		}
+		this.dailyRate.form.patchValue({
+			colories: lastTargetDailyRate?.caloriesRate ?? 0,
+			carbohydrates: lastTargetDailyRate?.carbohydrateRate ?? 0,
+			fats: lastTargetDailyRate?.fatRate ?? 0,
+			proteins: lastTargetDailyRate?.proteinRate ?? 0
+		});
 	}
 }
