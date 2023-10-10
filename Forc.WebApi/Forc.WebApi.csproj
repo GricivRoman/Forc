@@ -29,6 +29,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Forc.Functions\Forc.Functions.fsproj" />
     <ProjectReference Include="..\Forc.Infrastructure\Forc.Infrastructure.csproj" />
   </ItemGroup>
 

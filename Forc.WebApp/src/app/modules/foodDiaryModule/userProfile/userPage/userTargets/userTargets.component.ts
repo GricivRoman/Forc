@@ -63,7 +63,8 @@ export class UserTargetsComponent {
 				this.grid.refresh();
 			},
 			error: (errResponse: HttpErrorResponse) => {
-				this.alertService.showMessage(errResponse.error, AlertDialogStates.error);
+				console.error(errResponse);
+				this.alertService.showMessage(JSON.stringify(errResponse.error), AlertDialogStates.error);
 			}
 		});
 	}

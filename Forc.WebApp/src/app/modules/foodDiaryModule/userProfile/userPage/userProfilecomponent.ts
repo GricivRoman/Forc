@@ -40,7 +40,7 @@ export class UserProfileComponent extends ReactiveFromWithPicture<UserModel> {
 	}
 
 	userTargetsLoaded(data: UserTarget[]){
-		const lastTargetDailyRate = data[data.length - 1]?.dailyRate;
+		const lastTargetDailyRate = data[0]?.dailyRate;
 
 		if(lastTargetDailyRate){
 			this.dailyRate.form.patchValue({
