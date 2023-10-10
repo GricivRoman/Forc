@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { PopupService } from '../../shared/module-frontend/forc-popup/popup.service';
+import { ModalWindowService } from '../../shared/module-frontend/forc-popup/modelWindow.service';
 import { DialogService } from '../../shared/module-frontend/forc-dialog/dialog.service';
 import { AlertService } from '../../shared/module-frontend/forc-alert/alert.service';
 import { AlertDialogStates } from '../../shared/module-frontend/forc-alert/alertDialogStates';
@@ -9,11 +9,11 @@ import { AlertDialogStates } from '../../shared/module-frontend/forc-alert/alert
 	templateUrl: 'foodDiary.component.html'
 })
 export class FoodDiaryComponent {
-	constructor(private popupService: PopupService, private dialogService: DialogService, private alertService: AlertService){
+	constructor(private ModalWindowService: ModalWindowService, private dialogService: DialogService, private alertService: AlertService){
 	}
 
 	click(){
-		// this.popupService.openWithTwoButtons(
+		// this.ModalWindowService.openWithTwoButtons(
 		// 	UserProfileComponent,
 		// 	'CustomTitle',
 		// 	undefined,

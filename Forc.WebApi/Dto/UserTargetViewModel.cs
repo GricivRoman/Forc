@@ -45,7 +45,7 @@
         /// <summary>
         /// ID дневной нормы в соответствии с актуальной целью
         /// </summary>
-        public Guid DailyRateId { get; set; }
+        public Guid? DailyRateId { get; set; }
 
         /// <summary>
         /// Дневная норма в соответствии с актуальной целью

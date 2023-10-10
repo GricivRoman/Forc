@@ -1,7 +1,7 @@
 import { Column } from 'devextreme/ui/data_grid';
 import { GridOptions } from './grid-options.component';
 
-export interface GridOptionsInterface {
+export interface GridOptionsService {
     getColumns(): Column[];
     getGridOptions(): GridOptions;
 }

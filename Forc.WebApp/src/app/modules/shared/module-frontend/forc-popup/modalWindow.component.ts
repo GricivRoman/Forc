@@ -20,7 +20,7 @@ import { CommonModule, NgComponentOutlet } from '@angular/common';
 	standalone: true,
 	imports: [CommonModule]
 })
-export abstract class PopupComponent implements OnDestroy{
+export abstract class ModalWindowComponent implements OnDestroy{
 	public static componentToWrap: Type<any>;
 	protected innerComp: Type<any>;
 
@@ -34,11 +34,11 @@ export abstract class PopupComponent implements OnDestroy{
 	@ViewChild(NgComponentOutlet, {static: false}) inerRef: NgComponentOutlet;
 
 	constructor(){
-		this.innerComp = PopupComponent.componentToWrap;
+		this.innerComp = ModalWindowComponent.componentToWrap;
 	}
 
 	ngOnDestroy(): void {
-		PopupComponent.componentToWrap = Type;
+		ModalWindowComponent.componentToWrap = Type;
 	}
 
 }

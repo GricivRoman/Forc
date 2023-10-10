@@ -22,8 +22,10 @@ export class ReactiveFromComponent<TEntity extends BaseEntity> implements OnInit
 	protected modelSource: TEntity;
 	public apiUrl: string;
 	public modelId?: Guid;
-
 	public saveButtonDisabled: boolean;
+
+	// TODO вынести создание мустой модели в базовый компонент
+	protected createEmptyModel : () => TEntity;
 
 	constructor(
         protected dataService: DataService<TEntity>,
@@ -35,7 +37,9 @@ export class ReactiveFromComponent<TEntity extends BaseEntity> implements OnInit
 	ngOnInit() {
 		this.dataService.url = this.apiUrl;
 		if(this.modelId){
-			this.setModel(this.modelId);
+			this.setModelByModelId(this.modelId);
+		} else {
+			this.model = this.createEmptyModel();
 		}
 
 		this.form.valueChanges.pipe(takeUntil(this.destroy$)).subscribe(() => this.onFormValueChange());
@@ -48,7 +52,7 @@ export class ReactiveFromComponent<TEntity extends BaseEntity> implements OnInit
 		// this.saveButtonDisabled = this.model === this.modelSource;
 	}
 
-	public setModel(id: Guid, setModelAction?: () => void) {
+	public setModelByModelId(id: Guid, setModelAction?: () => void) {
 		this.dataService.get(id).pipe(takeUntil(this.destroy$)).subscribe({
 			next: (data: TEntity) => {
 				this.model = data;
@@ -87,6 +91,10 @@ export class ReactiveFromComponent<TEntity extends BaseEntity> implements OnInit
 				emitEvent: true
 			});
 		});
+	}
+
+	refreshDataServiceUrl(){
+		this.dataService.url = this.apiUrl;
 	}
 
 	ngOnDestroy(){

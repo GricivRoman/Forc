@@ -25,15 +25,15 @@ export class DataService<T extends BaseEntity> {
 		return this.http.get<T[]>(`${this.url}/select-list`);
 	}
 
-	public save(model: T){
-		return this.http.post(`${this.url}`, model);
+	public save(model: T): Observable<Guid>{
+		return this.http.post<Guid>(`${this.url}`, model);
 	}
 
-	public update(model: T){
-		return this.http.put(`${this.url}`, model);
+	public update(model: T): Observable<void>{
+		return this.http.put<void>(`${this.url}`, model);
 	}
 
-	public delete(id: Guid): Observable<any>{
-		return this.http.delete(`${this.url}/${id}`);
+	public delete(id: Guid): Observable<void>{
+		return this.http.delete<void>(`${this.url}/${id}`);
 	}
 }

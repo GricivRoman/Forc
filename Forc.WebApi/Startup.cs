@@ -87,6 +87,8 @@ namespace Forc.WebApi
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IPhysicalActivityService, PhysicalActivityService>();
             services.AddScoped<IFileStorageService, FileStorageService>();
+            services.AddScoped<IUserTargetService, UserTargetService>();
+            services.AddScoped<IDailyRateCalculationService, DailyRateCalculationService>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

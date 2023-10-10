@@ -19,7 +19,10 @@ namespace Forc.WebApi.MappingConfiguration
                 .ForMember(x => x.TargetBodyWeight, i => i.MapFrom(u => u.TargetBodyWeight))
                 .ForMember(x => x.DailyRateId, i => i.MapFrom(u => u.DailyRateId))
                 .ForMember(x => x.DailyRate, i => i.MapFrom(u => u.DailyRate))
-                .ReverseMap();
+                .ReverseMap()
+                .ForMember(x => x.Id, i => i.MapFrom(u => new Guid()))
+                .ForMember(x => x.DailyRateId, i => i.Ignore())
+                .ForMember(x => x.DailyRate, i => i.Ignore());
         }
     }
 }

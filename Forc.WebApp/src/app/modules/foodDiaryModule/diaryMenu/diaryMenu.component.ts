@@ -1,8 +1,8 @@
 import { Component, Injectable, ViewChild } from '@angular/core';
 import { GridComponent } from '../../shared/module-frontend/forc-grid/grid.component';
-import { GridOptionsInterface } from '../../shared/module-frontend/forc-grid/grid-options.interface';
+import { GridOptionsService } from '../../shared/module-frontend/forc-grid/grid-options.service';
 import { Column } from 'devextreme/ui/data_grid';
-import { gridSelectionModeStates } from '../../shared/module-frontend/forc-grid/gridElementsModeStates';
+import { GridSelectionModeStates } from '../../shared/module-frontend/forc-grid/gridElementsModeStates';
 import { GridDataService } from '../../shared/module-frontend/forc-grid/grid-data.service';
 import { Observable, of } from 'rxjs';
 import { GridOptions } from '../../shared/module-frontend/forc-grid/grid-options.component';
@@ -44,7 +44,7 @@ export class DiaryMenuComponent {
 }
 
 @Injectable()
-export class DiaryMenuGridOptionService implements GridOptionsInterface, GridDataService<HumanModel> {
+export class DiaryMenuGridOptionService implements GridOptionsService, GridDataService<HumanModel> {
 	getColumns(): Column[]{
 		return [
 			{
@@ -67,7 +67,7 @@ export class DiaryMenuGridOptionService implements GridOptionsInterface, GridDat
 	getGridOptions(): GridOptions {
 		const options = new GridOptions();
 		options.columns = this.getColumns();
-		options.selectionMode = gridSelectionModeStates.single;
+		options.selectionMode = GridSelectionModeStates.single;
 
 		return options;
 	}

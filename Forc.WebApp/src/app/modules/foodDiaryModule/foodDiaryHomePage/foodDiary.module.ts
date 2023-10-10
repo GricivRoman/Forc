@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { FoodDiaryRoutingModule } from './foodDiary-routing.module';
 import { FoodDiaryComponent } from './foodDiary.component';
-import { PopupService } from '../../shared/module-frontend/forc-popup/popup.service';
+import { ModalWindowService } from '../../shared/module-frontend/forc-popup/modelWindow.service';
 import { UserProfileModule } from '../userProfile/userProfile.module';
 import { DiaryMenuModule } from '../diaryMenu/diaryMenu.module';
 import { DialogService } from '../../shared/module-frontend/forc-dialog/dialog.service';
@@ -17,7 +17,7 @@ import { AlertService } from '../../shared/module-frontend/forc-alert/alert.serv
 		FoodDiaryComponent
 	],
 	providers: [
-		PopupService,
+		ModalWindowService,
 		DialogService,
 		AlertService
 	]

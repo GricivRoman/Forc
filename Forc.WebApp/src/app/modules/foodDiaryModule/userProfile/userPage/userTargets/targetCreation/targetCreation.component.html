@@ -1,0 +1,30 @@
+<div>
+    <div class="row">
+        <div class="col-6">
+            <app-forc-date
+                title="Date start"
+                [control]="form.controls.dateStart"
+            ></app-forc-date>
+        </div>
+        <div class="col-6">
+            <app-forc-date
+                title="Date finish"
+                [control]="form.controls.dateFinish"
+            ></app-forc-date>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-6">
+            <app-forc-number
+                label="Current weight"
+                [control]="form.controls.currentBodyWeight"
+            ></app-forc-number>
+        </div>
+        <div class="col-6">
+            <app-forc-number
+                label="Target weight"
+                [control]="form.controls.targetBodyWeight"
+            ></app-forc-number>
+        </div>
+    </div>
+</div>
