@@ -27,7 +27,7 @@ namespace Forc.WebApi.Services
                 physicalActivityMultiplier: userTarget.User.PhysicalActivity.PhysicalActivityMultiplier,
                 daysToRichTarget: (userTarget.DateFinish - userTarget.DateStart).TotalDays);
 
-            var calculatedRate = DailyRateModule.calculateBasalMetabolicRate(calculationUnit);
+            var calculatedRate = DailyRateModule.calculateDailyRate(calculationUnit);
 
             var dailyRate = new DailyRate()
             {
