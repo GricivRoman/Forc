@@ -64,7 +64,7 @@ module DailyRateModule =
             let addSexConst i = 
                 match x with
                 | male when male.Sex = Sex.Male -> i + 5.0
-                | female when female.Sex = Sex.Female -> i + 161.0
+                | female when female.Sex = Sex.Female -> i - 161.0
                 | _ -> i + 0.0
 
             let correctByPhysicalActivity i =

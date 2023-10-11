@@ -64,7 +64,7 @@ namespace Forc.Infrastructure.Models
         public UserDishCollection UserDishCollection { get; set; }
 
         /// <summary>
-        /// Рост
+        /// Рост, см
         /// </summary>
         public double? Height { get; set; }
 
