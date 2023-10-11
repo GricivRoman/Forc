@@ -16,6 +16,7 @@ import { PhysicalActivityService } from './physicalActivitySelect.service';
 	],
 	providers: [
 		DataService,
+		{ provide: 'PA_DataService', useClass: DataService },
 		PhysicalActivityService
 	]
 })

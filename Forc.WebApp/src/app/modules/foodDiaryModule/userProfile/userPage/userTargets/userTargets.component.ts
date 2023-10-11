@@ -82,7 +82,7 @@ export class UserTargetsComponent {
 		this.modalService.openWithTwoButtons(
 			TargetCreationComponent,
 			'Set your target',
-			'sm',
+			'md',
 			true,
 			(componentRef: ComponentRef<TargetCreationComponent>) => {
 				initAction(componentRef);

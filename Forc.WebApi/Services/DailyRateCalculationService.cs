@@ -8,15 +8,7 @@ namespace Forc.WebApi.Services
     {
         public DailyRate CalculateDailyRate(UserTarget userTarget)
         {
-            if (userTarget.User.Height == null || userTarget.User.Height == 0)
-            {
-                throw new ApplicationException("Can't count your daily rate without your height");
-            }
-
-            if (userTarget.User.Sex == null)
-            {
-                throw new ApplicationException("Can't count your daily rate without your sex");
-            }
+            CheckUserTargetFields(userTarget);
 
             var calculationUnit = new DailyRateModule.CalculationUnit(
                 sex: (DailyRateModule.Sex)userTarget.User.Sex,
@@ -39,6 +31,29 @@ namespace Forc.WebApi.Services
             };
 
             return dailyRate;
+        }
+
+        private void CheckUserTargetFields(UserTarget userTarget)
+        {
+            if (userTarget.User == null)
+            {
+                throw new NullReferenceException("User can't be null");
+            }
+
+            if (userTarget.User.Height == null || userTarget.User.Height == 0)
+            {
+                throw new ApplicationException("Can't count your daily rate without your height");
+            }
+
+            if (userTarget.User.Sex == null)
+            {
+                throw new ApplicationException("Can't count your daily rate without your sex");
+            }
+
+            if (userTarget.User.BirthDate == null)
+            {
+                throw new ApplicationException("Can't count your daily rate without your age");
+            }
         }
     }
 }
