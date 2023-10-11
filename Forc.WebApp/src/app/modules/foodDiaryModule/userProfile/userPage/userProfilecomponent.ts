@@ -2,12 +2,13 @@ import { Component, Inject, ViewChild } from '@angular/core';
 import { DataService } from '../../../shared/services/data.service';
 import { AlertService } from '../../../shared/module-frontend/forc-alert/alert.service';
 import { UserModel } from './user';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ApiValidationErrorsResolvingService } from '../../../shared/services/apiValidationErrorsResolving.service';
 import { LocalStorageService } from 'src/app/modules/shared/local-storage/localStorage.service';
 import { ReactiveFromWithPicture } from 'src/app/modules/shared/base-components/reactiveFromWithPictire';
 import { UserTarget } from './userTargets/userTarget';
 import { DailyRateComponent } from './dailyRate/dailyRate.component';
+import { ForcValidators } from 'src/app/modules/shared/validation/forcValidators';
 
 @Component({
 	selector: 'app-personal-account',
@@ -19,13 +20,12 @@ export class UserProfileComponent extends ReactiveFromWithPicture<UserModel> {
 	@ViewChild(DailyRateComponent, {static: false}) dailyRate: DailyRateComponent;
 
 	override form = new FormGroup({
-		name: new FormControl(''),
+		name: new FormControl('', Validators.minLength(2)),
 		gender: new FormControl(''),
-		birthDate: new FormControl(new Date()),
+		birthDate: new FormControl(new Date(), ForcValidators.earlierThan(new Date())),
 		sex: new FormControl(''),
 		physicalActivity: new FormControl(''),
-		height: new FormControl(''),
-		photo: new FormControl('')
+		height: new FormControl('')
 	});
 
 	constructor(
