@@ -1,15 +1,22 @@
 ﻿using Forc.Infrastructure.Data;
+using Forc.WebApi;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
 namespace Forc.IntegtationTests.Infrastructure
 {
-    public class TestWebApplicationFactory<TProgram> : WebApplicationFactory<TProgram> where TProgram : class
+    public class TestWebApplicationFactory : WebApplicationFactory<Program>
     {
-        private readonly string ConnectionString = "SERVER=localhost; Port=5432; Database=Forc_test; Username=postgres; Password=postgres;";
+        protected HttpClient _httpClient;
+        protected string url;
+
+        public TestWebApplicationFactory()
+        {
+            _httpClient = CreateClient();
+        }
+
         protected override IHost CreateHost(IHostBuilder builder)
         {
             builder.ConfigureServices(services =>
@@ -23,7 +30,7 @@ namespace Forc.IntegtationTests.Infrastructure
 
                 services.AddDbContext<DataContext>(opt =>
                 {
-                    opt.UseNpgsql(ConnectionString);
+                    opt.UseInMemoryDatabase($"Forc_test");
                 });
             });
 
