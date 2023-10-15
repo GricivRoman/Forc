@@ -12,6 +12,9 @@ jobs:
     strategy:
       matrix:
         node_version: [18.x]
+        
+    env: 
+        process.env.CI : false
 
     steps:
       - uses: actions/checkout@v1
