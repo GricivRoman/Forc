@@ -10,7 +10,7 @@ namespace Forc.IntegtationTests.Infrastructure
     public class TestWebApplicationFactory : WebApplicationFactory<Program>
     {
         protected HttpClient _httpClient;
-        protected string url;
+        protected string rootUrl;
 
         public TestWebApplicationFactory()
         {

@@ -7,6 +7,11 @@ namespace Forc.IntegtationTests.Controllers.AuthController
 {
     public class CreateUser_DoubleUserTest : TestWebApplicationFactory
     {
+        public CreateUser_DoubleUserTest()
+        {
+            rootUrl = "/account";
+        }
+
         [Fact]
         public async Task CreateUser_DoubleUser_ReturnBadRequest()
         {
@@ -16,7 +21,7 @@ namespace Forc.IntegtationTests.Controllers.AuthController
                 Email = "TestEmail@gmail.com",
                 Password = "R12345qwe"
             };
-            var response = await _httpClient.PostAsJsonAsync($"/account/checkin", model);
+            var response = await _httpClient.PostAsJsonAsync($"{rootUrl}/checkin", model);
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
 
             model = new CheckInViewModel
@@ -26,7 +31,7 @@ namespace Forc.IntegtationTests.Controllers.AuthController
                 Password = "R12345qwe"
             };
 
-            response = await _httpClient.PostAsJsonAsync($"/account/checkin", model);
+            response = await _httpClient.PostAsJsonAsync($"{rootUrl}/checkin", model);
             var errorMessage = (await response.Content.ReadFromJsonAsync<ExeptionDto>()).Message;
 
             Assert.Multiple(() =>
@@ -42,7 +47,7 @@ namespace Forc.IntegtationTests.Controllers.AuthController
                 Password = "R12345qwe"
             };
 
-            response = await _httpClient.PostAsJsonAsync($"/account/checkin", model);
+            response = await _httpClient.PostAsJsonAsync($"{rootUrl}/checkin", model);
             errorMessage = (await response.Content.ReadFromJsonAsync<ExeptionDto>()).Message;
 
             Assert.Multiple(() =>

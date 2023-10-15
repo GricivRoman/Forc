@@ -7,6 +7,11 @@ namespace Forc.IntegtationTests.Controllers.AuthController
 {
     public class CreateUser_CorrectModelTest : TestWebApplicationFactory
     {
+        public CreateUser_CorrectModelTest()
+        {
+            rootUrl = "/account";
+        }
+
         [Fact]
         public async Task CreateUser_CorrectModel_ReturnOK()
         {
@@ -17,10 +22,8 @@ namespace Forc.IntegtationTests.Controllers.AuthController
                 Password = "R12345qwe"
             };
 
-            var response = await _httpClient.PostAsJsonAsync($"/account/checkin", model);
-            var test = await response.Content.ReadAsStringAsync();
+            var response = await _httpClient.PostAsJsonAsync($"{rootUrl}/checkin", model);
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
-
         }
     }
 }

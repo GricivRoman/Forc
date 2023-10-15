@@ -6,6 +6,11 @@ namespace Forc.IntegtationTests.Controllers.AuthController
 {
     public class CreateUser_ValidationTest : TestWebApplicationFactory
     {
+        public CreateUser_ValidationTest()
+        {
+            rootUrl = "/account";
+        }
+
         [Fact]
         public async Task CreateUser_EmptyForm_ReturnValidatioErrors()
         {
@@ -15,10 +20,10 @@ namespace Forc.IntegtationTests.Controllers.AuthController
                 Email = "",
                 Password = ""
             };
-            var response = await _httpClient.PostAsJsonAsync($"/account/checkin", model);
-            var failCollection = await response.Content.ReadFromJsonAsync<IDictionary<string, string[]>>();
+            var response = await _httpClient.PostAsJsonAsync($"{rootUrl}/checkin", model);
+            var failsCollection = await response.Content.ReadFromJsonAsync<IDictionary<string, string[]>>();
 
-            Assert.Collection(failCollection,
+            Assert.Collection(failsCollection,
                 item => Assert.Multiple(() =>
                 {
                     Assert.Equal("Email", item.Key);
@@ -51,10 +56,10 @@ namespace Forc.IntegtationTests.Controllers.AuthController
                 Email = "JJJJJJJJJJ_TTTTT@@",
                 Password = "666666"
             };
-            var response = await _httpClient.PostAsJsonAsync($"/account/checkin", model);
-            var failCollection = await response.Content.ReadFromJsonAsync<IDictionary<string, string[]>>();
+            var response = await _httpClient.PostAsJsonAsync($"{rootUrl}/checkin", model);
+            var failsCollection = await response.Content.ReadFromJsonAsync<IDictionary<string, string[]>>();
 
-            Assert.Collection(failCollection,
+            Assert.Collection(failsCollection,
                 item => Assert.Multiple(() =>
                 {
                     Assert.Equal("Email", item.Key);
