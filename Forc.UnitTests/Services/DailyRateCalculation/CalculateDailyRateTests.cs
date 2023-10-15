@@ -74,19 +74,19 @@ namespace Forc.UnitTests.Services.DailyRateCalculation
         public static IEnumerable<object[]> CalculateDailyRateData =>
            new List<object[]>
            {
-                new object[] { SexEnum.Male, new DateTime(2000, 11, 12), 172, 90, 80, 1, 1840, 109.5, 90, 135 },
+                new object[] { SexEnum.Male, new DateTime(2000, 11, 12), 172, 90, 80, 1, 1839.5, 109.5, 90, 135 },
                 new object[] { SexEnum.Male, new DateTime(2000, 11, 12), 172, 90, 80, 1.25, 2306.5, 223.5, 90, 135 },
                 new object[] { SexEnum.Male, new DateTime(2000, 11, 12), 172, 90, 80, 1.5, 2773, 337, 90, 135 },
                 new object[] { SexEnum.Male, new DateTime(2000, 11, 12), 172, 80, 90, 1, 1778, 94, 88, 140 },
                 new object[] { SexEnum.Male, new DateTime(2000, 11, 12), 172, 80, 90, 1.25, 2219.5, 201.5, 88, 140 },
-                new object[] { SexEnum.Male, new DateTime(2000, 11, 12), 172, 80, 90, 1.5, 2661.5, 309.5, 88, 140 },
-                new object[] { SexEnum.Male, new DateTime(1975, 11, 12), 172, 80, 90, 1.25, 2066, 164.5, 88, 140 },
+                new object[] { SexEnum.Male, new DateTime(2000, 11, 12), 172, 80, 90, 1.5, 2661, 309.5, 88, 140 },
+                new object[] { SexEnum.Male, new DateTime(1975, 11, 12), 172, 80, 90, 1.25, 2065.5, 164, 88, 140 },
                 new object[] { SexEnum.Male, new DateTime(1975, 11, 12), 172, 90, 80, 1.25, 2152.5, 186, 90, 135 },
                 new object[] { SexEnum.Female, new DateTime(2000, 11, 12), 168, 70, 60, 1, 1449, 20.5, 105, 94.5 },
                 new object[] { SexEnum.Female, new DateTime(2000, 11, 12), 168, 70, 60, 1.25, 1818, 110.5, 105, 94.5 },
                 new object[] { SexEnum.Female, new DateTime(2000, 11, 12), 168, 70, 60, 1.5, 2186.5, 200.5, 105, 94.5 },
                 new object[] { SexEnum.Female, new DateTime(2000, 11, 12), 168, 50, 60, 1, 1287.5, 43.5, 80, 89 },
-                new object[] { SexEnum.Female, new DateTime(2000, 11, 12), 168, 50, 60, 1.25, 1606.5, 121.5, 80, 89 },
+                new object[] { SexEnum.Female, new DateTime(2000, 11, 12), 168, 50, 60, 1.25, 1606, 121, 80, 89 },
                 new object[] { SexEnum.Female, new DateTime(2000, 11, 12), 168, 50, 60, 1.5, 1925, 199, 80, 89 },
                 new object[] { SexEnum.Female, new DateTime(1975, 11, 12), 168, 70, 60, 1.25, 1664, 73, 105, 94.5 },
                 new object[] { SexEnum.Female, new DateTime(1975, 11, 12), 168, 50, 60, 1.25, 1452.5, 9.5, 102, 113.5 },

@@ -1,4 +1,6 @@
-﻿using System.Net;
+﻿using Forc.WebApi.Dto;
+using Microsoft.AspNetCore.Http;
+using System.Net;
 
 namespace Forc.WebApi.Middlewares
 {
@@ -17,6 +19,10 @@ namespace Forc.WebApi.Middlewares
             {
                 await _next(httpContext);
             }
+            catch (InvalidOperationException ex)
+            {
+                await HandleExceptionAsync(httpContext, ex.Message, HttpStatusCode.BadRequest);
+            }
             catch (Exception ex)
             {
                 await HandleExceptionAsync(httpContext, ex.Message, HttpStatusCode.NotFound);
@@ -26,8 +32,13 @@ namespace Forc.WebApi.Middlewares
         private async Task HandleExceptionAsync(HttpContext context, string exMsg, HttpStatusCode httpStatusCode)
         {
             HttpResponse response = context.Response;
+            response.ContentType = "application/json";
             response.StatusCode = (int)httpStatusCode;
-            await response.WriteAsync(exMsg);
+            await response.WriteAsJsonAsync(new ExeptionDto
+            {
+                StatusCode = response.StatusCode,
+                Message = exMsg,
+            });
         }
     }
 }

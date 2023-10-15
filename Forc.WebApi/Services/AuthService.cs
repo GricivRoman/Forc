@@ -1,4 +1,5 @@
-﻿using Forc.Infrastructure.Models;
+﻿using Forc.Infrastructure.Data;
+using Forc.Infrastructure.Models;
 using Forc.WebApi.Dto;
 using Forc.WebApi.Interfaces;
 using Microsoft.AspNetCore.Identity;
@@ -14,18 +15,23 @@ namespace Forc.WebApi.Services
         private readonly UserManager<User> _userManager;
         private readonly SignInManager<User> _signInManager;
         private readonly IConfiguration _config;
+        private readonly DataContext _context;
 
         public AuthService(
             UserManager<User> userManager,
             SignInManager<User> signInManager,
-            IConfiguration config)
+            IConfiguration config,
+            DataContext context
+            )
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _config = config;
+            _context = context;
         }
         public async Task CreateUserAsync(CheckInViewModel userModel)
         {
+            var userlist = _context.Set<User>().Where(x => x.Email == userModel.Email).ToList();
             var user = await _userManager.FindByEmailAsync(userModel.Email);
             if (user != null)
             {
