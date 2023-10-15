@@ -19,6 +19,8 @@ namespace Forc.IntegtationTests.Infrastructure
 
         protected override IHost CreateHost(IHostBuilder builder)
         {
+            builder.UseEnvironment("Testing");
+
             builder.ConfigureServices(services =>
             {
                 var descriptor = services.SingleOrDefault(d => d.ServiceType == typeof(DbContextOptions<DataContext>));
@@ -28,9 +30,14 @@ namespace Forc.IntegtationTests.Infrastructure
                     services.Remove(descriptor);
                 }
 
+                var provider = services
+                    .AddEntityFrameworkInMemoryDatabase()
+                    .BuildServiceProvider();
+
                 services.AddDbContext<DataContext>(opt =>
                 {
-                    opt.UseInMemoryDatabase($"Forc_test");
+                    opt.UseInMemoryDatabase($"Forc_test_");
+                    opt.UseInternalServiceProvider(provider);
                 });
             });
 
