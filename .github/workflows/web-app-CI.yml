@@ -1,45 +1,24 @@
 name: Web-App CI
-on:
-  push:
-    branches:
-      - [ main ]
+
+on: [push]
 
 jobs:
-  ci:
+  build:
+    name: Build
     runs-on: ubuntu-latest
-
     strategy:
       matrix:
-        node-version: [18.x]
+        node_version: [18]
 
     steps:
-      - uses: actions/checkout@v2
-
-      - name: Use Node.js ${{ matrix.node-version }}
+      - uses: actions/checkout@v1
+      - name: Use Node.js ${{ matrix.node_version }}
         uses: actions/setup-node@v1
         with:
-          node-version: ${{ matrix.node-version }}
+          node_version: ${{ matrix.node_version }}
 
-      - name: Cache node modules
-        id: cache-nodemodules
-        uses: actions/cache@v2
-        env:
-          cache-name: cache-node-modules
-        with:
-          # caching node_modules
-          path: node_modules
-          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-build-${{ env.cache-name }}-
-            ${{ runner.os }}-build-
-            ${{ runner.os }}-
-      - name: Install Dependencies
-        if: steps.cache-nodemodules.outputs.cache-hit != 'true'
+      - name: run CI
         run: |
-          npm ci
-      - name: Build
-        run: |
-          npm run build -- --prod
-      - name: Lint
-        run: |
-          npm run lint
+          npm install # or yarn install
+          npm run lint # or yarn lint
+          npm run build # or yarn build
