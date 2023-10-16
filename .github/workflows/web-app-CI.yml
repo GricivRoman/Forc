@@ -11,10 +11,10 @@ jobs:
         working-directory: ./Forc.WebApp
     strategy:
       matrix:
-        node_version: ['18.x']
+        node_version: ['18.x', 'false', '18.x']
         
     env: 
-        process.env.CI : false
+        process.env.CI : 'false'
 
     steps:
       - uses: actions/checkout@v1
