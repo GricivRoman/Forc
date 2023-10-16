@@ -11,7 +11,7 @@ jobs:
         working-directory: ./Forc.WebApp
     strategy:
       matrix:
-        node_version: [18.x]
+        node_version: ['18.x']
         
     env: 
         process.env.CI : false
