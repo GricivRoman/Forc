@@ -11,10 +11,7 @@ jobs:
         working-directory: ./Forc.WebApp
     strategy:
       matrix:
-        node_version: latest
-        
-    env: 
-        process.env.CI : false
+        node-version: 18
 
     steps:
       - uses: actions/checkout@v1
