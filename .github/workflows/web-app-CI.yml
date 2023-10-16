@@ -23,5 +23,5 @@ jobs:
       - name: run CI
         run: |
           npm install # or yarn install
-          npm run lint # or yarn lint
+          npm run lint --force # or yarn lint
           npm run build # or yarn build
