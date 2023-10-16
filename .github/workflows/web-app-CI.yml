@@ -24,4 +24,4 @@ jobs:
         run: |
           npm install # or yarn install
           npm run lint --force # or yarn lint
-          npm run build # or yarn build
+          npm run build --force # or yarn build
